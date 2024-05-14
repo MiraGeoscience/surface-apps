@@ -1,12 +1,12 @@
 # ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 #  Copyright (c) 2024 Mira Geoscience Ltd.                                     '
 #                                                                              '
-#  This file is part of my-app package.                                        '
+#  This file is part of surface-apps package.                                        '
 #                                                                              '
 #  All rights reserved.                                                        '
 # ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-from my_app import assets_path
+from surface_apps import assets_path
 
 
 def test_assets_directory_exist():

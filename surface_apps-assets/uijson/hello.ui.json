@@ -1,7 +1,7 @@
 {
-    "title": "my-app Hello World",
-    "conda_environment": "my_app",
-    "run_command": "my_app.commands.hello",
+    "title": "surface-apps Hello World",
+    "conda_environment": "surface_apps",
+    "run_command": "surface_apps.commands.hello",
     "name": {
         "main": true,
         "label": "Name",
