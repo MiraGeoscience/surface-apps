@@ -8,25 +8,21 @@
 
 from __future__ import annotations
 
-import sys
 import logging
-import warnings
+import sys
+
 import numpy as np
-from tqdm import tqdm
-from scipy.interpolate import interp1d
-from skimage.measure import marching_cubes
-
-from geoh5py.ui_json import InputFile
-from geoh5py.objects import Surface, BlockModel, ObjectBase
-from geoh5py.shared.utils import fetch_active_workspace
 from geoapps_utils.formatters import string_name
-from geoapps_utils.numerical import weighted_average
-from geoapps_utils.transformations import rotate_xyz
-from surface_apps.iso_surfaces.params import IsoSurfaceParameters
-from surface_apps.driver import BaseSurfaceDriver
+from geoh5py.objects import ObjectBase, Surface
+from geoh5py.shared.utils import fetch_active_workspace
+from geoh5py.ui_json import InputFile
 
+from surface_apps.driver import BaseSurfaceDriver
+from surface_apps.iso_surfaces.params import IsoSurfaceParameters
+from surface_apps.iso_surfaces.utils import entity_to_grid, extract_iso_surfaces
 
 logger = logging.getLogger(__name__)
+
 
 class IsoSurfacesDriver(BaseSurfaceDriver):
     """
@@ -63,13 +59,14 @@ class IsoSurfacesDriver(BaseSurfaceDriver):
                         results += [
                             Surface.create(
                                 self.params.geoh5,
-                                name=string_name(self.params.source.data.name + f"_{level:.2e}"),
+                                name=string_name(
+                                    self.params.source.data.name + f"_{level:.2e}"
+                                ),
                                 vertices=surface[0],
                                 cells=surface[1],
                                 parent=self.out_group,
                             )
                         ]
-
 
     @staticmethod
     def iso_surface(
@@ -108,95 +105,12 @@ class IsoSurfacesDriver(BaseSurfaceDriver):
             vertices and cell indices.
             [(vertices, cells)_level_1, ..., (vertices, cells)_level_n]
         """
-        if getattr(entity, "locations", None) is not None:
-            locations = entity.locations
-        else:
-            raise ValueError("Input 'entity' must have 'vertices' or 'centroids'.")
 
-        if isinstance(entity, BlockModel):
-            if entity.shape is None:
-                raise ValueError("BlockModel must have a shape attribute.")
+        logger.info("Converting entity and values to regular grid ...")
+        grid, values = entity_to_grid(entity, values, resolution, max_distance)
+        logger.info("Running marching cubes on levels ...")
+        surfaces = extract_iso_surfaces(entity, grid, levels, values)
 
-            values = values.reshape(
-                (entity.shape[2], entity.shape[0], entity.shape[1]), order="F"
-            ).transpose((1, 2, 0))
-
-            grid = []
-            for i in ["u", "v", "z"]:
-                cell_delimiters = getattr(entity, i + "_cell_delimiters")
-                dx = cell_delimiters[1:] - cell_delimiters[:-1]
-                grid.append(cell_delimiters[:-1] + dx / 2)
-
-        else:
-            print("Interpolating the model onto a regular grid...")
-            grid = []
-            for i in np.arange(3):
-                grid += [
-                    np.arange(
-                        locations[:, i].min(),
-                        locations[:, i].max() + resolution,
-                        resolution,
-                    )
-                ]
-
-            y, x, z = np.meshgrid(grid[1], grid[0], grid[2])
-            values = weighted_average(
-                locations,
-                np.c_[x.flatten(), y.flatten(), z.flatten()],
-                [values],
-                threshold=resolution / 2.0,
-                n=8,
-                max_distance=max_distance,
-            )
-            values = values[0].reshape(x.shape)
-
-        lower, upper = np.nanmin(values), np.nanmax(values)
-        surfaces = []
-        print("Running marching cubes on levels.")
-        skip = []
-        for level in tqdm(levels):
-            try:
-                if level < lower or level > upper:
-                    skip += [level]
-                    continue
-                verts, faces, _, _ = marching_cubes(values, level=level)
-
-                # Remove all vertices and cells with nan
-                nan_verts = np.any(np.isnan(verts), axis=1)
-                rem_cells = np.any(nan_verts[faces], axis=1)
-
-                active = np.arange(nan_verts.shape[0])
-                active[nan_verts] = nan_verts.shape[0]
-                _, inv_map = np.unique(active, return_inverse=True)
-
-                verts = verts[~nan_verts, :]
-                faces = faces[~rem_cells, :]
-                faces = inv_map[faces].astype("uint32")
-
-                vertices = []
-                for i in np.arange(3):
-                    interp = interp1d(
-                        np.arange(grid[i].shape[0]), grid[i], fill_value="extrapolate"
-                    )
-                    vertices += [interp(verts[:, i])]
-
-                if isinstance(entity, BlockModel):
-                    vertices = rotate_xyz(
-                        np.vstack(vertices).T, [0, 0, 0], entity.rotation
-                    )
-                    vertices[:, 0] += entity.origin["x"]
-                    vertices[:, 1] += entity.origin["y"]
-                    vertices[:, 2] += entity.origin["z"]
-
-                else:
-                    vertices = np.vstack(vertices).T
-            except RuntimeError:
-                vertices, faces = [], []
-
-            surfaces += [[vertices, faces]]
-
-        if any(skip):
-            warnings.warn(f"The following levels were out of bound and ignored: {skip}")
         return surfaces
 
 

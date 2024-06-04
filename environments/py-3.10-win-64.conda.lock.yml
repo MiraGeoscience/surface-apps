@@ -25,12 +25,12 @@ dependencies:
   - dask-core=2024.5.2=pyhd8ed1ab_0
   - dav1d=1.2.1=hcfcfb64_0
   - freetype=2.12.1=hdaf720e_2
-  - fsspec=2024.5.0=pyhff2d567_0
+  - fsspec=2024.6.0=pyhff2d567_0
   - giflib=5.2.2=h64bf75a_0
   - h5py=3.11.0=nompi_py310h2b0be38_101
-  - hdf5=1.14.3=nompi_h2b43c12_103
+  - hdf5=1.14.3=nompi_h2b43c12_104
   - idna=3.7=pyhd8ed1ab_0
-  - imagecodecs=2024.1.1=py310he9b5339_7
+  - imagecodecs=2024.6.1=py310he9b5339_0
   - imageio=2.34.1=pyh4b66e23_0
   - importlib-metadata=7.1.0=pyha770c72_0
   - importlib_metadata=7.1.0=hd8ed1ab_0

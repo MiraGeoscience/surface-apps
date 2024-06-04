@@ -32,12 +32,12 @@ dependencies:
   - docutils=0.20.1=py310h5588dad_3
   - exceptiongroup=1.2.0=pyhd8ed1ab_2
   - freetype=2.12.1=hdaf720e_2
-  - fsspec=2024.5.0=pyhff2d567_0
+  - fsspec=2024.6.0=pyhff2d567_0
   - giflib=5.2.2=h64bf75a_0
   - h5py=3.11.0=nompi_py310h2b0be38_101
-  - hdf5=1.14.3=nompi_h2b43c12_103
+  - hdf5=1.14.3=nompi_h2b43c12_104
   - idna=3.7=pyhd8ed1ab_0
-  - imagecodecs=2024.1.1=py310he9b5339_7
+  - imagecodecs=2024.6.1=py310he9b5339_0
   - imageio=2.34.1=pyh4b66e23_0
   - imagesize=1.4.1=pyhd8ed1ab_0
   - importlib-metadata=7.1.0=pyha770c72_0
@@ -103,7 +103,7 @@ dependencies:
   - pygments=2.18.0=pyhd8ed1ab_0
   - pylint=3.2.2=pyhd8ed1ab_0
   - pysocks=1.7.1=pyh0701188_6
-  - pytest=8.2.1=pyhd8ed1ab_0
+  - pytest=8.2.2=pyhd8ed1ab_0
   - pytest-cov=5.0.0=pyhd8ed1ab_0
   - python=3.10.14=h4de0772_0_cpython
   - python_abi=3.10=4_cp310
