@@ -8,19 +8,20 @@
 
 from __future__ import annotations
 
-import tempfile
 import logging
-from pathlib import Path
+import tempfile
 from abc import abstractmethod
+from pathlib import Path
 
-from geoh5py.ui_json import InputFile
+from geoapps_utils.driver.data import BaseData
+from geoapps_utils.driver.driver import BaseDriver
 from geoh5py.groups import UIJsonGroup
 from geoh5py.objects import ObjectBase
 from geoh5py.shared.utils import fetch_active_workspace
-from geoapps_utils.driver.data import BaseData
-from geoapps_utils.driver.driver import BaseDriver
+from geoh5py.ui_json import InputFile
 
 logger = logging.getLogger(__name__)
+
 
 class BaseSurfaceDriver(BaseDriver):
     """
@@ -38,7 +39,6 @@ class BaseSurfaceDriver(BaseDriver):
 
         # TODO need to re-type params in base class
         super().__init__(parameters)
-
 
     @property
     def out_group(self) -> UIJsonGroup | None:

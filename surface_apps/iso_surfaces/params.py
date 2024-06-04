@@ -10,13 +10,15 @@ from __future__ import annotations
 
 from pathlib import Path
 from typing import ClassVar
-from pydantic import ConfigDict, BaseModel
 
-from geoh5py.objects import Points, Curve, Surface, Octree
-from geoh5py.data import Data
-from geoapps_utils.driver.data import BaseData
 from curve_apps.contours.params import ContourDetectionParameters
+from geoapps_utils.driver.data import BaseData
+from geoh5py.data import Data
+from geoh5py.objects import Curve, Octree, Points, Surface
+from pydantic import BaseModel, ConfigDict
+
 from surface_apps import assets_path
+
 
 class IsoSurfaceSourceParameters(BaseData):
     """
@@ -30,6 +32,7 @@ class IsoSurfaceSourceParameters(BaseData):
 
     objects: Points | Curve | Surface | Octree
     data: Data
+
 
 class IsoSurfaceDetectionParameters(ContourDetectionParameters):
     """
