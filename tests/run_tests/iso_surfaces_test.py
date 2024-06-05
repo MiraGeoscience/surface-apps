@@ -109,7 +109,7 @@ def test_vertices(tmp_path: Path):
     length = 10
     origin = np.random.uniform(-100, 100, 3)
     verts = np.random.randn(5000, 3) * length + origin
-    sphere_radius = np.random.uniform(length * 0.2, length * 0.5, 1)
+    sphere_radius = np.random.uniform(length * 0.2, length * 0.5, 1)[0]
     offset = np.random.uniform(0, (length / 2), 3)
     sphere_center = origin + offset
 
