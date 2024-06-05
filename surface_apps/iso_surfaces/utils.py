@@ -129,12 +129,12 @@ def extract_iso_surfaces(
 
             if isinstance(entity, BlockModel):
                 vertices = rotate_xyz(np.vstack(vertices).T, [0, 0, 0], entity.rotation)
-                vertices[:, 0] += entity.origin["x"]
-                vertices[:, 1] += entity.origin["y"]
-                vertices[:, 2] += entity.origin["z"]
+                vertices[:, 0] += entity.origin["x"]  # type: ignore
+                vertices[:, 1] += entity.origin["y"]  # type: ignore
+                vertices[:, 2] += entity.origin["z"]  # type: ignore
 
             else:
-                vertices = np.vstack(vertices).T
+                vertices = np.vstack(vertices).T  # type: ignore
 
         except RuntimeError as _:  # noqa
             logging.exception("Caught a RuntimeError in marching cubes algorithm.")
