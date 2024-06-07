@@ -15,7 +15,8 @@
             "{202c5db1-a56d-4004-9cad-baafd8899406}",
             "{6a057fdc-b355-11e3-95be-fd84a7ffcb88}",
             "{f26feba3-aded-494b-b9e9-b2bbcbe298e1}",
-            "{4ea87376-3ece-438b-bf12-3479733ded46}"
+            "{4ea87376-3ece-438b-bf12-3479733ded46}",
+            "{B020A277-90E2-4CD7-84D6-612EE3F25051}"
         ],
         "label": "Object",
         "value": ""
@@ -78,7 +79,7 @@
         "main": true,
         "value": 50.0
     },
-    "out_group":{
+    "out_group": {
         "group": "Output",
         "main": true,
         "label": "Group",
