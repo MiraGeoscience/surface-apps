@@ -5,7 +5,7 @@
 #                                                                                '
 #  All rights reserved.                                                          '
 #                                                                                '
-#  This file is part of curve-apps.                                              '
+#  This file is part of surface-apps.                                              '
 #                                                                                '
 #  surface-apps is distributed under the terms and conditions of the MIT License   '
 #  (see LICENSE file at the root of this source code package).                   '
