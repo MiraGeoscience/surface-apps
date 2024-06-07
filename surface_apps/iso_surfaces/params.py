@@ -31,7 +31,7 @@ class IsoSurfaceSourceParameters(BaseData):
 
     model_config = ConfigDict(arbitrary_types_allowed=True)
 
-    objects: Points | Curve | Surface | Octree
+    objects: Points | CellObject | GridObject
     data: Data
 
 
