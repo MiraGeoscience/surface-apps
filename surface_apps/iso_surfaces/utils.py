@@ -138,7 +138,7 @@ def extract_iso_surfaces(
 
         except RuntimeError as _:  # noqa
             logging.exception("Caught a RuntimeError in marching cubes algorithm.")
-            vertices, faces = [], []
+            skip += [level]
 
         surfaces += [[vertices, faces]]
 
