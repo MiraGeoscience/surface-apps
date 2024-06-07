@@ -1,0 +1,88 @@
+{
+    "version": "0.1.0",
+    "title": "Create Iso Surfaces",
+    "conda_environment": "surface_apps",
+    "run_command": "surface_apps.iso_surfaces.driver",
+    "geoh5": "",
+    "monitoring_directory": "",
+    "workspace_geoh5": "",
+    "conda_environment_boolean": false,
+    "objects": {
+        "group": "Data",
+        "main": true,
+        "meshType": [
+            "{2e814779-c35f-4da0-ad6a-39a6912361f9}",
+            "{202c5db1-a56d-4004-9cad-baafd8899406}",
+            "{6a057fdc-b355-11e3-95be-fd84a7ffcb88}",
+            "{f26feba3-aded-494b-b9e9-b2bbcbe298e1}",
+            "{4ea87376-3ece-438b-bf12-3479733ded46}",
+            "{B020A277-90E2-4CD7-84D6-612EE3F25051}"
+        ],
+        "label": "Object",
+        "value": ""
+    },
+    "data": {
+        "group": "Data",
+        "main": true,
+        "association": [
+            "Vertex",
+            "Cell"
+        ],
+        "dataType": "Float",
+        "label": "Value fields",
+        "parent": "objects",
+        "value": ""
+    },
+    "interval_min": {
+        "main": true,
+        "group": "Contours",
+        "optional": true,
+        "enabled": false,
+        "label": "Interval min",
+        "value": 0.0
+    },
+    "interval_max": {
+        "main": true,
+        "group": "Contours",
+        "enabled": false,
+        "dependency": "interval_min",
+        "dependencyType": "enabled",
+        "label": "Interval max",
+        "value": 0.0
+    },
+    "interval_spacing": {
+        "main": true,
+        "group": "Contours",
+        "enabled": false,
+        "dependency": "interval_min",
+        "dependencyType": "enabled",
+        "label": "Interval spacing",
+        "value": 0.0
+    },
+    "fixed_contours": {
+        "main": true,
+        "group": "Contours",
+        "label": "Contours",
+        "value": "",
+        "optional": true,
+        "enabled": false
+    },
+    "max_distance": {
+        "enabled": true,
+        "label": "Max Interpolation Distance (m)",
+        "main": true,
+        "value": 500.0
+    },
+    "resolution": {
+        "enabled": true,
+        "label": "Base grid resolution (m)",
+        "main": true,
+        "value": 50.0
+    },
+    "out_group": {
+        "group": "Output",
+        "main": true,
+        "label": "Group",
+        "value": "Iso Surfaces"
+    }
+}

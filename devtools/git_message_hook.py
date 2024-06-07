@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 
-# ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-#  Copyright (c) 2022-2024 Mira Geoscience Ltd.                                '
-#                                                                              '
-#  This file is part of surface-apps package.                                        '
-#                                                                              '
-#  All rights reserved.                                                        '
-# ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+#  '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+#  Copyright (c) 2024 Mira Geoscience Ltd.                                       '
+#                                                                                '
+#  All rights reserved.                                                          '
+#                                                                                '
+#  This file is part of surface-apps.                                            '
+#                                                                                '
+#  surface-apps is distributed under the terms and conditions of the MIT License '
+#  (see LICENSE file at the root of this source code package).                   '
+#  '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
 """Some Git pre-commit hooks implementations."""
 
@@ -103,7 +106,7 @@ def check_commit_message(filepath: str) -> tuple[bool, str]:
 
     message_jira_id = ""
     first_line = None
-    with open(filepath, encoding="utf-8") as message_file:
+    with open(filepath) as message_file:
         for line in message_file:
             if not line.startswith("#") and len(line.strip()) > 0:
                 # test only the first non-comment line that is not empty
