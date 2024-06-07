@@ -79,29 +79,16 @@ class IsoSurfacesDriver(BaseSurfaceDriver):
         """
         Generate 3D iso surface from an entity vertices or centroids and values.
 
-        Parameters
-        ----------
-        entity: geoh5py.objects
-            Any entity with 'vertices' or 'centroids' attribute.
-
-        values: numpy.ndarray
-            Array of values to create iso-surfaces from.
-
-        levels: list of floats
-            List of iso values
-
-        max_distance: float, default=numpy.inf
-            Maximum distance from input data to generate iso surface.
+        :param entity: Any entity with 'vertices' or 'centroids' attribute.
+        :param values: Array of values to create iso-surfaces from.
+        :param levels: List of iso values
+        :param max_distance: Maximum distance from input data to generate iso surface.
+            Only used for input entities other than BlockModel.
+        :param resolution: Grid size used to generate the iso surface.
             Only used for input entities other than BlockModel.
 
-        resolution: int, default=100
-            Grid size used to generate the iso surface.
-            Only used for input entities other than BlockModel.
 
-        Returns
-        -------
-        surfaces: list of numpy.ndarrays
-            List of surfaces (one per levels) defined by
+        :returns surfaces: List of surfaces (one per levels) defined by
             vertices and cell indices.
             [(vertices, cells)_level_1, ..., (vertices, cells)_level_n]
         """
