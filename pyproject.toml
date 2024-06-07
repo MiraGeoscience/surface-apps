@@ -55,8 +55,6 @@ geoh5py = {url = "https://github.com/MiraGeoscience/geoh5py/archive/refs/heads/d
 geoapps-utils = {url = "https://github.com/MiraGeoscience/geoapps-utils/archive/refs/heads/develop.zip"}
 #geoapps-utils = {url = "http://localhost:8888/geoapps-utils.tar.gz#sha256="}
 
-curve-apps = {url = "https://github.com/MiraGeoscience/curve-apps/archive/refs/heads/develop.zip"}
-
 ## indirect dependencies, forcing them here for installation through Conda not pip
 h5py = "^3.2.1" # from geoh5py
 Pillow = "~10.3.0" # from geoh5py
