@@ -14,7 +14,7 @@ from typing import ClassVar
 import numpy as np
 from geoapps_utils.driver.data import BaseData
 from geoh5py.data import Data
-from geoh5py.objects import Curve, Octree, Points, Surface
+from geoh5py.objects import BlockModel, Curve, Octree, Points, Surface
 from geoh5py.ui_json.utils import str2list
 from pydantic import BaseModel, ConfigDict, field_validator
 
@@ -31,7 +31,7 @@ class IsoSurfaceSourceParameters(BaseData):
 
     model_config = ConfigDict(arbitrary_types_allowed=True)
 
-    objects: Points | Curve | Surface | Octree
+    objects: Points | Curve | Surface | Octree | BlockModel
     data: Data
 
 
