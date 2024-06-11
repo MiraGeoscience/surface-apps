@@ -67,7 +67,10 @@ class IsoSurfaceDetectionParameters(BaseData):
             fixed_contours = val
 
         elif isinstance(val, str):
-            fixed_contours = str2list(val)
+            if val == "":
+                fixed_contours = None
+            else:
+                fixed_contours = str2list(val)
 
         elif val is None:
             fixed_contours = None
