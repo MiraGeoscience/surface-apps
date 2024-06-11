@@ -34,9 +34,10 @@
    :alt: Maintainability
 
 
-surface-apps: # TODO: SHORT DESCRIPTION
-=========================================================================
-The **surface-apps** library # TODO: PACKAGE DESCRIPTION
+surface-apps
+============
+
+Surface detection within geoscientific data.
 
 .. contents:: Table of Contents
    :local:
