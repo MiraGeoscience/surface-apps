@@ -12,7 +12,7 @@ from pathlib import Path
 sys.path.insert(0, Path("../..").resolve())
 
 project = "surface-apps"
-copyright = "2024, Benjamin Kary"
+copyright = "Mira Geoscience Ltd"
 author = "Benjamin Kary"
 release = "2024"
 
