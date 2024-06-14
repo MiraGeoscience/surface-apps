@@ -3,10 +3,11 @@
 Iso Surfaces
 ============
 
-With this application, users can create surfaces from 3D data in a semi-automated
-fashion. The application uses a marching cubes algorithm from the
-`Scikit-Image <https://scikit-image.org/>`__ open-source package. Surfaces are
-exported to `Geoscience ANALYST <https://mirageoscience.com/mining-industry-software/geoscience-analyst/>`__
+With this application, users can create surfaces of equal values from 3D data in a semi-automated
+fashion. The application uses a `marching cubes <https://scikit-image.org/docs/stable/auto_examples/edges/plot_marching_cubes.html>`__
+algorithm from the open-source scikit-image package. The algorithm works by 'marching' across the volume,
+identifying iso-valued regions and adding them to an output triangulation (surface).  Surfaces are exported to
+`Geoscience ANALYST <https://mirageoscience.com/mining-industry-software/geoscience-analyst/>`__
 for viewing and editing.
 
 .. figure:: ./images/iso_surfaces/iso_surface_landing.png
