@@ -37,16 +37,19 @@ Data Selection
 Contour Parameters
 ^^^^^^^^^^^^^^^^^^^^
 
-List of parameters controlling the detection and filtering of lineaments.
+List of parameters controlling the detection and filtering of iso-surfaces.  The iso-surface
+levels can be provided as either a min/max/spacing interval or a fixed list.
 
  - **Interval min**: Interval minimum.
  - **Interval max**: Interval maximum.
  - **Interval spacing**: Interval spacing.
+ - **Contours**: These are fixed iso-surface levels outside of any provided interval ranges
 
 Output Preferences
 ^^^^^^^^^^^^^^^^^^
 
- - **Group**: Create a ``Container Group`` entity to store the results.
+ - **Group**: Results are stored in a ``Container Group`` using the name provided here.
+    Each level will result in a separate surface stored under the group.
 
 
 Need help? Contact us at support@mirageoscience.com
