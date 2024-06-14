@@ -28,8 +28,10 @@ The following sections provide details on the different parameters exposed in th
 Data Selection
 ^^^^^^^^^^^^^^
 
- - **Object**: Select the target data object from the dropdown list.
- - **Data**: Select the data attribute to use for iso-surface detection.
+ - **Object**: Select the target data object from the dropdown list.  Objects should be
+    distributed in 3D and may be of type Points, Curve, Surface, Octree, or BlockModel.
+ - **Data**: Select the data attribute to use for iso-surface detection.  Can be any
+    FloatData children of the selected *Object*.
 
 
 Contour Parameters
