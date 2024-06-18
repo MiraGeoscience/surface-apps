@@ -14,10 +14,17 @@ build:
     # nodejs: "19"
     # rust: "1.64"
     # golang: "1.19"
+    pre_build:
+      # Generate on-the-fly Sphinx configuration from Jupyter Book's _config.yml
+      - "pip install . --no-deps"
+
+conda:
+  environment: environments/py-3.10-linux-64-dev.conda.lock.yml
 
 # Build documentation in the "docs/" directory with Sphinx
 sphinx:
   configuration: docs/source/conf.py
+
 
 # Optionally build your docs in additional formats such as PDF and ePub
 # formats:
