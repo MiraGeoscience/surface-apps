@@ -24,7 +24,7 @@ Content
    getting_started
    usage
    iso_surfaces
-   modules
+   api_reference
 
 
 License

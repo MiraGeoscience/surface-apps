@@ -1,5 +1,5 @@
-surface\_apps package
-=====================
+API Reference
+=============
 
 Subpackages
 -----------
