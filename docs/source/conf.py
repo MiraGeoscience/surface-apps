@@ -19,7 +19,7 @@ release = "2024"
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-autodoc_mock_imports = ["numpy", "geoh5py", "scipy", "skimage", "geoapps_utils"]
+autodoc_mock_imports = ["numpy", "geoh5py", "scipy", "skimage", "geoapps_utils", "pydantic", "tqdm"]
 extensions = ["sphinx.ext.autodoc"]
 
 templates_path = ["_templates"]
