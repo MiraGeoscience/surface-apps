@@ -44,6 +44,8 @@ levels can be provided as either a min/max/spacing interval or a fixed list.
  - **Interval max**: Interval maximum.
  - **Interval spacing**: Interval spacing.
  - **Contours**: These are fixed iso-surface levels outside of any provided interval ranges
+ - **Max interpolation distance**: Maximum distance between points for interpolation into base grid.
+ - **Base grid resolution**: Resolution of the grid used by scikit-image to create the contours.
 
 Output Preferences
 ^^^^^^^^^^^^^^^^^^
