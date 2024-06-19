@@ -20,7 +20,7 @@ include = [
     "THIRD_PARTY_SOFTWARE.rst",
 ]
 
-# TODO: adjust classifiers
+keywords = ["geology", "geophysics", "earth sciences"]
 classifiers = [
     "Development Status :: 2 - Pre-Alpha",
     "Intended Audience :: Science/Research",
@@ -74,9 +74,13 @@ pylint = "*"
 pytest = "*"
 pytest-cov = "*"
 sphinx = "*"
+readthedocs-sphinx-ext = "*"
 sphinx-autodoc-typehints = "*"
 sphinx-rtd-theme = "*"
 tomli = "*"
+numpydoc = "*"
+sphinx_issues = "*"
+sphinx_rtd_theme = "*"
 
 [tool.conda-lock]
 platforms = ['win-64', 'linux-64']
