@@ -74,36 +74,43 @@ def interp_to_grid(
     entity: ObjectBase, values: np.ndarray, resolution, max_distance
 ) -> tuple[list[np.ndarray], np.ndarray]:
     """
-    Interpolate values into a regular grid based on entity locations.
+    Interpolate values into a regular grid bounding all finite data points.
 
     :param entity: Geoh5py object with locations data.
     :param values: Data to be interpolated to grid.
     :param resolution: Grid resolution
     :param max_distance: Maximum distance used in weighted average.
+
+    :returns: Tuple of grid and nearest neighbor interpolated values. The
+        resulting grid bounds all the points in entity for which the data
+        is not nan.
     """
 
     grid = []
+    is_finite = np.isfinite(values)
+    locations = entity.locations[is_finite, :]
+    finite_values = values[is_finite]
     for i in np.arange(3):
         grid += [
             np.arange(
-                entity.locations[:, i].min(),
-                entity.locations[:, i].max() + resolution,
+                locations[:, i].min(),
+                locations[:, i].max() + resolution,
                 resolution,
             )
         ]
 
     y, x, z = np.meshgrid(grid[1], grid[0], grid[2])
-    values = weighted_average(
-        entity.locations,
+    average_values = weighted_average(
+        locations,
         np.c_[x.flatten(), y.flatten(), z.flatten()],
-        [values],
+        [finite_values],
         threshold=resolution / 2.0,
         n=8,
         max_distance=max_distance,
     )
-    values = values[0].reshape(x.shape)
+    average_values = average_values[0].reshape(x.shape)
 
-    return grid, values
+    return grid, average_values
 
 
 def extract_iso_surfaces(
