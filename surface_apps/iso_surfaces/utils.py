@@ -5,14 +5,16 @@
 #                                                                              '
 #  All rights reserved.                                                        '
 # ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+from __future__ import annotations
 
 import logging
 import warnings
 
 import numpy as np
+from geoapps_utils.locations import mask_under_horizon
 from geoapps_utils.numerical import weighted_average
 from geoapps_utils.transformations import rotate_xyz
-from geoh5py.objects import BlockModel, ObjectBase
+from geoh5py.objects import BlockModel, ObjectBase, Surface
 from scipy.interpolate import interp1d
 from skimage.measure import marching_cubes
 from tqdm import tqdm
@@ -23,12 +25,17 @@ def entity_to_grid(
     values: np.ndarray,
     resolution: float,
     max_distance: float,
+    horizon: Surface | None = None,
 ):
     """
     Extracts grid and values from a geoh5py object.
 
     :param entity: geoh5py object with locations data.
     :param values: Data to be reshaped or interpolated to grid ordering.
+    :resolution: Grid resolution.
+    :param max_distance: Maximum distance used in weighted average.
+    :param horizon: Clipping surface to restrict interpolation from bleeding
+        into the air.
 
     :returns: Tuple of grid and values.
     """
@@ -39,7 +46,7 @@ def entity_to_grid(
     if isinstance(entity, BlockModel):
         grid, values = block_model_to_grid(entity, values)
     else:
-        grid, values = interp_to_grid(entity, values, resolution, max_distance)
+        grid, values = interp_to_grid(entity, values, resolution, max_distance, horizon)
 
     return grid, values
 
@@ -70,8 +77,12 @@ def block_model_to_grid(
     return grid, values
 
 
-def interp_to_grid(
-    entity: ObjectBase, values: np.ndarray, resolution, max_distance
+def interp_to_grid(  # pylint: disable=too-many-locals
+    entity: ObjectBase,
+    values: np.ndarray,
+    resolution: float,
+    max_distance: float,
+    horizon: Surface | None = None,
 ) -> tuple[list[np.ndarray], np.ndarray]:
     """
     Interpolate values into a regular grid bounding all finite data points.
@@ -109,6 +120,12 @@ def interp_to_grid(
         max_distance=max_distance,
     )
     average_values = average_values[0].reshape(x.shape)
+
+    if horizon is not None:
+        grid_xyz = np.c_[x.flatten(), y.flatten(), z.flatten()]
+        mask = mask_under_horizon(grid_xyz, horizon.vertices)
+        mask = mask.reshape(average_values.shape)
+        average_values[~mask] = np.nan
 
     return grid, average_values
 

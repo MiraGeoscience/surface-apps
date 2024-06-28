@@ -51,6 +51,7 @@ class IsoSurfacesDriver(BaseSurfaceDriver):
                     levels,
                     resolution=self.params.detection.resolution,
                     max_distance=self.params.detection.max_distance,
+                    horizon=self.params.source.horizon,
                 )
 
                 results = []
@@ -75,6 +76,7 @@ class IsoSurfacesDriver(BaseSurfaceDriver):
         levels: list,
         resolution: float = 100,
         max_distance: float = np.inf,
+        horizon: Surface | None = None,
     ):
         """
         Generate 3D iso surface from an entity vertices or centroids and values.
@@ -86,6 +88,8 @@ class IsoSurfacesDriver(BaseSurfaceDriver):
             Only used for input entities other than BlockModel.
         :param resolution: Grid size used to generate the iso surface.
             Only used for input entities other than BlockModel.
+        :param horizon: Clipping surface to restrict interpolation from bleeding
+            into the air.
 
 
         :returns surfaces: List of surfaces (one per levels) defined by
@@ -94,7 +98,7 @@ class IsoSurfacesDriver(BaseSurfaceDriver):
         """
 
         logger.info("Converting entity and values to regular grid ...")
-        grid, values = entity_to_grid(entity, values, resolution, max_distance)
+        grid, values = entity_to_grid(entity, values, resolution, max_distance, horizon)
         logger.info("Running marching cubes on levels ...")
         surfaces = extract_iso_surfaces(entity, grid, levels, values)
 
