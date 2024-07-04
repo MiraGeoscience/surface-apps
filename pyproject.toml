@@ -53,7 +53,7 @@ tqdm = "~4.66.1"
 #geoh5py = {url = "http://localhost:8888/geoh5py.tar.gz#sha256="}
 
 #geoapps-utils = {version = "~0.3.0rc1", source = "pypi", allow-prereleases = true}
-geoapps-utils = {url = "https://github.com/MiraGeoscience/geoapps-utils/archive/refs/heads/develop.zip"}
+geoapps-utils = {url = "https://github.com/MiraGeoscience/geoapps-utils/archive/refs/heads/GEOPY-1569.zip"}
 #geoapps-utils = {url = "http://localhost:8888/geoapps-utils.tar.gz#sha256="}
 
 ## indirect dependencies, forcing them here for installation through Conda not pip
