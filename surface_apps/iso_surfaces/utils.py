@@ -16,7 +16,7 @@ from geoapps_utils.numerical import weighted_average
 from geoapps_utils.transformations import rotate_xyz
 from geoh5py.data import DataAssociationEnum
 from geoh5py.data.data import Data
-from geoh5py.objects import BlockModel, ObjectBase, Octree, Surface
+from geoh5py.objects import BlockModel, ObjectBase, Surface, CellObject
 from scipy.interpolate import interp1d
 from skimage.measure import marching_cubes
 from tqdm import tqdm
@@ -101,13 +101,13 @@ def interp_to_grid(  # pylint: disable=too-many-locals
 
     grid = []
     is_finite = np.isfinite(data.values)
-    if isinstance(entity, Octree):
-        locations = entity.centroids[is_finite, :]
-    elif data.association == DataAssociationEnum.CELL:
-        vertices = entity.locations
-        locations = np.mean(vertices[entity.cells], axis=1)[is_finite, :]
+    if (
+       isinstance(entity, CellObject) and
+       data.association == DataAssociationEnum.CELL
+    ):
+        locations = np.mean(entity.vertices[entity.cells], axis=1)[is_finite, :]
     else:
-        locations = entity.vertices[is_finite, :]
+        locations = entity.locations[is_finite, :]
 
     finite_values = data.values[is_finite]
     for i in np.arange(3):
