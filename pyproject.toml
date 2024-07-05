@@ -20,7 +20,7 @@ include = [
     "THIRD_PARTY_SOFTWARE.rst",
 ]
 
-keywords = ["geology", "geophysics", "earth sciences"]
+# TODO: adjust classifiers
 classifiers = [
     "Development Status :: 2 - Pre-Alpha",
     "Intended Audience :: Science/Research",
@@ -40,10 +40,10 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.10, <3.11"
 
-numpy = "~1.26"  # also geoh5py
-pydantic = "~2.5.2"
+numpy = "~1.26.0"  # also in geoh5py
+pydantic = "^2.5.2"  # also in geoh5py
 scikit-image = "~0.20.0"
-scipy = "~1.14"
+scipy = "~1.14.0"
 tqdm = "~4.66.1"
 
 ## pip dependencies
@@ -76,13 +76,9 @@ pylint = "*"
 pytest = "*"
 pytest-cov = "*"
 sphinx = "*"
-readthedocs-sphinx-ext = "*"
 sphinx-autodoc-typehints = "*"
 sphinx-rtd-theme = "*"
 tomli = "*"
-numpydoc = "*"
-sphinx_issues = "*"
-sphinx_rtd_theme = "*"
 
 [tool.conda-lock]
 platforms = ['win-64', 'linux-64']
