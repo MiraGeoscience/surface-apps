@@ -146,6 +146,7 @@ class IsoSurfaceParameters(BaseData):
     title: ClassVar[str] = "IsoSurface Detection"
     run_command: ClassVar[str] = "surface_apps.iso_surface.driver"
 
+    conda_environment: str = "surface_apps"
     source: IsoSurfaceSourceParameters
     detection: IsoSurfaceDetectionParameters
     output: IsoSurfaceOutputParameters = IsoSurfaceOutputParameters()

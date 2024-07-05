@@ -65,10 +65,11 @@ def test_centroids(tmp_path: Path):
         np.subtract(verts, np.asarray(sphere_center)),
         axis=1,
     )
+    data = block_model.add_data({"my data": {"values": values}})
 
     # Generate surface
     func_surface = IsoSurfacesDriver.iso_surface(
-        block_model, values, [sphere_radius], max_distance=np.inf
+        block_model, data, [sphere_radius], max_distance=np.inf
     )
 
     # Compare surface center with sphere center
@@ -120,10 +121,10 @@ def test_vertices(tmp_path: Path):
         name="test_points",
         vertices=verts,
     )
-
+    data = points.add_data({"my data": {"values": values}})
     func_surface = IsoSurfacesDriver.iso_surface(
         points,
-        values,
+        data,
         [sphere_radius],
         resolution=sphere_radius / 8.0,
         max_distance=np.inf,
@@ -176,6 +177,7 @@ def test_clipping_horizon(tmp_path: Path):
         name="test_points",
         vertices=verts,
     )
+    data = points.add_data({"my data": {"values": values}})
 
     vertices = np.array(
         [
@@ -192,7 +194,7 @@ def test_clipping_horizon(tmp_path: Path):
     )
     func_surface = IsoSurfacesDriver.iso_surface(
         points,
-        values,
+        data,
         [20],
         resolution=sphere_radius / 8.0,
         max_distance=np.inf,
