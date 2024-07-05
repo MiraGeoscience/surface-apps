@@ -18,10 +18,12 @@ from surface_apps.iso_surfaces.driver import IsoSurfacesDriver
 
 #  pylint: disable=too-many-locals
 
+
 def test_cell_association(tmp_path: Path):
 
     ws = Workspace(tmp_path / "iso_test.geoh5")
-    
+
+
 def test_centroids(tmp_path: Path):
     """
     Test iso_surface with a block model. Data values are the distance from a point.
