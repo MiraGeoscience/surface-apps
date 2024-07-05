@@ -13,6 +13,7 @@ import sys
 
 import numpy as np
 from geoapps_utils.formatters import string_name
+from geoh5py.data.data import Data
 from geoh5py.objects import ObjectBase, Surface
 from geoh5py.shared.utils import fetch_active_workspace
 from geoh5py.ui_json import InputFile
@@ -47,10 +48,11 @@ class IsoSurfacesDriver(BaseSurfaceDriver):
 
                 surfaces = self.iso_surface(
                     self.params.source.objects,
-                    self.params.source.data.values,
+                    self.params.source.data,
                     levels,
                     resolution=self.params.detection.resolution,
                     max_distance=self.params.detection.max_distance,
+                    horizon=self.params.source.horizon,
                 )
 
                 results = []
@@ -71,21 +73,24 @@ class IsoSurfacesDriver(BaseSurfaceDriver):
     @staticmethod
     def iso_surface(
         entity: ObjectBase,
-        values: np.ndarray,
+        data: Data,
         levels: list,
         resolution: float = 100,
         max_distance: float = np.inf,
+        horizon: Surface | None = None,
     ):
         """
         Generate 3D iso surface from an entity vertices or centroids and values.
 
         :param entity: Any entity with 'vertices' or 'centroids' attribute.
-        :param values: Array of values to create iso-surfaces from.
+        :param data: Data objects whose values will be used to create iso-surfaces.
         :param levels: List of iso values
         :param max_distance: Maximum distance from input data to generate iso surface.
             Only used for input entities other than BlockModel.
         :param resolution: Grid size used to generate the iso surface.
             Only used for input entities other than BlockModel.
+        :param horizon: Clipping surface to restrict interpolation from bleeding
+            into the air.
 
 
         :returns surfaces: List of surfaces (one per levels) defined by
@@ -94,7 +99,7 @@ class IsoSurfacesDriver(BaseSurfaceDriver):
         """
 
         logger.info("Converting entity and values to regular grid ...")
-        grid, values = entity_to_grid(entity, values, resolution, max_distance)
+        grid, values = entity_to_grid(entity, data, resolution, max_distance, horizon)
         logger.info("Running marching cubes on levels ...")
         surfaces = extract_iso_surfaces(entity, grid, levels, values)
 

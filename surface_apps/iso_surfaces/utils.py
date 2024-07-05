@@ -5,14 +5,18 @@
 #                                                                              '
 #  All rights reserved.                                                        '
 # ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+from __future__ import annotations
 
 import logging
 import warnings
 
 import numpy as np
+from geoapps_utils.locations import mask_under_horizon
 from geoapps_utils.numerical import weighted_average
 from geoapps_utils.transformations import rotate_xyz
-from geoh5py.objects import BlockModel, ObjectBase
+from geoh5py.data import DataAssociationEnum
+from geoh5py.data.data import Data
+from geoh5py.objects import BlockModel, ObjectBase, Surface
 from scipy.interpolate import interp1d
 from skimage.measure import marching_cubes
 from tqdm import tqdm
@@ -20,15 +24,20 @@ from tqdm import tqdm
 
 def entity_to_grid(
     entity: ObjectBase,
-    values: np.ndarray,
+    data: Data,
     resolution: float,
     max_distance: float,
+    horizon: Surface | None = None,
 ):
     """
     Extracts grid and values from a geoh5py object.
 
     :param entity: geoh5py object with locations data.
-    :param values: Data to be reshaped or interpolated to grid ordering.
+    :param data: Data to be reshaped or interpolated to grid ordering.
+    :resolution: Grid resolution.
+    :param max_distance: Maximum distance used in weighted average.
+    :param horizon: Clipping surface to restrict interpolation from bleeding
+        into the air.
 
     :returns: Tuple of grid and values.
     """
@@ -37,9 +46,9 @@ def entity_to_grid(
         raise ValueError("Input 'entity' must have a vertices or centroids set.")
 
     if isinstance(entity, BlockModel):
-        grid, values = block_model_to_grid(entity, values)
+        grid, values = block_model_to_grid(entity, data.values)
     else:
-        grid, values = interp_to_grid(entity, values, resolution, max_distance)
+        grid, values = interp_to_grid(entity, data, resolution, max_distance, horizon)
 
     return grid, values
 
@@ -70,40 +79,62 @@ def block_model_to_grid(
     return grid, values
 
 
-def interp_to_grid(
-    entity: ObjectBase, values: np.ndarray, resolution, max_distance
+def interp_to_grid(  # pylint: disable=too-many-locals
+    entity: ObjectBase,
+    data: Data,
+    resolution: float,
+    max_distance: float,
+    horizon: Surface | None = None,
 ) -> tuple[list[np.ndarray], np.ndarray]:
     """
-    Interpolate values into a regular grid based on entity locations.
+    Interpolate values into a regular grid bounding all finite data points.
 
     :param entity: Geoh5py object with locations data.
-    :param values: Data to be interpolated to grid.
+    :param data: Data to be interpolated to grid.
     :param resolution: Grid resolution
     :param max_distance: Maximum distance used in weighted average.
+
+    :returns: Tuple of grid and nearest neighbor interpolated values. The
+        resulting grid bounds all the points in entity for which the data
+        is not nan.
     """
 
     grid = []
+    is_finite = np.isfinite(data.values)
+    if data.association == DataAssociationEnum.CELL:
+        vertices = entity.locations
+        locations = np.mean(vertices[entity.cells], axis=1)[is_finite, :]
+    else:
+        locations = entity.vertices[is_finite, :]
+
+    finite_values = data.values[is_finite]
     for i in np.arange(3):
         grid += [
             np.arange(
-                entity.locations[:, i].min(),
-                entity.locations[:, i].max() + resolution,
+                locations[:, i].min(),
+                locations[:, i].max() + resolution,
                 resolution,
             )
         ]
 
     y, x, z = np.meshgrid(grid[1], grid[0], grid[2])
-    values = weighted_average(
-        entity.locations,
+    average_values = weighted_average(
+        locations,
         np.c_[x.flatten(), y.flatten(), z.flatten()],
-        [values],
+        [finite_values],
         threshold=resolution / 2.0,
         n=8,
         max_distance=max_distance,
     )
-    values = values[0].reshape(x.shape)
+    average_values = average_values[0].reshape(x.shape)
 
-    return grid, values
+    if horizon is not None:
+        grid_xyz = np.c_[x.flatten(), y.flatten(), z.flatten()]
+        mask = mask_under_horizon(grid_xyz, horizon.vertices)
+        mask = mask.reshape(average_values.shape)
+        average_values[~mask] = np.nan
+
+    return grid, average_values
 
 
 def extract_iso_surfaces(
