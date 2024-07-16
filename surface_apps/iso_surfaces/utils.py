@@ -93,6 +93,8 @@ def interp_to_grid(  # pylint: disable=too-many-locals
     :param data: Data to be interpolated to grid.
     :param resolution: Grid resolution
     :param max_distance: Maximum distance used in weighted average.
+    :param horizon: Clipping surface to restrict interpolation from bleeding
+        into the air.
 
     :returns: Tuple of grid and nearest neighbor interpolated values. The
         resulting grid bounds all the points in entity for which the data
@@ -102,6 +104,9 @@ def interp_to_grid(  # pylint: disable=too-many-locals
     grid = []
     is_finite = np.isfinite(data.values)
     if isinstance(entity, CellObject) and data.association == DataAssociationEnum.CELL:
+        if entity.vertices is None:
+            raise ValueError("Entity must contain vertices.")
+            # TODO: Remove when GEOPY-1602 has been merged.
         locations = np.mean(entity.vertices[entity.cells], axis=1)[is_finite, :]
     else:
         locations = entity.locations[is_finite, :]

@@ -43,14 +43,18 @@ def get_curve(workspace):
     return curve
 
 
-def test_interp_to_grid_points(tmp_path):
+def test_interp_points_to_grid(tmp_path):
+
     ws = Workspace(tmp_path / "test.geoh5")
     pts = get_points(ws)
-    ind = pts.vertices[:, 0] > 5
     values = np.zeros(pts.n_vertices)
-    values[ind] = 1
-    inactive = pts.vertices[:, 2] > 0
-    values[inactive] = np.nan
+
+    right_side = pts.vertices[:, 0] > 5
+    values[right_side] = 1
+
+    above_zero = pts.vertices[:, 2] > 0
+    values[above_zero] = np.nan
+
     data = pts.add_data({"data": {"values": values}})
     grid, gridded_data = interp_to_grid(pts, data, resolution=0.5, max_distance=1)
     y_grid, x_grid, z_grid = np.meshgrid(grid[1], grid[0], grid[2])
@@ -60,19 +64,24 @@ def test_interp_to_grid_points(tmp_path):
         vertices=np.c_[x_grid.flatten(), y_grid.flatten(), z_grid.flatten()],
     )
     pts.add_data({"my grid data": {"values": gridded_data.flatten()}})
+
     assert all(gridded_data[x_grid > 6] == 1)
     assert all(gridded_data[x_grid < 4] == 0)
     assert grid[2].max() == 0
 
 
-def test_interp_to_grid_curve(tmp_path):
+def test_interp_curve_vertex_data_to_grid(tmp_path):
+
     ws = Workspace(tmp_path / "test.geoh5")
     crv = get_curve(ws)
-    ind = crv.vertices[:, 0] > 5
     values = np.zeros(crv.n_vertices)
-    values[ind] = 1
-    inactive = crv.vertices[:, 2] > 0
-    values[inactive] = np.nan
+
+    right_side = crv.vertices[:, 0] > 5
+    values[right_side] = 1
+
+    above_zero = crv.vertices[:, 2] > 0
+    values[above_zero] = np.nan
+
     data = crv.add_data({"vertex data": {"values": values, "association": "VERTEX"}})
     grid, gridded_data = interp_to_grid(crv, data, resolution=0.5, max_distance=1)
     y_grid, x_grid, z_grid = np.meshgrid(grid[1], grid[0], grid[2])
@@ -82,15 +91,24 @@ def test_interp_to_grid_curve(tmp_path):
         vertices=np.c_[x_grid.flatten(), y_grid.flatten(), z_grid.flatten()],
     )
     pts.add_data({"my grid data": {"values": gridded_data.flatten()}})
+
     assert all(gridded_data[x_grid > 6] == 1)
     assert all(gridded_data[x_grid < 4] == 0)
     assert grid[2].max() == 0
 
+
+def test_interp_curve_cell_data_to_grid(tmp_path):
+
+    ws = Workspace(tmp_path / "test.geoh5")
+    crv = get_curve(ws)
     values = np.zeros(crv.n_cells)
-    ind = crv.vertices[crv.cells[:, 1], 0] > 5
-    values[ind] = 1
-    inactive = crv.vertices[crv.cells[:, 1], 2] > 0
-    values[inactive] = np.nan
+
+    right_side = crv.vertices[crv.cells[:, 1], 0] > 5
+    values[right_side] = 1
+
+    above_zero = crv.vertices[crv.cells[:, 1], 2] > 0
+    values[above_zero] = np.nan
+
     data = crv.add_data({"cell data": {"values": values, "association": "CELL"}})
     grid, gridded_data = interp_to_grid(crv, data, resolution=0.5, max_distance=1)
     y_grid, x_grid, z_grid = np.meshgrid(grid[1], grid[0], grid[2])
@@ -100,6 +118,7 @@ def test_interp_to_grid_curve(tmp_path):
         vertices=np.c_[x_grid.flatten(), y_grid.flatten(), z_grid.flatten()],
     )
     pts.add_data({"my other grid data": {"values": gridded_data.flatten()}})
+
     assert all(gridded_data[x_grid > 6] == 1)
     assert all(gridded_data[x_grid < 4] == 0)
     assert grid[2].max() == -0.5
