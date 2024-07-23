@@ -12,7 +12,7 @@ import logging
 import sys
 
 import numpy as np
-from geoapps_utils.formatters import string_name
+from geoapps_utils.utils.formatters import string_name
 from geoh5py.data.data import Data
 from geoh5py.objects import ObjectBase, Surface
 from geoh5py.shared.utils import fetch_active_workspace
