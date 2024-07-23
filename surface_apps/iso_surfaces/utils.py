@@ -11,9 +11,9 @@ import logging
 import warnings
 
 import numpy as np
-from geoapps_utils.locations import mask_under_horizon
-from geoapps_utils.numerical import weighted_average
-from geoapps_utils.transformations import rotate_xyz
+from geoapps_utils.utils.locations import mask_under_horizon
+from geoapps_utils.utils.numerical import weighted_average
+from geoapps_utils.utils.transformations import rotate_xyz
 from geoh5py.data import DataAssociationEnum
 from geoh5py.data.data import Data
 from geoh5py.objects import BlockModel, CellObject, ObjectBase, Surface
