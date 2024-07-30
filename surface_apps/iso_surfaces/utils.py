@@ -109,7 +109,6 @@ def interp_to_grid(
 def extract_iso_surfaces(
     entity: ObjectBase, grid: list[np.ndarray], levels: list[float], values: np.ndarray
 ) -> list[list[np.ndarray]]:
-
     surfaces = []
     skip = []
     for level in tqdm(levels):

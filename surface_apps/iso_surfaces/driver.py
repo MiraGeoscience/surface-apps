@@ -44,7 +44,6 @@ class IsoSurfacesDriver(BaseSurfaceDriver):
             levels = self.params.detection.contours
 
             if len(levels) >= 1:
-
                 surfaces = self.iso_surface(
                     self.params.source.objects,
                     self.params.source.data.values,
