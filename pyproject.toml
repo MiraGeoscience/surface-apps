@@ -40,24 +40,19 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.10, <3.11"
 
-numpy = "~1.23.5"  # also geoh5py
-pydantic = "~2.5.2"
+numpy = "~1.26.0"  # also in geoh5py
+pydantic = "^2.5.2"  # also in geoh5py
 scikit-image = "~0.20.0"
-scipy = "~1.13"
+scipy = "~1.14.0"  # also in geoapps-utils
 tqdm = "~4.66.1"
 
-## pip dependencies
-#geoh5py = {version = "~0.10.0a1", source = "pypi", allow-prereleases = true}
-geoh5py = {url = "https://github.com/MiraGeoscience/geoh5py/archive/refs/heads/develop.zip"}
-#geoh5py = {url = "http://localhost:8888/geoh5py.tar.gz#sha256="}
+## Pip dependencies from Git repositories
+#----------------------------------------
+#geoh5py = {version = "~0.10.0-alpha.1", source = "pypi", allow-prereleases = true}
+geoh5py = {git = "https://github.com/MiraGeoscience/geoh5py.git", rev = "develop"}
 
-#geoapps-utils = {version = "~0.3.0rc1", source = "pypi", allow-prereleases = true}
-geoapps-utils = {url = "https://github.com/MiraGeoscience/geoapps-utils/archive/refs/heads/develop.zip"}
-#geoapps-utils = {url = "http://localhost:8888/geoapps-utils.tar.gz#sha256="}
-
-## indirect dependencies, forcing them here for installation through Conda not pip
-h5py = "^3.2.1" # from geoh5py
-Pillow = "~10.3.0" # from geoh5py
+#geoapps-utils = {version = "~0.4.0-alpha.1", source = "pypi", allow-prereleases = true}
+geoapps-utils = {git = "https://github.com/MiraGeoscience/geoapps-utils.git", rev = "develop"}
 
 ## about pip dependencies
 # to be specified to work with conda-lock
@@ -67,6 +62,12 @@ Pillow = "~10.3.0" # from geoh5py
 #   - for a branch: my_package = { url = "https://github.com/ORGANISATION/REPO/archive/refs/heads/BRANCH.zip#sha256=" }
 # Note - conda-lock does not support the syntax: my_package = { git = ... }
 #        while poetry2conda supports only { git = "...", tag = "..." }, and not { url = ... }
+
+[tool.conda-lock.dependencies]
+## indirect dependencies, forcing them here for installation through Conda not pip
+#---------------------------------------------------------------------------------
+Pillow = ">=10.3.0, <10.4.0"  # from geoh5py
+h5py = ">=3.2.1, <4.0.0"  # from geoh5py
 
 [tool.poetry.group.dev.dependencies]
 Pygments = "*"

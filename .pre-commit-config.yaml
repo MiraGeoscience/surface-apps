@@ -44,7 +44,7 @@ repos:
             types-PyYAML,
             tomli  # to read config from pyproject.toml
         ]
-        exclude: ^(docs|geoapps-assets)/
+        exclude: ^(docs|surface_apps-assets)/
 -   repo: https://github.com/codingjoe/relint
     rev: 3.1.1
     hooks:
