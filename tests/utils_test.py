@@ -14,7 +14,6 @@ from surface_apps.iso_surfaces.utils import interp_to_grid
 
 
 def get_points(workspace):
-
     x = np.linspace(0, 10, 11)
     y = np.linspace(0, 10, 11)
     z = np.linspace(-8, 2, 11)
@@ -26,7 +25,6 @@ def get_points(workspace):
 
 
 def get_curve(workspace):
-
     pts = get_points(workspace)
     locs = pts.vertices
     cells = np.c_[np.arange(len(locs) - 1), np.arange(1, len(locs))]
@@ -44,7 +42,6 @@ def get_curve(workspace):
 
 
 def test_interp_points_to_grid(tmp_path):
-
     ws = Workspace(tmp_path / "test.geoh5")
     pts = get_points(ws)
     values = np.zeros(pts.n_vertices)
@@ -71,7 +68,6 @@ def test_interp_points_to_grid(tmp_path):
 
 
 def test_interp_curve_vertex_data_to_grid(tmp_path):
-
     ws = Workspace(tmp_path / "test.geoh5")
     crv = get_curve(ws)
     values = np.zeros(crv.n_vertices)
@@ -98,7 +94,6 @@ def test_interp_curve_vertex_data_to_grid(tmp_path):
 
 
 def test_interp_curve_cell_data_to_grid(tmp_path):
-
     ws = Workspace(tmp_path / "test.geoh5")
     crv = get_curve(ws)
     values = np.zeros(crv.n_cells)
