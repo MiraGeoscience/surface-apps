@@ -170,7 +170,7 @@ def extract_iso_surfaces(
             else:
                 vertices = np.vstack(vertices).T  # type: ignore
 
-        except RuntimeError as _:  # noqa
+        except RuntimeError as _:
             logging.exception("Caught a RuntimeError in marching cubes algorithm.")
             skip += [level]
 
