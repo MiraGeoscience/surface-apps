@@ -54,10 +54,6 @@ geoh5py = {git = "https://github.com/MiraGeoscience/geoh5py.git", rev = "develop
 #geoapps-utils = {version = "~0.4.0-alpha.1", source = "pypi", allow-prereleases = true}
 geoapps-utils = {git = "https://github.com/MiraGeoscience/geoapps-utils.git", rev = "develop"}
 
-## indirect dependencies, forcing them here for installation through Conda not pip
-h5py = "^3.2.1" # from geoh5py
-Pillow = "~10.3.0" # from geoh5py
-
 ## about pip dependencies
 # to be specified to work with conda-lock
 # - from PyPI: my_package = { version = "1.2.3", source = "pypi" }
@@ -66,6 +62,12 @@ Pillow = "~10.3.0" # from geoh5py
 #   - for a branch: my_package = { url = "https://github.com/ORGANISATION/REPO/archive/refs/heads/BRANCH.zip#sha256=" }
 # Note - conda-lock does not support the syntax: my_package = { git = ... }
 #        while poetry2conda supports only { git = "...", tag = "..." }, and not { url = ... }
+
+[tool.conda-lock.dependencies]
+## indirect dependencies, forcing them here for installation through Conda not pip
+#---------------------------------------------------------------------------------
+Pillow = ">=10.3.0, <10.4.0"  # from geoh5py
+h5py = ">=3.2.1, <4.0.0"  # from geoh5py
 
 [tool.poetry.group.dev.dependencies]
 Pygments = "*"
