@@ -33,6 +33,15 @@
         "parent": "objects",
         "value": ""
     },
+    "horizon": {
+        "group": "Data",
+        "main": true,
+        "meshType": "{f26feba3-aded-494b-b9e9-b2bbcbe298e1}",
+        "label": "Clipping Horizon",
+        "optional": true,
+        "enabled": false,
+        "value": ""
+    },
     "interval_min": {
         "main": true,
         "group": "Contours",

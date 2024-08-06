@@ -65,10 +65,11 @@ def test_centroids(tmp_path: Path):
         np.subtract(verts, np.asarray(sphere_center)),
         axis=1,
     )
+    data = block_model.add_data({"my data": {"values": values}})
 
     # Generate surface
     func_surface = IsoSurfacesDriver.iso_surface(
-        block_model, values, [sphere_radius], max_distance=np.inf
+        block_model, data, [sphere_radius], max_distance=np.inf
     )
 
     # Compare surface center with sphere center
@@ -120,10 +121,10 @@ def test_vertices(tmp_path: Path):
         name="test_points",
         vertices=verts,
     )
-
+    data = points.add_data({"my data": {"values": values}})
     func_surface = IsoSurfacesDriver.iso_surface(
         points,
-        values,
+        data,
         [sphere_radius],
         resolution=sphere_radius / 8.0,
         max_distance=np.inf,
@@ -154,3 +155,61 @@ def test_vertices(tmp_path: Path):
     radius_error = np.abs((surf_radius - sphere_radius) / sphere_radius)
 
     assert radius_error < 0.06
+
+
+def test_clipping_horizon(tmp_path: Path):
+    """
+    Test iso_surface with a points object. Data values are the distance from a point.
+    """
+    ws = Workspace(tmp_path / "iso_test.geoh5")
+    np.random.seed(0)
+    length = 10
+    origin = np.random.uniform(-100, 100, 3)
+    verts = np.random.randn(5000, 3) * length + origin
+    sphere_radius = np.random.uniform(length * 0.2, length * 0.5, 1)[0]
+    offset = np.random.uniform(0, (length / 2), 3)
+    sphere_center = origin + offset
+
+    values = np.linalg.norm(verts - sphere_center, axis=1)
+
+    points = Points.create(
+        ws,
+        name="test_points",
+        vertices=verts,
+    )
+    data = points.add_data({"my data": {"values": values}})
+
+    vertices = np.array(
+        [
+            [-500, -500, 30],
+            [500, -500, 30],
+            [500, 500, 30],
+            [-500, 500, 30],
+            [-500, -500, 30],
+        ]
+    )
+    cells = np.array([[0, 1, 3], [1, 2, 3]])
+    horizon = Surface.create(
+        workspace=ws, name="horizon", vertices=vertices, cells=cells
+    )
+    func_surface = IsoSurfacesDriver.iso_surface(
+        points,
+        data,
+        [20],
+        resolution=sphere_radius / 8.0,
+        max_distance=np.inf,
+        horizon=horizon,
+    )  # For user validation only
+
+    surface = Surface.create(
+        ws, name="surface", vertices=func_surface[0][0], cells=func_surface[0][1]
+    )
+    points.add_data(
+        {
+            "DataValues": {
+                "values": values,
+            }
+        }
+    )
+
+    assert np.all(surface.vertices[:, -1] <= 30)
