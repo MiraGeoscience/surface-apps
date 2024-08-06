@@ -14,7 +14,7 @@ from typing import ClassVar
 import numpy as np
 from geoapps_utils.driver.data import BaseData
 from geoh5py.data import Data
-from geoh5py.objects import Points
+from geoh5py.objects import Points, Surface
 from geoh5py.objects.cell_object import CellObject
 from geoh5py.objects.grid_object import GridObject
 from geoh5py.ui_json.utils import str2list
@@ -29,12 +29,15 @@ class IsoSurfaceSourceParameters(BaseData):
 
     :param objects: A Grid2D, Points, Curve or Surface source object.
     :param data: Data values to create iso-surfaces from.
+    :param horizon: Clipping surface to restrict interpolation from
+        bleeding into the air.
     """
 
     model_config = ConfigDict(arbitrary_types_allowed=True)
 
     objects: Points | CellObject | GridObject
     data: Data
+    horizon: Surface | None = None
 
 
 class IsoSurfaceDetectionParameters(BaseData):
@@ -67,7 +70,10 @@ class IsoSurfaceDetectionParameters(BaseData):
             fixed_contours = val
 
         elif isinstance(val, str):
-            fixed_contours = str2list(val)
+            if val == "":
+                fixed_contours = None
+            else:
+                fixed_contours = str2list(val)
 
         elif val is None:
             fixed_contours = None
@@ -140,6 +146,7 @@ class IsoSurfaceParameters(BaseData):
     title: ClassVar[str] = "IsoSurface Detection"
     run_command: ClassVar[str] = "surface_apps.iso_surface.driver"
 
+    conda_environment: str = "surface_apps"
     source: IsoSurfaceSourceParameters
     detection: IsoSurfaceDetectionParameters
     output: IsoSurfaceOutputParameters = IsoSurfaceOutputParameters()
