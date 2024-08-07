@@ -50,7 +50,7 @@ def test_centroids(tmp_path: Path):
     # Sphere test data for the block model
     sphere_radius = np.random.uniform(length * 0.15, length * 0.3)
     offset = np.random.uniform(0, (length / 2) - sphere_radius, 3)
-    sphere_center = ((length - 2) / 2, (length - 2) / 2, (length - 2) / 2, *offset)
+    sphere_center = ((length - 2) / 2, (length - 2) / 2, (length - 2) / 2) + offset
 
     # The value at each point is its distance from the center of the sphere
     x_coords, y_coords, z_coords = np.meshgrid(
