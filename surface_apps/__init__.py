@@ -11,6 +11,7 @@ from __future__ import annotations
 import logging
 from pathlib import Path
 
+
 __version__ = "0.1.0-alpha.1"
 logging.basicConfig(level=logging.INFO)
 

@@ -144,7 +144,6 @@ def interp_to_grid(  # pylint: disable=too-many-locals
 def extract_iso_surfaces(
     entity: ObjectBase, grid: list[np.ndarray], levels: list[float], values: np.ndarray
 ) -> list[list[np.ndarray]]:
-
     surfaces = []
     skip = []
     for level in tqdm(levels):
@@ -171,7 +170,7 @@ def extract_iso_surfaces(
             else:
                 vertices = np.vstack(vertices).T  # type: ignore
 
-        except RuntimeError as _:  # noqa
+        except RuntimeError as _:
             logging.exception("Caught a RuntimeError in marching cubes algorithm.")
             skip += [level]
 

@@ -22,6 +22,7 @@ from surface_apps.driver import BaseSurfaceDriver
 from surface_apps.iso_surfaces.params import IsoSurfaceParameters
 from surface_apps.iso_surfaces.utils import entity_to_grid, extract_iso_surfaces
 
+
 logger = logging.getLogger(__name__)
 
 
@@ -45,7 +46,6 @@ class IsoSurfacesDriver(BaseSurfaceDriver):
             levels = self.params.detection.contours
 
             if len(levels) >= 1:
-
                 surfaces = self.iso_surface(
                     self.params.source.objects,
                     self.params.source.data,
@@ -56,7 +56,7 @@ class IsoSurfacesDriver(BaseSurfaceDriver):
                 )
 
                 results = []
-                for surface, level in zip(surfaces, levels):
+                for surface, level in zip(surfaces, levels, strict=False):
                     if len(surface[0]) > 0 and len(surface[1]) > 0:
                         results += [
                             Surface.create(
