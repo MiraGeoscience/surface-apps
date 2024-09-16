@@ -45,11 +45,11 @@ class BaseSurfaceDriver(BaseDriver):
     def out_group(self) -> UIJsonGroup | None:
         """Output container group."""
 
-        if self._out_group is None and self.params.output.out_group is not None:
+        if self._out_group is None:
             with fetch_active_workspace(self.workspace, mode="r+") as workspace:
                 self._out_group = UIJsonGroup.create(
                     workspace=workspace,
-                    name=self.params.output.out_group,
+                    name=self.params.title,
                 )
                 self._out_group.options = InputFile.stringify(  # type: ignore
                     InputFile.demote(self.params.input_file.ui_json)
