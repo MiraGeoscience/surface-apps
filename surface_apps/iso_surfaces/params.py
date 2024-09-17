@@ -14,6 +14,7 @@ from typing import ClassVar
 import numpy as np
 from geoapps_utils.driver.data import BaseData
 from geoh5py.data import Data
+from geoh5py.groups import UIJsonGroup
 from geoh5py.objects import Points, Surface
 from geoh5py.objects.cell_object import CellObject
 from geoh5py.objects.grid_object import GridObject
@@ -129,7 +130,9 @@ class IsoSurfaceOutputParameters(BaseModel):
     :param out_group: Name of the output group.
     """
 
-    out_group: str = "Iso Surfaces"
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+
+    out_group: UIJsonGroup | None = None
 
 
 class IsoSurfaceParameters(BaseData):
