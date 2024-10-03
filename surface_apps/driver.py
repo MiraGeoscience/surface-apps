@@ -34,7 +34,8 @@ class BaseSurfaceDriver(BaseDriver):
     _parameter_class: type[BaseData]
 
     def __init__(self, parameters: BaseData | InputFile):
-        self._out_group = None
+        self._out_group: UIJsonGroup | None = None
+
         if isinstance(parameters, InputFile):
             parameters = self._parameter_class.build(parameters)
 
@@ -46,14 +47,18 @@ class BaseSurfaceDriver(BaseDriver):
         """Output container group."""
 
         if self._out_group is None:
-            with fetch_active_workspace(self.workspace, mode="r+") as workspace:
-                self._out_group = UIJsonGroup.create(
-                    workspace=workspace,
-                    name=self.params.title,
-                )
-                self._out_group.options = InputFile.stringify(  # type: ignore
-                    InputFile.demote(self.params.input_file.ui_json)
-                )
+            if self.params.out_group is not None:
+                self._out_group = self.params.out_group
+
+            else:
+                with fetch_active_workspace(self.workspace, mode="r+") as workspace:
+                    self._out_group = UIJsonGroup.create(
+                        workspace=workspace,
+                        name=self.params.title,
+                    )
+                    self._out_group.options = InputFile.stringify(  # type: ignore
+                        InputFile.demote(self.params.input_file.ui_json)
+                    )
 
         return self._out_group
 
@@ -67,7 +72,7 @@ class BaseSurfaceDriver(BaseDriver):
             self.update_monitoring_directory(self.out_group)
             logger.info(
                 "Surface object(s) saved in '%s' to '%s'.",
-                self.params.output.out_group,
+                self.params.out_group,
                 str(workspace.h5file),
             )
 
