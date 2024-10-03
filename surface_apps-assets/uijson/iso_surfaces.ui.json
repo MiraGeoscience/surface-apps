@@ -89,9 +89,12 @@
         "value": 50.0
     },
     "out_group": {
-        "group": "Output",
-        "main": true,
-        "label": "Group",
-        "value": "Iso Surfaces"
+        "group": "Output Preferences",
+        "label": "UIJson group",
+        "value": "",
+        "groupType": "{BB50AC61-A657-4926-9C82-067658E246A0}",
+        "visible": true,
+        "optional": true,
+        "enabled": false
     }
 }
