@@ -1,0 +1,50 @@
+{% set name = "surface-apps" %}
+{% set version = "0.1.0a1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  path: ../{{ name }} # Used to build the package from the source code
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python >=3.10.0,<3.11
+    - poetry-core >=1.0.0
+    - setuptools
+    - pip
+  run:
+    - python >=3.10.0,<3.11
+    - numpy >=1.26.0,<1.27.0
+    - scipy >=1.14.0,<1.15.0
+    - pydantic >=2.5.2,<2.6.0
+    - geoh5py >=0.10.0a0.dev0,<0.11
+    - geoapps-utils >=0.4.0a0.dev0,<0.5.0
+    - pillow >=10.3.0,<10.4.0
+    - h5py >=3.2.1,<4.0.0
+    - scikit-image >=0.20.0,<0.21.0
+    - tqdm >=4.66.1,<4.67.0
+
+
+test:
+  imports:
+    - surface_apps
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - SophieCurinier
+    - sebhmg
