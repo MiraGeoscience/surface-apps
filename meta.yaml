@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  path: ../{{ name }} # Used to build the package from the source code
+  path: ../{{ name }}
 
 build:
   noarch: python
