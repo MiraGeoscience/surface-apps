@@ -38,11 +38,11 @@ classifiers = [
 [tool.poetry.scripts]
 
 [tool.poetry.dependencies]
-python = "^3.10, <3.11"
+python = "^3.10"
 
 numpy = "~1.26.0"  # also in geoh5py
 pydantic = "^2.5.2"  # also in geoh5py
-scikit-image = "~0.20.0"
+scikit-image = "~0.24.0"
 scipy = "~1.14.0"  # also in geoapps-utils
 tqdm = "~4.66.1"
 
@@ -52,7 +52,7 @@ tqdm = "~4.66.1"
 geoh5py = {git = "https://github.com/MiraGeoscience/geoh5py.git", rev = "release/0.10.0"}
 
 #geoapps-utils = {version = "~0.4.0-alpha.1", source = "pypi", allow-prereleases = true}
-geoapps-utils = {git = "https://github.com/MiraGeoscience/geoapps-utils.git", rev = "develop"}
+geoapps-utils = {git = "https://github.com/MiraGeoscience/geoapps-utils.git", rev = "release/0.4.0"}
 
 ## about pip dependencies
 # to be specified to work with conda-lock
