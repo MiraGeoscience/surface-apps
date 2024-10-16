@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "surface-apps"
-version = "0.1.0-alpha.1"
+version = "0.2.0-alpha.1"
 license = "MIT"
 description = "Find Iso-surfaces in 3D data."
 authors = ["Mira Geoscience <support@mirageoscience.com>"]
