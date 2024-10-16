@@ -75,6 +75,7 @@ class IsoSurfacesDriver(BaseSurfaceDriver):
         entity: ObjectBase,
         data: Data,
         levels: list,
+        *,
         resolution: float = 100,
         max_distance: float = np.inf,
         horizon: Surface | None = None,
