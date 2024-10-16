@@ -18,7 +18,7 @@ from geoh5py.data import DataAssociationEnum
 from geoh5py.data.data import Data
 from geoh5py.objects import BlockModel, CellObject, ObjectBase, Surface
 from scipy.interpolate import interp1d
-from skimage.measure import marching_cubes
+from skimage.measure import marching_cubes  # pylint: disable=no-name-in-module
 from tqdm import tqdm
 
 
