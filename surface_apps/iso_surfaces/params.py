@@ -19,7 +19,7 @@ from geoh5py.objects import Points, Surface
 from geoh5py.objects.cell_object import CellObject
 from geoh5py.objects.grid_object import GridObject
 from geoh5py.ui_json.utils import str2list
-from pydantic import BaseModel, ConfigDict, field_validator
+from pydantic import ConfigDict, field_validator
 
 from surface_apps import assets_path
 
@@ -122,19 +122,6 @@ class IsoSurfaceDetectionParameters(BaseData):
         return contours
 
 
-class IsoSurfaceOutputParameters(BaseModel):
-    """
-    Output parameters.
-
-    :param export_as: Name of the output entity.
-    :param out_group: Name of the output group.
-    """
-
-    model_config = ConfigDict(arbitrary_types_allowed=True)
-
-    out_group: UIJsonGroup | None = None
-
-
 class IsoSurfaceParameters(BaseData):
     """
     Contour parameters for use with `contours.driver`.
@@ -152,4 +139,4 @@ class IsoSurfaceParameters(BaseData):
     conda_environment: str = "surface_apps"
     source: IsoSurfaceSourceParameters
     detection: IsoSurfaceDetectionParameters
-    output: IsoSurfaceOutputParameters = IsoSurfaceOutputParameters()
+    out_group: UIJsonGroup | None = None
