@@ -9,12 +9,13 @@
 import sys
 from pathlib import Path
 from importlib.metadata import version
+from datetime import datetime
 
 sys.path.insert(0, Path("../..").resolve())
 
 project = "surface-apps"
-copyright = "Mira Geoscience Ltd"
 author = "Mira Geoscience Ltd."
+project_copyright = "%Y, Mira Geoscience Ltd"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -44,3 +45,10 @@ exclude_patterns = []
 
 html_theme = "alabaster"
 html_static_path = ["_static"]
+
+def get_copyright_notice():
+    return f"Copyright {datetime.now().strftime(project_copyright)}"
+
+rst_epilog = f"""
+.. |copyright_notice| replace:: {get_copyright_notice()}.
+"""
