@@ -8,17 +8,21 @@
 
 import sys
 from pathlib import Path
-
+from importlib.metadata import version
 
 sys.path.insert(0, Path("../..").resolve())
 
 project = "surface-apps"
 copyright = "Mira Geoscience Ltd"
 author = "Benjamin Kary"
-release = "2024"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
+
+# The full version, including alpha/beta/rc tags.
+release = version("surface-apps")
+# The short X.Y.Z version.
+version = ".".join(release.split(".")[:3])
 
 autodoc_mock_imports = [
     "numpy",
