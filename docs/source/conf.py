@@ -8,17 +8,22 @@
 
 import sys
 from pathlib import Path
-
+from importlib.metadata import version
+from datetime import datetime
 
 sys.path.insert(0, Path("../..").resolve())
 
 project = "surface-apps"
-copyright = "Mira Geoscience Ltd"
-author = "Benjamin Kary"
-release = "2024"
+author = "Mira Geoscience Ltd."
+project_copyright = "%Y, Mira Geoscience Ltd"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
+
+# The full version, including alpha/beta/rc tags.
+release = version("surface-apps")
+# The short X.Y.Z version.
+version = ".".join(release.split(".")[:3])
 
 autodoc_mock_imports = [
     "numpy",
@@ -39,4 +44,14 @@ exclude_patterns = []
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_theme = "alabaster"
+html_theme_options = {
+    'description': f"version {release}",
+}
 html_static_path = ["_static"]
+
+def get_copyright_notice():
+    return f"Copyright {datetime.now().strftime(project_copyright)}"
+
+rst_epilog = f"""
+.. |copyright_notice| replace:: {get_copyright_notice()}.
+"""
