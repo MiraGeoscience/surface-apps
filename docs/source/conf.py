@@ -14,7 +14,7 @@ sys.path.insert(0, Path("../..").resolve())
 
 project = "surface-apps"
 copyright = "Mira Geoscience Ltd"
-author = "Benjamin Kary"
+author = "Mira Geoscience Ltd."
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

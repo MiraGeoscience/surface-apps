@@ -5,7 +5,11 @@ license = "MIT"
 description = "Find Iso-surfaces in 3D data."
 authors = ["Mira Geoscience <support@mirageoscience.com>"]
 repository = "https://github.com/MiraGeoscience/surface-apps"
-homepage = "https://mirageoscience.com"
+maintainers = [
+    "Benjamin Kary <benjamink@mirageoscience.com>",
+    "Dominique Fournier <dominiquef@mirageoscience.com>",
+]
+homepage = "https://www.mirageoscience.com/mining-industry-software/python-integration/"
 readme = "README.rst"
 packages = [
      { include = "surface_apps" },
