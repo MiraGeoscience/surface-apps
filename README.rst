@@ -1,9 +1,9 @@
 |coverage| |maintainability| |precommit_ci| |docs| |style| |version| |status| |pyversions|
 
 
-.. |docs| image:: https://readthedocs.org/projects/surface-apps/badge/
+.. |docs| image:: https://readthedocs.com/projects/mirageoscience-surface-apps/badge/?version=latest
     :alt: Documentation Status
-    :target: https://surface-apps.readthedocs.io/en/latest/?badge=latest
+    :target: https://mirageoscience-surface-apps.readthedocs-hosted.com/en/latest/?badge=latest
 
 .. |coverage| image:: https://codecov.io/gh/MiraGeoscience/surface-apps/branch/develop/graph/badge.svg
     :alt: Code coverage
@@ -45,7 +45,7 @@ Surface detection within geoscientific data.
 
 Documentation
 ^^^^^^^^^^^^^
-`Online documentation <https://surface-apps.readthedocs.io/en/latest/>`_
+`Online documentation <https://mirageoscience-surface-apps.readthedocs-hosted.com/en/latest/>`_
 
 
 Installation
