@@ -45,8 +45,11 @@ tests:
       - pip check
 
 about:
+  summary: Surface detection within geoscientific data.
   license: MIT
   license_file: LICENSE
+  homepage: https://www.mirageoscience.com/mining-industry-software/python-integration/
+  repository: https://github.com/MiraGeoscience/surface-apps
 
 extra:
   recipe-maintainers:
