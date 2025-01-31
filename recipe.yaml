@@ -1,17 +1,20 @@
-{% set name = "surface-apps" %}
-{% set version = "0.2.0a1" %}
+schema_version: 1
+
+context:
+  name: surface-apps
+  version: 0.2.0a1
 
 package:
-  name: {{ name|lower }}
-  version: {{ version }}
+  name: ${{ name|lower }}
+  version: ${{ version }}
 
 source:
-  path: ../{{ name }}
+  path: ../${{ name }}
 
 build:
-  noarch: python
-  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
@@ -31,18 +34,22 @@ requirements:
     - scikit-image >=0.24.0,<0.25.0
     - tqdm >=4.66.1,<4.67.0
 
-
-test:
-  imports:
-    - surface_apps
-  commands:
-    - pip check
-  requires:
-    - pip
+tests:
+  - python:
+      imports:
+        - surface_apps
+  - requirements:
+      run:
+        - pip
+    script:
+      - pip check
 
 about:
+  summary: Surface detection within geoscientific data.
   license: MIT
   license_file: LICENSE
+  homepage: https://www.mirageoscience.com/mining-industry-software/python-integration/
+  repository: https://github.com/MiraGeoscience/surface-apps
 
 extra:
   recipe-maintainers:
