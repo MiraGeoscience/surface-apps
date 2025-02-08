@@ -11,7 +11,7 @@ compatibly licensed.  We list these here.
    * - `geoh5py <https://github.com/MiraGeoscience/geoh5py>`_
      - LGPL-3.0-or-later
      - Python API for geoh5, an open file format for geoscientific data
-   * = `geoapps-utils <https://github.com/MiraGeoscience/geoapps-utils>`_
+   * - `geoapps-utils <https://github.com/MiraGeoscience/geoapps-utils>`_
      - MIT
      - Utilities for geoscientific applications.
    * - `numpy <https://github.com/numpy/numpy>`_

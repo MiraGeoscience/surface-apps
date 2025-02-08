@@ -18,17 +18,17 @@ build:
 
 requirements:
   host:
-    - python >=3.10.0,<3.11
+    - python 3.10.*
     - poetry-core >=1.0.0
     - setuptools
     - pip
   run:
-    - python >=3.10.0,<3.11
+    - python >=3.10.0
     - numpy >=1.26.0,<1.27.0
     - scipy >=1.14.0,<1.15.0
     - pydantic >=2.5.2,<2.6.0
-    - geoh5py >=0.11.0a1.dev,<0.12.0a.dev
-    - geoapps-utils >=0.5.0a1.dev,<0.6.0a.dev
+    - geoh5py 0.10.*
+    - geoapps-utils 0.4.*
     - pillow >=10.3.0,<10.4.0
     - h5py >=3.2.1,<4.0.0
     - scikit-image >=0.24.0,<0.25.0

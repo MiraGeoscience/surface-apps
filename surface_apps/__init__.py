@@ -1,9 +1,10 @@
 # ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-#  Copyright (c) 2022-2024 Mira Geoscience Ltd.                                '
+#  Copyright (c) 2024-2025 Mira Geoscience Ltd.                                '
 #                                                                              '
-#  This file is part of surface-apps package.                                        '
+#  This file is part of surface-apps package.                                  '
 #                                                                              '
-#  All rights reserved.                                                        '
+#  surface-apps is distributed under the terms and conditions of the MIT License
+#  (see LICENSE file at the root of this source code package).                 '
 # ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
 from __future__ import annotations
@@ -12,7 +13,7 @@ import logging
 from pathlib import Path
 
 
-__version__ = "0.2.0-alpha.1"
+__version__ = "0.1.0-beta.2"
 logging.basicConfig(level=logging.INFO)
 
 
