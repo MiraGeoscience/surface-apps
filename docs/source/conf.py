@@ -7,9 +7,10 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 import sys
+from datetime import datetime
 from pathlib import Path
 from importlib.metadata import version
-from datetime import datetime
+from packaging.version import Version
 
 sys.path.insert(0, Path("../..").resolve())
 
@@ -22,8 +23,8 @@ project_copyright = "%Y, Mira Geoscience Ltd"
 
 # The full version, including alpha/beta/rc tags.
 release = version("surface-apps")
-# The short X.Y.Z version.
-version = ".".join(release.split(".")[:3])
+# The shorter X.Y.Z version.
+version = Version(release).base_version
 
 autodoc_mock_imports = [
     "numpy",
