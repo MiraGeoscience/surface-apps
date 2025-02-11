@@ -37,7 +37,7 @@
 surface-apps
 ============
 
-Surface detection within geoscientific data.
+The **surface-apps** library offers tools for the creation and manipulation of surface objects using various Python libraries and `geoh5py <https://mirageoscience-geoh5py.readthedocs-hosted.com/>`_.
 
 .. contents:: Table of Contents
    :local:
@@ -65,7 +65,7 @@ Within a conda environment
 --------------------------
 
 You can install (or update) a conda environment with all the requires packages to run **surface-apps**.
-To do so you can directly run the **Install_or_Update.bat** file by double left clicking on it.
+To do so you can directly run the **install.bat** file by double left clicking on it.
 
 Install with conda
 ------------------
@@ -156,7 +156,7 @@ The use of Third Party Software is governed by the terms of such software licens
 Third Party Software notices and/or additional terms and conditions are located in the
 `THIRD_PARTY_SOFTWARE.rst`_ file.
 
-.. _THIRD_PARTY_SOFTWARE.rst: THIRD_PARTY_SOFTWARE.rst
+.. _THIRD_PARTY_SOFTWARE.rst: ./docs/source/THIRD_PARTY_SOFTWARE.rst
 
 Copyright
 ^^^^^^^^^
