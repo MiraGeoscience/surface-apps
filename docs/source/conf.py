@@ -23,7 +23,7 @@ project_copyright = "%Y, Mira Geoscience Ltd"
 copyright = "Mira Geoscience Ltd"
 
 # The full version, including alpha/beta/rc tags.
-release = version("plate-simulation")
+release = version("surface-apps")
 # The shorter X.Y.Z version.
 version = Version(release).base_version
 
