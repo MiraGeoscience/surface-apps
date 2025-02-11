@@ -25,6 +25,7 @@ Content
    usage
    iso_surfaces
    api_reference
+   THIRD_PARTY_SOFTWARE
 
 
 License
@@ -41,16 +42,6 @@ GNU Lesser General Public License for more details.
 
 A copy of the GNU Lesser General Public License can be accessed from <https://www.gnu.org/licenses/>.
 
-
-Third Party Software
-^^^^^^^^^^^^^^^^^^^^
-The surface-apps Software may provide links to third party libraries or code (collectively “Third Party Software”)
-to implement various functions. Third Party Software does not comprise part of the Software.
-The use of Third Party Software is governed by the terms of such software license(s).
-Third Party Software notices and/or additional terms and conditions are located in the
-`THIRD_PARTY_SOFTWARE`_ file.
-
-.. _THIRD_PARTY_SOFTWARE: THIRD_PARTY_SOFTWARE.rst
 
 Copyright
 ^^^^^^^^^

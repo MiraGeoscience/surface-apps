@@ -1,4 +1,7 @@
-The my-app repository and source distributions bundle several libraries that are
+Third Party Software
+====================
+
+The surface-apps repository and source distributions bundle several libraries that are
 compatibly licensed.  We list these here.
 
 .. list-table::
@@ -26,6 +29,6 @@ compatibly licensed.  We list these here.
    * - `tqdm <https://github.com/tqdm>`_
      - MPL-2.0 or MIT
      - A Fast, Extensible Progress Bar for Python and CLI
-   * - `scikit-image <https://github.com/scikit-image/scikit-image >`_
+   * - `scikit-image <https://github.com/scikit-image/scikit-image>`_
      - BSD-3-Clause
      - Image processing in Python
