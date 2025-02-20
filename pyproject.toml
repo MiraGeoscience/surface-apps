@@ -15,7 +15,6 @@ packages = [
      { include = "surface_apps" },
      { include = "surface_apps-assets" },
 ]
-
 include = [
     "COPYING",
     "COPYING.LESSER",
@@ -23,8 +22,7 @@ include = [
     "README.rst",
     "THIRD_PARTY_SOFTWARE.rst",
 ]
-
-# TODO: adjust classifiers
+keywords = ["geology", "geophysics", "earth sciences"]
 classifiers = [
     "Development Status :: 2 - Pre-Alpha",
     "Intended Audience :: Science/Research",
