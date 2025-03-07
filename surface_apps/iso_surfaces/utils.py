@@ -152,7 +152,7 @@ def extract_iso_surfaces(
             if level < np.nanmin(values) or level > np.nanmax(values):
                 skip += [level]
                 continue
-            verts, faces, _, _ = marching_cubes(values, level=level)
+            verts, faces, _normals, _values = marching_cubes(values, level=level)
             verts, faces = remove_nan(verts, faces)
 
             vertices = []
