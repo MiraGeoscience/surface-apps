@@ -50,10 +50,10 @@ tqdm = "^4.66.1"
 
 ## Pip dependencies from Git repositories
 #----------------------------------------
-#geoh5py = {version = ">=0.11.0a1, <0.12.0a.dev", source = "pypi", allow-prereleases = true}
+#geoh5py = {version = ">=0.11.0a1, <0.12.dev", source = "pypi", allow-prereleases = true}
 geoh5py = {git = "https://github.com/MiraGeoscience/geoh5py.git", rev = "develop"}
 
-#geoapps-utils = {version = ">=0.5.0a1, <0.6.0a.dev", source = "pypi", allow-prereleases = true}
+#geoapps-utils = {version = ">=0.5.0a1, <0.6.dev", source = "pypi", allow-prereleases = true}
 geoapps-utils = {git = "https://github.com/MiraGeoscience/geoapps-utils.git", rev = "develop"}
 
 ## about pip dependencies
@@ -68,8 +68,8 @@ geoapps-utils = {git = "https://github.com/MiraGeoscience/geoapps-utils.git", re
 [tool.conda-lock.dependencies]
 ## indirect dependencies, forcing them here for installation through Conda not pip
 #---------------------------------------------------------------------------------
-Pillow = ">=10.3.0, <10.4.0"  # from geoh5py
-h5py = ">=3.2.1, <4.0.0"  # from geoh5py
+Pillow = ">=10.3.0, <10.4.dev"  # from geoh5py
+h5py = ">=3.2.1, <4.0.dev"  # from geoh5py
 
 [tool.poetry.group.dev.dependencies]
 Pygments = "*"

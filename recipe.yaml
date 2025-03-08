@@ -25,12 +25,14 @@ requirements:
     - pip
   run:
     - python >=${{ python_min }}
-    - numpy >=1.26.0,<1.27.0
-    - scipy >=1.14.0,<1.15.0
-    - pydantic >=2.5.2,<2.6.0
-    - geoh5py 0.10.*
-    - geoapps-utils 0.4.*
-    - scikit-image >=0.24.0,<0.25.0
+    # Mira packages
+    - geoapps-utils >=0.5.0a, <0.6.dev
+    - geoh5py >=0.11.0a, <0.12.dev
+    # direct dependencies
+    - numpy >=1.26.0, <1.27.dev
+    - pydantic >=2.5.2, <3.0.dev
+    - scikit-image >=0.24.0, <0.25.dev
+    - scipy >=1.14.0, <1.15.dev
     - tqdm >=4.66.1, <5.0.dev
 
 tests:
