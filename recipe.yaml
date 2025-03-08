@@ -30,8 +30,6 @@ requirements:
     - pydantic >=2.5.2,<2.6.0
     - geoh5py 0.10.*
     - geoapps-utils 0.4.*
-    - pillow >=10.3.0,<10.4.0
-    - h5py >=3.2.1,<4.0.0
     - scikit-image >=0.24.0,<0.25.0
     - tqdm >=4.66.1, <5.0.dev
 
