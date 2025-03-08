@@ -46,7 +46,7 @@ numpy = "~1.26.0"  # also in geoh5py
 pydantic = "^2.5.2"  # also in geoh5py
 scikit-image = "0.24.*"
 scipy = "~1.14.0"  # also in geoapps-utils
-tqdm = "~4.66.1"
+tqdm = "^4.66.1"
 
 ## Pip dependencies from Git repositories
 #----------------------------------------
