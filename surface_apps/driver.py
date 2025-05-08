@@ -10,8 +10,10 @@
 from __future__ import annotations
 
 import logging
+import sys
 import tempfile
 from abc import abstractmethod
+from json import load
 from pathlib import Path
 
 from geoapps_utils.driver.data import BaseData
@@ -99,6 +101,17 @@ class BaseSurfaceDriver(BaseDriver):
             raise TypeError("Parameters must be a BaseData subclass.")
         self._params = val
 
+    @classmethod
+    def start(cls, filepath: str | Path, driver_class=None, **kwargs):
+        with open(filepath, encoding="utf-8") as jsonfile:
+            uijson = load(jsonfile)
+
+        if driver_class is None:
+            module = __import__(uijson["run_command"], fromlist=["Driver"])
+            driver_class = module.Driver
+
+        super().start(filepath, driver_class=driver_class, **kwargs)
+
     def add_ui_json(self, entity: ObjectBase | UIJsonGroup) -> None:
         """
         Add ui.json file to entity.
@@ -111,3 +124,8 @@ class BaseSurfaceDriver(BaseDriver):
             self.params.write_ui_json(filepath)
 
             entity.add_file(str(filepath))
+
+
+if __name__ == "__main__":
+    file = Path(sys.argv[1]).resolve()
+    BaseSurfaceDriver.start(file)

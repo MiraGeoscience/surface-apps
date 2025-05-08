@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import logging
 import sys
+from pathlib import Path
 
 import numpy as np
 from geoapps_utils.utils.formatters import string_name
@@ -27,7 +28,7 @@ from surface_apps.iso_surfaces.utils import entity_to_grid, extract_iso_surfaces
 logger = logging.getLogger(__name__)
 
 
-class IsoSurfacesDriver(BaseSurfaceDriver):
+class Driver(BaseSurfaceDriver):
     """
     Driver for the detection of iso-surfaces within geoh5py objects.
 
@@ -109,7 +110,5 @@ class IsoSurfacesDriver(BaseSurfaceDriver):
 
 
 if __name__ == "__main__":
-    file = sys.argv[1]
-    ifile = InputFile.read_ui_json(file)
-    driver = IsoSurfacesDriver(ifile)
-    driver.run()
+    file = Path(sys.argv[1]).resolve()
+    Driver.start(file)

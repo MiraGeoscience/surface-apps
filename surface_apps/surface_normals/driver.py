@@ -25,7 +25,7 @@ from surface_apps.surface_normals.utils import to_points
 logger = logging.getLogger(__name__)
 
 
-class SurfaceNormalsDriver(BaseDriver):
+class Driver(BaseDriver):
     """
     Driver for computing surface normals.
 
@@ -71,4 +71,4 @@ class SurfaceNormalsDriver(BaseDriver):
 
 if __name__ == "__main__":
     file = Path(sys.argv[1]).resolve()
-    driver = SurfaceNormalsDriver.start(file)
+    driver = Driver.start(file)
