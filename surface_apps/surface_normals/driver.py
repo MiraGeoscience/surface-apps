@@ -51,7 +51,7 @@ class Driver(BaseDriver):
                 "property_group_type": GroupTypeEnum.VECTOR,
             }
             if self.params.merge_points:
-                to_points(
+                points = to_points(
                     self.params.surfaces,
                     name="centers",
                     children=["x", "y", "z"],
@@ -59,12 +59,14 @@ class Driver(BaseDriver):
                 )
             else:
                 for surface in self.params.surfaces:
-                    to_points(
+                    points = to_points(
                         [surface],
                         name=f"{surface.name} centers",
                         children=["x", "y", "z"],
                         property_group=prop_group,
                     )
+
+            self.update_monitoring_directory(points)
 
         return prop_group
 
