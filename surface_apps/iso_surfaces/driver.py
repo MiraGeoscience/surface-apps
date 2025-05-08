@@ -35,7 +35,7 @@ class Driver(BaseSurfaceDriver):
     :param parameters: Application parameters.
     """
 
-    _parameter_class = IsoSurfaceParameters
+    _params_class = IsoSurfaceParameters
 
     def __init__(self, parameters: IsoSurfaceParameters | InputFile):
         super().__init__(parameters)
