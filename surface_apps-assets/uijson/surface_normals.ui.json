@@ -20,5 +20,12 @@
         "main": true,
         "label": "Merge points",
         "value": true
+    },
+    "out_name": {
+        "group": "Data",
+        "main": true,
+        "label": "Name",
+        "value": "Surface Normals",
+        "tooltip": "Name of the output points object."
     }
 }

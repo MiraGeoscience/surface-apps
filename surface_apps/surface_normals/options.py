@@ -35,3 +35,4 @@ class SurfaceNormalsOptions(BaseData):
     conda_environment: str = "surface_apps"
     surfaces: list[Surface]
     merge_points: bool = True
+    out_name: str = "Surface Normals"

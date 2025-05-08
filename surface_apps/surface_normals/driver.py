@@ -53,20 +53,20 @@ class Driver(BaseDriver):
             if self.params.merge_points:
                 points = to_points(
                     self.params.surfaces,
-                    name="centers",
+                    name=self.params.name,
                     children=["x", "y", "z"],
                     property_group=prop_group,
                 )
+                self.update_monitoring_directory(points)
             else:
                 for surface in self.params.surfaces:
                     points = to_points(
                         [surface],
-                        name=f"{surface.name} centers",
+                        name=f"{surface.name} {self.params.name}",
                         children=["x", "y", "z"],
                         property_group=prop_group,
                     )
-
-            self.update_monitoring_directory(points)
+                    self.update_monitoring_directory(points)
 
         return prop_group
 
