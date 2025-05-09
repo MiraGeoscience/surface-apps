@@ -25,7 +25,7 @@
         "group": "Data",
         "main": true,
         "label": "Name",
-        "value": "Surface Normals",
+        "value": "surface normals",
         "tooltip": "Name of the output points object."
     }
 }

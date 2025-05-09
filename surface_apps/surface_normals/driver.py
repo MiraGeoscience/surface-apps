@@ -16,10 +16,11 @@ from geoapps_utils.utils.transformations import (
     compute_normals,
 )
 from geoh5py.groups.property_group_type import GroupTypeEnum
+from geoh5py.shared.conversion.base import CellObjectConversion
+from geoh5py.shared.merging.cell import SurfaceMerger
 from geoh5py.shared.utils import fetch_active_workspace
 
 from surface_apps.surface_normals.options import SurfaceNormalsOptions
-from surface_apps.surface_normals.utils import to_points
 
 
 logger = logging.getLogger(__name__)
@@ -35,7 +36,7 @@ class Driver(BaseDriver):
     _params_class = SurfaceNormalsOptions
 
     def run(self):
-        with fetch_active_workspace(self.params.geoh5, mode="r+"):
+        with fetch_active_workspace(self.params.geoh5, mode="r+") as geoh5:
             for surface in self.params.surfaces:
                 normals = compute_normals(surface)
                 surface.add_data(
@@ -46,27 +47,29 @@ class Driver(BaseDriver):
                     }
                 )
 
-            prop_group = {
-                "name": "Normals",
-                "property_group_type": GroupTypeEnum.VECTOR,
-            }
-            if self.params.merge_points:
-                points = to_points(
-                    self.params.surfaces,
-                    name=self.params.name,
-                    children=["x", "y", "z"],
-                    property_group=prop_group,
+            merge_points = self.params.merge_points and len(self.params.surfaces) > 1
+            if merge_points:
+                surface = SurfaceMerger.merge_objects(
+                    geoh5, self.params.surfaces, name="merged"
                 )
-                self.update_monitoring_directory(points)
-            else:
-                for surface in self.params.surfaces:
-                    points = to_points(
-                        [surface],
-                        name=f"{surface.name} {self.params.name}",
-                        children=["x", "y", "z"],
-                        property_group=prop_group,
+
+            points = []
+            surfaces = [surface] if merge_points else self.params.surfaces
+            for surface in surfaces:
+                points.append(
+                    CellObjectConversion.to_points(
+                        surface, name=f"{surface.name} {self.params.out_name}"
                     )
-                    self.update_monitoring_directory(points)
+                )
+
+            for pts in points:
+                properties = [pts.get_data(k)[0] for k in "xyz"]
+                prop_group = pts.create_property_group(
+                    name="Normals",
+                    property_group_type=GroupTypeEnum.VECTOR,
+                    properties=properties,
+                )
+                self.update_monitoring_directory(pts)
 
         return prop_group
 

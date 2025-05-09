@@ -41,7 +41,7 @@ def create_surface(workspace: Workspace):
         ]
     )
 
-    surf = Surface.create(workspace, name="surf", vertices=vertices, cells=cells)
+    surf = Surface.create(workspace, name="diamond", vertices=vertices, cells=cells)
     return surf
 
 
@@ -54,7 +54,7 @@ def test_surface_normals(tmp_path):
     normals = SurfaceNormalsDriver.start(tmp_path / "test.ui.json")
 
     with Workspace(tmp_path / "test.geoh5") as ws:
-        pts = ws.get_entity("surface_normals")[0]
+        pts = ws.get_entity("diamond surface normals")[0]
         pg = pts.fetch_property_group("Normals")
 
         normals = np.column_stack([ws.get_entity(k)[0].values for k in pg.properties])
