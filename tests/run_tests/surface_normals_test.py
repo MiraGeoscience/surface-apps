@@ -11,7 +11,7 @@ import numpy as np
 from geoh5py import Workspace
 from geoh5py.objects import Surface
 
-from surface_apps.surface_normals.driver import SurfaceNormalsDriver
+from surface_apps.surface_normals.driver import Driver as SurfaceNormalsDriver
 from surface_apps.surface_normals.options import SurfaceNormalsOptions
 
 
