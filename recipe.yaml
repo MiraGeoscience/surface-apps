@@ -25,25 +25,28 @@ requirements:
     - pip
   run:
     - python >=${{ python_min }}
-    - numpy >=1.26.0,<1.27.0
-    - scipy >=1.14.0,<1.15.0
-    - pydantic >=2.5.2,<2.6.0
-    - geoh5py 0.10.*
-    - geoapps-utils 0.4.*
-    - pillow >=10.3.0,<10.4.0
-    - h5py >=3.2.1,<4.0.0
-    - scikit-image >=0.24.0,<0.25.0
-    - tqdm >=4.66.1,<4.67.0
+    # Mira packages
+    - geoapps-utils >=0.6.0a, <0.7.dev
+    - geoh5py >=0.12.0a, <0.13.dev
+    # other direct dependencies
+    - numpy >=1.26.0, <1.27.dev
+    - pydantic >=2.5.2, <3.0.dev
+    - scikit-image >=0.24.0, <0.25.dev
+    - scipy >=1.14.0, <1.15.dev
+    - tqdm >=4.66.1, <5.0.dev
 
 tests:
   - python:
       imports:
         - surface_apps
-  - requirements:
+  - script:
+      - pytest --ignore=tests/version_test.py
+    requirements:
       run:
-        - pip
-    script:
-      - pip check
+        - pytest
+    files:
+      source:
+        - tests/
 
 about:
   summary: Surface detection within geoscientific data.

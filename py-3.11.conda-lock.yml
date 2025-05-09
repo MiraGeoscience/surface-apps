@@ -15,8 +15,8 @@
 version: 1
 metadata:
   content_hash:
-    win-64: b7c6028b9dd3b4cd39a4fe84b9e6d2dc7dd5453d658df321c9237f75f144f475
-    linux-64: f547cd0cf9e1379c7453cb1a94a17ecb1b06018cd4c20d06dac05f511c5d355c
+    win-64: 875f127341f91eceaa6af85b1fedba59cf90f6915c0d882d52290caf958fabe9
+    linux-64: 1d3a35d442204a275005a0104cc4376302f4c033494706038c062fb61ed379b6
   channels:
   - url: conda-forge
     used_env_vars: []
@@ -1812,16 +1812,16 @@ package:
   category: main
   optional: false
 - name: libgcc
-  version: 14.2.0
+  version: 15.1.0
   manager: conda
   platform: win-64
   dependencies:
     _openmp_mutex: '>=4.5'
     libwinpthread: '>=12.0.0.r4.gg4f2fc60ca'
-  url: https://conda.anaconda.org/conda-forge/win-64/libgcc-14.2.0-h1383e82_2.conda
+  url: https://conda.anaconda.org/conda-forge/win-64/libgcc-15.1.0-h1383e82_2.conda
   hash:
-    md5: 4a74c1461a0ba47a3346c04bdccbe2ad
-    sha256: fddf2fc037bc95adb3b369e8866da8a71b6a67ebcfc4d7035ac4208309dc9e72
+    md5: 9bedb24480136bfeb81ebc81d4285e70
+    sha256: c0288596ac58366d96a56c57e4088fe1c6dd4194fdcaeacf5862f47fb1e1e5be
   category: main
   optional: false
 - name: libgcc-ng
@@ -1874,15 +1874,15 @@ package:
   category: main
   optional: false
 - name: libgomp
-  version: 14.2.0
+  version: 15.1.0
   manager: conda
   platform: win-64
   dependencies:
     libwinpthread: '>=12.0.0.r4.gg4f2fc60ca'
-  url: https://conda.anaconda.org/conda-forge/win-64/libgomp-14.2.0-h1383e82_2.conda
+  url: https://conda.anaconda.org/conda-forge/win-64/libgomp-15.1.0-h1383e82_2.conda
   hash:
-    md5: dd6b1ab49e28bcb6154cd131acec985b
-    sha256: 674ec5f1bf319eac98d0d6ecb9c38e0192f3cf41969a5621d62a7e695e1aa9f3
+    md5: 5fbacaa9b41e294a6966602205b99747
+    sha256: 4316316097ce5fde2608b6fccd18709cf647dce52e230f5ac66f5c524dfad791
   category: main
   optional: false
 - name: libhwloc
@@ -2753,27 +2753,27 @@ package:
   category: main
   optional: false
 - name: platformdirs
-  version: 4.3.7
+  version: 4.3.8
   manager: conda
   platform: linux-64
   dependencies:
     python: '>=3.9'
-  url: https://conda.anaconda.org/conda-forge/noarch/platformdirs-4.3.7-pyh29332c3_0.conda
+  url: https://conda.anaconda.org/conda-forge/noarch/platformdirs-4.3.8-pyhe01879c_0.conda
   hash:
-    md5: e57da6fe54bb3a5556cf36d199ff07d8
-    sha256: ae7d3e58224d53d6b59e1f5ac5809803bb1972f0ac4fb10cd9b8c87d4122d3e0
+    md5: 424844562f5d337077b445ec6b1398a7
+    sha256: 0f48999a28019c329cd3f6fd2f01f09fc32cc832f7d6bbe38087ddac858feaa3
   category: dev
   optional: true
 - name: platformdirs
-  version: 4.3.7
+  version: 4.3.8
   manager: conda
   platform: win-64
   dependencies:
     python: '>=3.9'
-  url: https://conda.anaconda.org/conda-forge/noarch/platformdirs-4.3.7-pyh29332c3_0.conda
+  url: https://conda.anaconda.org/conda-forge/noarch/platformdirs-4.3.8-pyhe01879c_0.conda
   hash:
-    md5: e57da6fe54bb3a5556cf36d199ff07d8
-    sha256: ae7d3e58224d53d6b59e1f5ac5809803bb1972f0ac4fb10cd9b8c87d4122d3e0
+    md5: 424844562f5d337077b445ec6b1398a7
+    sha256: 0f48999a28019c329cd3f6fd2f01f09fc32cc832f7d6bbe38087ddac858feaa3
   category: dev
   optional: true
 - name: pluggy
@@ -3994,29 +3994,29 @@ package:
   category: dev
   optional: true
 - name: tqdm
-  version: 4.66.6
+  version: 4.67.1
   manager: conda
   platform: linux-64
   dependencies:
     colorama: ''
-    python: '>=3.7'
-  url: https://conda.anaconda.org/conda-forge/noarch/tqdm-4.66.6-pyhd8ed1ab_0.conda
+    python: '>=3.9'
+  url: https://conda.anaconda.org/conda-forge/noarch/tqdm-4.67.1-pyhd8ed1ab_1.conda
   hash:
-    md5: 92718e1f892e1e4623dcc59b9f9c4e55
-    sha256: 32c39424090a8cafe7994891a816580b3bd253eb4d4f5473bdefcf6a81ebc061
+    md5: 9efbfdc37242619130ea42b1cc4ed861
+    sha256: 11e2c85468ae9902d24a27137b6b39b4a78099806e551d390e394a8c34b48e40
   category: main
   optional: false
 - name: tqdm
-  version: 4.66.6
+  version: 4.67.1
   manager: conda
   platform: win-64
   dependencies:
     colorama: ''
-    python: '>=3.7'
-  url: https://conda.anaconda.org/conda-forge/noarch/tqdm-4.66.6-pyhd8ed1ab_0.conda
+    python: '>=3.9'
+  url: https://conda.anaconda.org/conda-forge/noarch/tqdm-4.67.1-pyhd8ed1ab_1.conda
   hash:
-    md5: 92718e1f892e1e4623dcc59b9f9c4e55
-    sha256: 32c39424090a8cafe7994891a816580b3bd253eb4d4f5473bdefcf6a81ebc061
+    md5: 9efbfdc37242619130ea42b1cc4ed861
+    sha256: 11e2c85468ae9902d24a27137b6b39b4a78099806e551d390e394a8c34b48e40
   category: main
   optional: false
 - name: typing-extensions
