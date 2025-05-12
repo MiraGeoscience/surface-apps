@@ -15,7 +15,7 @@ import numpy as np
 from geoh5py.objects import BlockModel, Points, Surface
 from geoh5py.workspace import Workspace
 
-from surface_apps.iso_surfaces.driver import IsoSurfacesDriver
+from surface_apps.iso_surfaces.driver import Driver as IsoSurfacesDriver
 
 
 #  pylint: disable=too-many-locals
