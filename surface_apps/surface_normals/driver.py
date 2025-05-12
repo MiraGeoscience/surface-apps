@@ -17,7 +17,7 @@ from geoapps_utils.utils.transformations import (
 )
 from geoh5py.groups.property_group_type import GroupTypeEnum
 from geoh5py.shared.conversion.base import CellObjectConversion
-from geoh5py.shared.merging.cell import SurfaceMerger
+from geoh5py.shared.merging.points import PointsMerger
 from geoh5py.shared.utils import fetch_active_workspace
 
 from surface_apps.surface_normals.options import SurfaceNormalsOptions
@@ -37,41 +37,39 @@ class Driver(BaseDriver):
 
     def run(self):
         with fetch_active_workspace(self.params.geoh5, mode="r+") as geoh5:
+            points = []
             for surface in self.params.surfaces:
                 normals = compute_normals(surface)
-                surface.add_data(
+                pts = CellObjectConversion.to_points(
+                    surface, name=f"{surface.name} {self.params.out_name}"
+                )
+                pts.add_data(
                     {
-                        "x": {"values": normals[:, 0], "association": "CELL"},
-                        "y": {"values": normals[:, 1], "association": "CELL"},
-                        "z": {"values": normals[:, 2], "association": "CELL"},
+                        "Nx": {"values": normals[:, 0], "association": "VERTEX"},
+                        "Ny": {"values": normals[:, 1], "association": "VERTEX"},
+                        "Nz": {"values": normals[:, 2], "association": "VERTEX"},
                     }
                 )
+                points.append(pts)
 
-            merge_points = self.params.merge_points and len(self.params.surfaces) > 1
+            merge_points = self.params.merge_points and len(points) > 1
             if merge_points:
-                surface = SurfaceMerger.merge_objects(
-                    geoh5, self.params.surfaces, name="merged"
-                )
-
-            points = []
-            surfaces = [surface] if merge_points else self.params.surfaces
-            for surface in surfaces:
-                points.append(
-                    CellObjectConversion.to_points(
-                        surface, name=f"{surface.name} {self.params.out_name}"
+                points = [
+                    PointsMerger.merge_objects(
+                        geoh5,
+                        points,  # type: ignore
+                        add_data=True,
+                        name=f"merged {self.params.out_name}",
                     )
-                )
+                ]
 
             for pts in points:
-                properties = [pts.get_data(k)[0] for k in "xyz"]
-                prop_group = pts.create_property_group(
+                pts.create_property_group(
+                    properties=[pts.get_data(k)[0] for k in ["Nx", "Ny", "Nz"]],
                     name="Normals",
                     property_group_type=GroupTypeEnum.VECTOR,
-                    properties=properties,
                 )
                 self.update_monitoring_directory(pts)
-
-        return prop_group
 
 
 if __name__ == "__main__":

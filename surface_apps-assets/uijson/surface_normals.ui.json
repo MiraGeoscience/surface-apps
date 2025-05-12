@@ -16,13 +16,13 @@
         "multiSelect": true
     },
     "merge_points": {
-        "group": "Data",
+        "group": "Output",
         "main": true,
-        "label": "Merge points",
+        "label": "Merge",
         "value": true
     },
     "out_name": {
-        "group": "Data",
+        "group": "Output",
         "main": true,
         "label": "Name",
         "value": "surface normals",
