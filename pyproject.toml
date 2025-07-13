@@ -1,16 +1,31 @@
-[tool.poetry]
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+
+[project]
 name = "surface-apps"
 version = "0.1.0-beta.2"
-license = "MIT"
+
+
+dynamic = ["dependencies"]
+
+requires-python = ">=3.10,<4.0"
+
+license = { text = "MIT" }
 description = "Find Iso-surfaces in 3D data."
-authors = ["Mira Geoscience <support@mirageoscience.com>"]
-repository = "https://github.com/MiraGeoscience/surface-apps"
-maintainers = [
-    "Benjamin Kary <benjamink@mirageoscience.com>",
-    "Dominique Fournier <dominiquef@mirageoscience.com>",
+authors = [
+    { name = "Mira Geoscience", email = "support@mirageoscience.com" }
 ]
-homepage = "https://www.mirageoscience.com/mining-industry-software/python-integration/"
+
+maintainers = [
+    { name = "Benjamin Kary", email = "benjamink@mirageoscience.com" },
+    { name = "Dominique Fournier", email = "dominiquef@mirageoscience.com" }
+]
 readme = "package.rst"
+
+
 packages = [
      { include = "surface_apps" },
      { include = "surface_apps-assets" },
@@ -37,7 +52,11 @@ classifiers = [
     "Natural Language :: English",
 ]
 
-[tool.poetry.scripts]
+[project.urls]
+homepage = "https://www.mirageoscience.com/mining-industry-software/python-integration/"
+repository = "https://github.com/MiraGeoscience/surface-apps"
+
+[project.scripts]
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -154,7 +173,3 @@ exclude_lines = [
 [tool.coverage.html]
 skip_empty = true
 skip_covered = true
-
-[build-system]
-requires = ["poetry-core>=1.0.0", "setuptools"]
-build-backend = "poetry.core.masonry.api"
