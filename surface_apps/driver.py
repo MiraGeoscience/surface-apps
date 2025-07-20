@@ -102,15 +102,15 @@ class BaseSurfaceDriver(BaseDriver):
         self._params = val
 
     @classmethod
-    def start(cls, filepath: str | Path, driver_class=None, **kwargs):
+    def start(cls, filepath: str | Path, mode=None, **kwargs):
         with open(filepath, encoding="utf-8") as jsonfile:
             uijson = load(jsonfile)
 
-        if driver_class is None:
+        if mode is None:
             module = __import__(uijson["run_command"], fromlist=["Driver"])
-            driver_class = module.Driver
+            mode = module.Driver
 
-        super().start(filepath, driver_class=driver_class, **kwargs)
+        super().start(filepath, mode=mode, **kwargs)
 
     def add_ui_json(self, entity: ObjectBase | UIJsonGroup) -> None:
         """
