@@ -13,7 +13,7 @@ import logging
 from pathlib import Path
 
 
-__version__ = "0.1.0-beta.2"
+__version__ = "0.1.0b2"
 logging.basicConfig(level=logging.INFO)
 
 
