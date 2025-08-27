@@ -1,17 +1,16 @@
 [build-system]
-requires = ["poetry-core>=1.8.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=1.8.0", "poetry-dynamic-versioning>=1.9.0,<2.0.0"]
+build-backend = "poetry_dynamic_versioning.backend"
 
 [project]
 name = "surface-apps"
-version = "0.1.0b2"
 requires-python = '>=3.10,<4.0'
 
 description = "Find Iso-surfaces in 3D data."
 license = "MIT"
 keywords = ["geology", "geophysics", "earth sciences"]
 readme = "package.rst"
-dynamic = ["dependencies", "classifiers"]
+dynamic = ["version", "dependencies", "classifiers"]
 authors = [{name = "Mira Geoscience", email = "support@mirageoscience.com"}]
 maintainers = [
     { name = "Benjamin Kary", email = "benjamink@mirageoscience.com" },
@@ -50,6 +49,8 @@ include = [
     { path = "README.rst" },
     { path = "docs/**/THIRD_PARTY_SOFTWARE.rst" },
 ]
+
+version = "0.0.0.dev0"
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -95,6 +96,34 @@ sphinx = "*"
 sphinx-autodoc-typehints = "*"
 sphinx-rtd-theme = "*"
 tomli = "*"
+
+[tool.poetry.requires-plugins]
+poetry-dynamic-versioning = { version = ">=1.0.0,<2.0.0", extras = ["plugin"] }
+
+[tool.poetry-dynamic-versioning]
+bump = true
+enable = true
+fix-shallow-repository = true
+strict = true
+style = "pep440"
+vcs = "git"
+
+[tool.poetry-dynamic-versioning.substitution]
+files = ["surface_apps/_version.py", "recipe.yaml"]
+patterns = [
+    { value = '''(^__version__\s*(?::.*?)?=\s*['"])[^'"]*(['"])''', mode = "str" },
+    { value = '''(^\s*version\s*(?::.*?)?:\s*['"])[^'"]*(['"])''', mode = "str" },
+]
+
+[tool.poetry-dynamic-versioning.files."surface_apps/_version.py"]
+persistent-substitution = true
+initial-content = """
+  # Version placeholder that will be replaced during substitution
+  __version__ = "0.0.0"
+"""
+
+[tool.poetry-dynamic-versioning.files."recipe.yaml"]
+persistent-substitution = true
 
 [tool.conda-lock]
 platforms = ['win-64', 'linux-64']
