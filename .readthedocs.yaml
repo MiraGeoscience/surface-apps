@@ -15,9 +15,16 @@ build:
     # rust: "1.64"
     # golang: "1.19"
   jobs:
+    post_checkout:
+      - |
+        set -e
+        # Install pixi
+        curl -fsSL https://pixi.sh/install.sh | bash
+        export PATH="$HOME/.pixi/bin:$PATH"
+        echo 'export PATH="$HOME/.pixi/bin:$PATH"' >> $BASH_ENV
     pre_build:
       # Generate on-the-fly Sphinx configuration from Jupyter Book's _config.yml
-      - "pip install . --no-deps"
+      - "pixi run --environment dev postinstall"
 
 #conda:
 #  environment: environments/py-3.10-linux-64-dev.conda.lock.yml

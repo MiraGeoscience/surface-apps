@@ -1,0 +1,44 @@
+[project]
+name = "surface-apps"
+channels = ["conda-forge"]
+platforms = ["win-64", "linux-64"]
+
+[tasks]
+install-dev = "pip install --no-deps --editable ."
+
+[dependencies]
+# Standard dependencies
+numpy = "1.26.*"
+pydantic = ">=2.5.2, 2.*"
+scikit-image = "0.24.*"
+scipy = "1.14.*"
+tqdm = ">=4.66.1, 4.*"
+# Force indirect dependencies through conda
+h5py = ">=3.2.1, 3.*"
+pillow = "10.3.*"
+
+[feature.dev.dependencies]
+# Development dependencies
+pygments = "*"
+pylint = "*"
+pytest = "*"
+pytest-cov = "*"
+pyyaml = "*"
+packaging = "*"
+sphinx = "*"
+sphinx-autodoc-typehints = "*"
+sphinx-rtd-theme = "*"
+
+# Build dependencies
+poetry-core = ">=1.8.0"
+poetry-dynamic-versioning = ">=1.9.1,<2.0"
+markupsafe = ">=2.0"
+dunamai = ">=1.25,<2.0"
+tomlkit = ">=0.13"
+
+[feature.dev.tasks]
+postinstall = "pixi run install-dev && pip install --no-deps git+https://github.com/MiraGeoscience/geoh5py.git@develop && pip install --no-deps git+https://github.com/MiraGeoscience/geoapps-utils.git@develop"
+
+[environments]
+default = { solve-group = "default" }
+dev = { features = ["dev"], solve-group = "default" }

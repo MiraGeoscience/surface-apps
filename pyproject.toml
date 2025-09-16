@@ -19,11 +19,21 @@ description = "Find Iso-surfaces in 3D data."
 license = "MIT"
 keywords = ["geology", "geophysics", "earth sciences"]
 readme = "package.rst"
-dynamic = ["version", "dependencies", "classifiers"]
+dynamic = ["version", "classifiers"]
 authors = [{name = "Mira Geoscience", email = "support@mirageoscience.com"}]
 maintainers = [
     { name = "Benjamin Kary", email = "benjamink@mirageoscience.com" },
     { name = "Dominique Fournier", email = "dominiquef@mirageoscience.com" }
+]
+
+dependencies = [
+    "numpy~=1.26.0",
+    "pydantic>=2.5.2,<3.0",
+    "scikit-image==0.24.*",
+    "scipy~=1.14.0",
+    "tqdm>=4.66.1,<5.0",
+    "geoh5py",
+    "geoapps-utils",
 ]
 
 [project.urls]
@@ -60,51 +70,6 @@ include = [
 ]
 
 version = "0.0.0.dev0"
-
-[tool.poetry.dependencies]
-python = "^3.10"
-
-numpy = "~1.26.0"  # also in geoh5py
-pydantic = "^2.5.2"  # also in geoh5py
-scikit-image = "0.24.*"
-scipy = "~1.14.0"  # also in geoapps-utils
-tqdm = "^4.66.1"
-
-## Pip dependencies from Git repositories
-#----------------------------------------
-#geoh5py = {version = ">=0.12.0a, <0.13.dev", source = "pypi", allow-prereleases = true}
-geoh5py = {git = "https://github.com/MiraGeoscience/geoh5py.git", rev = "develop"}
-
-#geoapps-utils = {version = ">=0.6.0a, <0.7.dev", source = "pypi", allow-prereleases = true}
-geoapps-utils = {git = "https://github.com/MiraGeoscience/geoapps-utils.git", rev = "develop"}
-
-## about pip dependencies
-# to be specified to work with conda-lock
-# - from PyPI: my_package = { version = "1.2.3", source = "pypi" }
-# - from URL: !!! no actual lock, as tag or branch can move and installation will fetch current !!!
-#   - for a tag:    my_package = { url = "https://github.com/ORGANISATION/REPO/archive/refs/tags/TAG.tar.gz" }
-#   - for a branch: my_package = { url = "https://github.com/ORGANISATION/REPO/archive/refs/heads/BRANCH.tar.gz" }
-# - to actually lock on a revision: my_package = { git = "https://github.com/ORGANISATION/REPO.git", rev = "GIT_REV" }
-#   (where rev value is a tag, a branch name or a commit hash). Can also use ``branch`` or ``tag`` instead of ``rev``
-
-[tool.conda-lock.dependencies]
-## indirect dependencies, forcing them here for installation through Conda not pip
-#---------------------------------------------------------------------------------
-Pillow = ">=10.3.0, <10.4.dev"  # from geoh5py
-h5py = ">=3.2.1, <4.0.dev"  # from geoh5py
-
-[tool.poetry.group.dev.dependencies]
-Pygments = "*"
-pylint = "*"
-pytest = "*"
-pytest-cov = "*"
-pyyaml = '*'
-jinja2 = '*'
-packaging = '*'
-sphinx = "*"
-sphinx-autodoc-typehints = "*"
-sphinx-rtd-theme = "*"
-tomli = "*"
 
 [tool.poetry.requires-plugins]
 poetry-dynamic-versioning = { version = ">=1.9.1,<2.0.0", extras = ["plugin"] }
