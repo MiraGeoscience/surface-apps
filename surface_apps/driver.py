@@ -94,7 +94,7 @@ class BaseSurfaceDriver(Driver):
     @params.setter
     def params(self, val: Options):
         if not isinstance(val, Options):
-            raise TypeError("Parameters must be a BaseData subclass.")
+            raise TypeError("Parameters must be an Options subclass.")
         self._params = val
 
     def add_ui_json(self, entity: ObjectBase | UIJsonGroup) -> None:
