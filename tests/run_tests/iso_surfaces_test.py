@@ -16,6 +16,7 @@ from geoh5py.objects import BlockModel, Points, Surface
 from geoh5py.workspace import Workspace
 
 from surface_apps.iso_surfaces.driver import Driver as IsoSurfacesDriver
+from surface_apps.iso_surfaces.params import IsoSurfaceParameters
 
 
 #  pylint: disable=too-many-locals
@@ -215,3 +216,39 @@ def test_clipping_horizon(tmp_path: Path):
     )
 
     assert np.all(surface.vertices[:, -1] <= 30)
+
+
+def test_single_layer_grid(tmp_path):
+    with Workspace(tmp_path / "iso_test.geoh5") as ws:
+        grid = BlockModel.create(
+            ws,
+            name="single_layer_grid",
+            u_cell_delimiters=np.linspace(0, 10, 11),
+            v_cell_delimiters=np.linspace(0, 10, 11),
+            z_cell_delimiters=np.array([0.0, 1.0]),
+            origin=[0, 0, 0],
+        )
+        data = grid.add_data(
+            {
+                "elevation": {
+                    "values": np.random.rand(grid.n_cells) * 100,
+                    "data_type": "Float",
+                    "association": "Cell",
+                }
+            }
+        )
+
+        params = IsoSurfaceParameters.build(
+            {
+                "geoh5": ws,
+                "objects": grid,
+                "data": data,
+                "interval_min": 0.0,
+                "interval_max": 100.0,
+                "interval_spacing": 20.0,
+                "max_distance": 50.0,
+                "resolution": 5.0,
+            }
+        )
+        driver = IsoSurfacesDriver(params)
+        driver.run()

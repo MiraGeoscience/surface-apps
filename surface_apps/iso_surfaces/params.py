@@ -16,16 +16,16 @@ import numpy as np
 from geoapps_utils.driver.data import BaseData
 from geoh5py.data import Data
 from geoh5py.groups import UIJsonGroup
-from geoh5py.objects import Points, Surface
+from geoh5py.objects import BlockModel, Points, Surface
 from geoh5py.objects.cell_object import CellObject
 from geoh5py.objects.grid_object import GridObject
 from geoh5py.ui_json.utils import str2list
-from pydantic import ConfigDict, field_validator
+from pydantic import BaseModel, ConfigDict, field_validator
 
 from surface_apps import assets_path
 
 
-class IsoSurfaceSourceParameters(BaseData):
+class IsoSurfaceSourceParameters(BaseModel):
     """
     Source parameters providing input data to the driver.
 
@@ -41,8 +41,22 @@ class IsoSurfaceSourceParameters(BaseData):
     data: Data
     horizon: Surface | None = None
 
+    @field_validator("objects", mode="before")
+    @classmethod
+    def no_single_layer_grids(cls, value):
+        """Ensure a grid has more than a single layer in any dimension."""
 
-class IsoSurfaceDetectionParameters(BaseData):
+        if isinstance(value, BlockModel):
+            n_cells = [len(getattr(value, f"{k}_cell_delimiters")) - 1 for k in "uvz"]
+            if any(n == 1 for n in n_cells):
+                raise ValueError(
+                    "Grid source cannot be a single layer in any dimension."
+                )
+
+        return value
+
+
+class IsoSurfaceDetectionParameters(BaseModel):
     """
     Contour specification parameters.
 
