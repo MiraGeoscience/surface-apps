@@ -15,8 +15,7 @@ import tempfile
 from abc import abstractmethod
 from pathlib import Path
 
-from geoapps_utils.driver.data import BaseData
-from geoapps_utils.driver.driver import BaseDriver
+from geoapps_utils.base import Driver, Options
 from geoh5py.groups import UIJsonGroup
 from geoh5py.objects import ObjectBase
 from geoh5py.shared.utils import fetch_active_workspace, stringify
@@ -26,16 +25,16 @@ from geoh5py.ui_json import InputFile
 logger = logging.getLogger(__name__)
 
 
-class BaseSurfaceDriver(BaseDriver):
+class BaseSurfaceDriver(Driver):
     """
     Driver for the surface application.
 
     :param parameters: Application parameters.
     """
 
-    _parameter_class: type[BaseData]
+    _parameter_class: type[Options]
 
-    def __init__(self, parameters: BaseData | InputFile):
+    def __init__(self, parameters: Options | InputFile):
         self._out_group: UIJsonGroup | None = None
 
         if isinstance(parameters, InputFile):
@@ -88,13 +87,13 @@ class BaseSurfaceDriver(BaseDriver):
         self.store()
 
     @property
-    def params(self) -> BaseData:
+    def params(self) -> Options:
         """Application parameters."""
         return self._params
 
     @params.setter
-    def params(self, val: BaseData):
-        if not isinstance(val, BaseData):
+    def params(self, val: Options):
+        if not isinstance(val, Options):
             raise TypeError("Parameters must be a BaseData subclass.")
         self._params = val
 

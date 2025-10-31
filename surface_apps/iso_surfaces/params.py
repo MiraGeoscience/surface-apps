@@ -13,7 +13,7 @@ from pathlib import Path
 from typing import ClassVar
 
 import numpy as np
-from geoapps_utils.driver.data import BaseData
+from geoapps_utils.base import Options
 from geoh5py.data import Data
 from geoh5py.groups import UIJsonGroup
 from geoh5py.objects import BlockModel, Points, Surface
@@ -137,7 +137,7 @@ class IsoSurfaceDetectionParameters(BaseModel):
         return contours
 
 
-class IsoSurfaceParameters(BaseData):
+class IsoSurfaceParameters(Options):
     """
     Contour parameters for use with `contours.driver`.
 

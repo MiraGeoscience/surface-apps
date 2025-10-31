@@ -12,6 +12,8 @@ from __future__ import annotations
 from pathlib import Path
 
 import numpy as np
+import pytest
+from geoapps_utils.utils.importing import GeoAppsError
 from geoh5py.objects import BlockModel, Points, Surface
 from geoh5py.workspace import Workspace
 
@@ -238,17 +240,16 @@ def test_single_layer_grid(tmp_path):
             }
         )
 
-        params = IsoSurfaceParameters.build(
-            {
-                "geoh5": ws,
-                "objects": grid,
-                "data": data,
-                "interval_min": 0.0,
-                "interval_max": 100.0,
-                "interval_spacing": 20.0,
-                "max_distance": 50.0,
-                "resolution": 5.0,
-            }
-        )
-        driver = IsoSurfacesDriver(params)
-        driver.run()
+        with pytest.raises(GeoAppsError, match="cannot be a single layer"):
+            IsoSurfaceParameters.build(
+                {
+                    "geoh5": ws,
+                    "objects": grid,
+                    "data": data,
+                    "interval_min": 0.0,
+                    "interval_max": 100.0,
+                    "interval_spacing": 20.0,
+                    "max_distance": 50.0,
+                    "resolution": 5.0,
+                }
+            )
