@@ -778,7 +778,7 @@ package:
   dependencies:
     hpack: '>=4.1,<5'
     hyperframe: '>=6.1,<7'
-    python: ''
+    python: '>=3.10'
   url: https://repo.prefix.dev/conda-forge/noarch/h2-4.3.0-pyhcf101f3_0.conda
   hash:
     md5: 164fc43f0b53b6e3a7bc7dce5e4f1dc9
@@ -1107,7 +1107,7 @@ package:
   manager: conda
   platform: win-64
   dependencies:
-    python: ''
+    python: '>=3.9'
     zipp: '>=3.20'
   url: https://repo.prefix.dev/conda-forge/noarch/importlib-metadata-8.7.0-pyhe01879c_1.conda
   hash:
@@ -2543,7 +2543,7 @@ package:
   manager: conda
   platform: win-64
   dependencies:
-    python: ''
+    python: '>=3.10'
   url: https://repo.prefix.dev/conda-forge/noarch/networkx-3.4.2-pyh267e887_2.conda
   hash:
     md5: fd40bf7f7f4bc4b647dc8512053d9873
@@ -2667,7 +2667,7 @@ package:
   manager: conda
   platform: win-64
   dependencies:
-    python: ''
+    python: '>=3.8'
   url: https://repo.prefix.dev/conda-forge/noarch/packaging-25.0-pyh29332c3_1.conda
   hash:
     md5: 58335b26c38bf4a20f399384c33cbcf9
@@ -2767,7 +2767,7 @@ package:
   manager: conda
   platform: win-64
   dependencies:
-    python: ''
+    python: '>=3.10'
   url: https://repo.prefix.dev/conda-forge/noarch/platformdirs-4.5.0-pyhcf101f3_0.conda
   hash:
     md5: 5c7a868f8241e64e1cf5fdf4962f23e2
@@ -2842,7 +2842,7 @@ package:
   manager: conda
   platform: win-64
   dependencies:
-    python: ''
+    python: '>=3.9'
   url: https://repo.prefix.dev/conda-forge/noarch/pycparser-2.22-pyh29332c3_1.conda
   hash:
     md5: 12c566707c80111f9799308d9e265aef
@@ -2971,7 +2971,7 @@ package:
     isort: '>=5,<8,!=5.13'
     mccabe: '>=0.6,<0.8'
     platformdirs: '>=2.2'
-    python: ''
+    python: '>=3.10'
     tomli: '>=1.1.0'
     tomlkit: '>=0.10.1'
   url: https://repo.prefix.dev/conda-forge/noarch/pylint-4.0.2-pyhcf101f3_0.conda
@@ -3037,7 +3037,7 @@ package:
     packaging: '>=22'
     pluggy: '>=1.5,<2'
     pygments: '>=2.7.2'
-    python: ''
+    python: '>=3.10'
     tomli: '>=1'
   url: https://repo.prefix.dev/conda-forge/noarch/pytest-9.0.0-pyhcf101f3_0.conda
   hash:
@@ -3068,7 +3068,7 @@ package:
     coverage: '>=7.10.6'
     pluggy: '>=1.2'
     pytest: '>=7'
-    python: ''
+    python: '>=3.10'
   url: https://repo.prefix.dev/conda-forge/noarch/pytest-cov-7.0.0-pyhcf101f3_1.conda
   hash:
     md5: 6891acad5e136cb62a8c2ed2679d6528
@@ -3914,7 +3914,7 @@ package:
   manager: conda
   platform: win-64
   dependencies:
-    python: ''
+    python: '>=3.10'
   url: https://repo.prefix.dev/conda-forge/noarch/tomli-2.3.0-pyhcf101f3_0.conda
   hash:
     md5: d2732eb636c264dc9aa4cbee404b1a53
@@ -4038,7 +4038,7 @@ package:
   manager: conda
   platform: win-64
   dependencies:
-    python: ''
+    python: '>=3.10'
   url: https://repo.prefix.dev/conda-forge/noarch/typing_extensions-4.15.0-pyhcf101f3_0.conda
   hash:
     md5: 0caa1af407ecff61170c9437a808404d
