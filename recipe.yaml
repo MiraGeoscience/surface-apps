@@ -50,6 +50,9 @@ tests:
     files:
       source:
         - tests/
+  - package_contents:
+      files:
+        - site-packages/${{ module_name }}/_version.py
 
 about:
   summary: Surface detection within geoscientific data.
