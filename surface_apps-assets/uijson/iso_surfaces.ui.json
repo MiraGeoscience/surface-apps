@@ -37,7 +37,7 @@
         "group": "Data",
         "main": true,
         "meshType": "{f26feba3-aded-494b-b9e9-b2bbcbe298e1}",
-        "label": "Clipping Horizon",
+        "label": "Clipping horizon",
         "optional": true,
         "enabled": false,
         "value": ""
@@ -78,7 +78,7 @@
     },
     "max_distance": {
         "enabled": true,
-        "label": "Max Interpolation Distance (m)",
+        "label": "Max interpolation distance (m)",
         "main": true,
         "value": 500.0
     },

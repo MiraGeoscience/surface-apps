@@ -26,6 +26,6 @@
         "main": true,
         "label": "Name",
         "value": "surface normals",
-        "tooltip": "Name of the output points object."
+        "tooltip": "Name of the output points object"
     }
 }
