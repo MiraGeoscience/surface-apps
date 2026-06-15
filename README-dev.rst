@@ -17,46 +17,26 @@ After you have cloned the Git repository, you will need to:
 
 
 Create the Conda environment lock files
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+---------------------------------------
+First, create the Conda environment lock files (``*.conda.lock.yml``) for the dependencies defined
+in `pyproject.toml`_. From the root of the project, run the command::
 
-First, you need to create the Conda environment lock files (``*.conda.lock.yml``) for the dependencies defined
-in `pyproject.toml`_.
+    $ deps-lock
 
-.. note::
-    As a prerequisite, you need to install some packages in your base Conda environment. To do so,
-    simply execute ``devtools\setup-conda-base.bat``.
-
-Then, to create the Conda environment lock files, execute ``devtools\run_conda_lock.bat``,
-or run from command line::
-
-    $ (base) python devtools/run_conda_lock.py
-
-It will create or update ``.conda.lock.yml`` files in the ``environments`` folder:
+It will create or replace the ``*.conda.lock.yml`` files in the ``environments`` folder:
 one for runtime dependencies, and one for development dependencies (with the ``-dev`` suffix),
-for each combinations of Python versions and platforms.
+for each combinations of Python versions and platforms
+(platforms are specified in ``conda-lock`` section of the ``pyproject.toml``).
 
-The platforms are specified in ``conda-lock`` section of the ``pyproject.toml`` file:
-
-.. code-block:: toml
-
-    [tool.conda-lock]
-    platforms = ['win-64', 'linux-64']
-
-The python versions are specified at the beginning of the ``devtools/run_conda_lock.py`` file:
-
-.. code-block:: python
-
-    _python_versions = ["3.12", "3.13"]
-
-The ``Install_or_Update.bat`` and the ``setup-dev.bat`` will use them to install the environment.
+These files will be used by installation script and to create the development environment.
 
 
 Install the Conda environment
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------------
 
-For development, you need a **Conda** environments. you can install it running the ``setup-dev.bat`` or::
+For development, you need a **Conda** environment. From the root of the project, run the command::
 
-    $ [path\to\surface-apps]\devtools\setup-dev.bat
+    $ create-dev-env
 
 This command install a local environment at the base of your repository: ``.conda-env``.
 This environment should automatically be recognized by the Conda installation.
