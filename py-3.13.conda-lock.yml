@@ -15,8 +15,8 @@
 version: 1
 metadata:
   content_hash:
-    win-64: 68d4c5cd077931dc72e0120818f18da0e293191418207ef8c38d0ea5ce60e92e
-    linux-64: 7ae67d9e4c855c99d4d6233062f675b414eadc3bdd9df3261ddcc4e6fb9c1b5b
+    win-64: 7f705106f37a4f4063d5bee031b16eda70a82a9a2c4fe4454b27532bfb186c41
+    linux-64: b5b0cd49461cbd87ae7cbe46f8f16db222e464c6dd73455254ed70894a1d9e16
   channels:
   - url: conda-forge
     used_env_vars: []
@@ -551,6 +551,70 @@ package:
     sha256: 9303a7a0e03cf118eab3691013f6d6cbd1cbac66efbc70d89b20f5d0145257c0
   category: main
   optional: false
+- name: brotli
+  version: 1.2.0
+  manager: conda
+  platform: linux-64
+  dependencies:
+    __glibc: '>=2.17,<3.0.a0'
+    brotli-bin: 1.2.0
+    libbrotlidec: 1.2.0
+    libbrotlienc: 1.2.0
+    libgcc: '>=14'
+  url: https://repo.prefix.dev/conda-forge/linux-64/brotli-1.2.0-hed03a55_1.conda
+  hash:
+    md5: 8ccf913aaba749a5496c17629d859ed1
+    sha256: e511644d691f05eb12ebe1e971fd6dc3ae55a4df5c253b4e1788b789bdf2dfa6
+  category: main
+  optional: false
+- name: brotli
+  version: 1.2.0
+  manager: conda
+  platform: win-64
+  dependencies:
+    brotli-bin: 1.2.0
+    libbrotlidec: 1.2.0
+    libbrotlienc: 1.2.0
+    ucrt: '>=10.0.20348.0'
+    vc: '>=14.3,<15'
+    vc14_runtime: '>=14.44.35208'
+  url: https://repo.prefix.dev/conda-forge/win-64/brotli-1.2.0-h2d644bc_1.conda
+  hash:
+    md5: bc58fdbced45bb096364de0fba1637af
+    sha256: a4fffdf1c9b9d3d0d787e20c724cff3a284dfa3773f9ce609c93b1cfd0ce8933
+  category: main
+  optional: false
+- name: brotli-bin
+  version: 1.2.0
+  manager: conda
+  platform: linux-64
+  dependencies:
+    __glibc: '>=2.17,<3.0.a0'
+    libbrotlidec: 1.2.0
+    libbrotlienc: 1.2.0
+    libgcc: '>=14'
+  url: https://repo.prefix.dev/conda-forge/linux-64/brotli-bin-1.2.0-hb03c661_1.conda
+  hash:
+    md5: af39b9a8711d4a8d437b52c1d78eb6a1
+    sha256: 64b137f30b83b1dd61db6c946ae7511657eead59fdf74e84ef0ded219605aa94
+  category: main
+  optional: false
+- name: brotli-bin
+  version: 1.2.0
+  manager: conda
+  platform: win-64
+  dependencies:
+    libbrotlidec: 1.2.0
+    libbrotlienc: 1.2.0
+    ucrt: '>=10.0.20348.0'
+    vc: '>=14.3,<15'
+    vc14_runtime: '>=14.44.35208'
+  url: https://repo.prefix.dev/conda-forge/win-64/brotli-bin-1.2.0-hfd05255_1.conda
+  hash:
+    md5: 6abd7089eb3f0c790235fe469558d190
+    sha256: e76966232ef9612de33c2087e3c92c2dc42ea5f300050735a3c646f33bce0429
+  category: main
+  optional: false
 - name: brotli-python
   version: 1.2.0
   manager: conda
@@ -846,6 +910,40 @@ package:
     sha256: ab29d57dc70786c1269633ba3dff20288b81664d3ff8d21af995742e2bb03287
   category: main
   optional: false
+- name: contourpy
+  version: 1.3.3
+  manager: conda
+  platform: linux-64
+  dependencies:
+    __glibc: '>=2.17,<3.0.a0'
+    libgcc: '>=14'
+    libstdcxx: '>=14'
+    numpy: '>=1.25'
+    python: ''
+    python_abi: 3.13.*
+  url: https://repo.prefix.dev/conda-forge/linux-64/contourpy-1.3.3-py313hc8edb43_4.conda
+  hash:
+    md5: 33639459bc29437315d4bff9ed5bc7a7
+    sha256: 7f86eb205d2d7fcf2c82654a08c6a240623ac34cb406206b4b1f1afa5cda8e49
+  category: main
+  optional: false
+- name: contourpy
+  version: 1.3.3
+  manager: conda
+  platform: win-64
+  dependencies:
+    numpy: '>=1.25'
+    python: ''
+    python_abi: 3.13.*
+    ucrt: '>=10.0.20348.0'
+    vc: '>=14.3,<15'
+    vc14_runtime: '>=14.44.35208'
+  url: https://repo.prefix.dev/conda-forge/win-64/contourpy-1.3.3-py313h1a38498_4.conda
+  hash:
+    md5: 726aa233b5e4613e546ca84cd63cbd45
+    sha256: fb254e7e29535ea0a63b8fba6299f7e4ccd0efcc40750c8cd64e42a0a3b79da7
+  category: main
+  optional: false
 - name: coverage
   version: 7.14.1
   manager: conda
@@ -879,6 +977,30 @@ package:
     sha256: cda15c313312f6fe90489df9b37dd0277fa7dbd4d52f3ea0aad2c48806bc1e55
   category: dev
   optional: true
+- name: cycler
+  version: 0.12.1
+  manager: conda
+  platform: linux-64
+  dependencies:
+    python: ''
+  url: https://repo.prefix.dev/conda-forge/noarch/cycler-0.12.1-pyhcf101f3_2.conda
+  hash:
+    md5: 4c2a8fef270f6c69591889b93f9f55c1
+    sha256: bb47aec5338695ff8efbddbc669064a3b10fe34ad881fb8ad5d64fbfa6910ed1
+  category: main
+  optional: false
+- name: cycler
+  version: 0.12.1
+  manager: conda
+  platform: win-64
+  dependencies:
+    python: ''
+  url: https://repo.prefix.dev/conda-forge/noarch/cycler-0.12.1-pyhcf101f3_2.conda
+  hash:
+    md5: 4c2a8fef270f6c69591889b93f9f55c1
+    sha256: bb47aec5338695ff8efbddbc669064a3b10fe34ad881fb8ad5d64fbfa6910ed1
+  category: main
+  optional: false
 - name: dav1d
   version: 1.2.1
   manager: conda
@@ -979,6 +1101,68 @@ package:
     sha256: ee6cf346d017d954255bbcbdb424cddea4d14e4ed7e9813e429db1d795d01144
   category: dev
   optional: true
+- name: fonttools
+  version: 4.63.0
+  manager: conda
+  platform: linux-64
+  dependencies:
+    __glibc: '>=2.17,<3.0.a0'
+    brotli: ''
+    libgcc: '>=14'
+    munkres: ''
+    python: '>=3.13,<3.14.0a0'
+    python_abi: 3.13.*
+  url: https://repo.prefix.dev/conda-forge/linux-64/fonttools-4.63.0-py313h3dea7bd_0.conda
+  hash:
+    md5: ae83c999b4cfc4c171ce88b99c8b43cc
+    sha256: e0029a390d7aef29bd6e7c12a3759f5e0b989930b5781e544ca9bac0abcd8442
+  category: main
+  optional: false
+- name: fonttools
+  version: 4.63.0
+  manager: conda
+  platform: win-64
+  dependencies:
+    brotli: ''
+    munkres: ''
+    python: '>=3.13,<3.14.0a0'
+    python_abi: 3.13.*
+    ucrt: '>=10.0.20348.0'
+    vc: '>=14.3,<15'
+    vc14_runtime: '>=14.44.35208'
+  url: https://repo.prefix.dev/conda-forge/win-64/fonttools-4.63.0-py313hd650c13_0.conda
+  hash:
+    md5: 2b7be2be35fc3b035f1365a015af9706
+    sha256: 10cd3c3606219bc8e1a387757b069175b8202c54f02244b1557c283bd6c252d1
+  category: main
+  optional: false
+- name: freetype
+  version: 2.14.3
+  manager: conda
+  platform: linux-64
+  dependencies:
+    libfreetype: 2.14.3
+    libfreetype6: 2.14.3
+  url: https://repo.prefix.dev/conda-forge/linux-64/freetype-2.14.3-ha770c72_0.conda
+  hash:
+    md5: 8462b5322567212beeb025f3519fb3e2
+    sha256: c934c385889c7836f034039b43b05ccfa98f53c900db03d8411189892ced090b
+  category: main
+  optional: false
+- name: freetype
+  version: 2.14.3
+  manager: conda
+  platform: win-64
+  dependencies:
+    libfreetype: 2.14.3
+    libfreetype6: 2.14.3
+    zlib: ''
+  url: https://repo.prefix.dev/conda-forge/win-64/freetype-2.14.3-h57928b3_1.conda
+  hash:
+    md5: e77293b32225b136a8be300f93d0e89f
+    sha256: a0e419e96146159f12344c870dca608d11bca36841f228092b986ffc2e1e0f02
+  category: main
+  optional: false
 - name: giflib
   version: 5.2.2
   manager: conda
@@ -1476,6 +1660,38 @@ package:
   hash:
     md5: b38117a3c920364aff79f870c984b4a3
     sha256: 0960d06048a7185d3542d850986d807c6e37ca2e644342dd0c72feefcf26c2a4
+  category: main
+  optional: false
+- name: kiwisolver
+  version: 1.5.0
+  manager: conda
+  platform: linux-64
+  dependencies:
+    __glibc: '>=2.17,<3.0.a0'
+    libgcc: '>=14'
+    libstdcxx: '>=14'
+    python: ''
+    python_abi: 3.13.*
+  url: https://repo.prefix.dev/conda-forge/linux-64/kiwisolver-1.5.0-py313hc8edb43_0.conda
+  hash:
+    md5: b81883b9dbf5069821c2fb09a8ba1407
+    sha256: 0447d2901639f295989c5ccba7b1c367ed78b216e0d2705327a8c8a87a31177e
+  category: main
+  optional: false
+- name: kiwisolver
+  version: 1.5.0
+  manager: conda
+  platform: win-64
+  dependencies:
+    python: ''
+    python_abi: 3.13.*
+    ucrt: '>=10.0.20348.0'
+    vc: '>=14.3,<15'
+    vc14_runtime: '>=14.44.35208'
+  url: https://repo.prefix.dev/conda-forge/win-64/kiwisolver-1.5.0-py313h1a38498_0.conda
+  hash:
+    md5: 7e40c4c1af80d907eb2973ab73418095
+    sha256: 58c7b7d85ea3c0fac593fde238b994ee2d4fa8467decfe369dabfb5516b7ded4
   category: main
   optional: false
 - name: krb5
@@ -2720,6 +2936,65 @@ package:
     sha256: 9dc626b6c00bc2dbd2494df689876ff675b93d92636ba5df8e37b99040a1f6bc
   category: dev
   optional: true
+- name: matplotlib-base
+  version: 3.10.9
+  manager: conda
+  platform: linux-64
+  dependencies:
+    __glibc: '>=2.17,<3.0.a0'
+    contourpy: '>=1.0.1'
+    cycler: '>=0.10'
+    fonttools: '>=4.22.0'
+    freetype: ''
+    kiwisolver: '>=1.3.1'
+    libfreetype: '>=2.14.3'
+    libfreetype6: '>=2.14.3'
+    libgcc: '>=14'
+    libstdcxx: '>=14'
+    numpy: '>=1.23,<3'
+    packaging: '>=20.0'
+    pillow: '>=8'
+    pyparsing: '>=2.3.1'
+    python: '>=3.13,<3.14.0a0'
+    python-dateutil: '>=2.7'
+    python_abi: 3.13.*
+    qhull: '>=2020.2,<2020.3.0a0'
+    tk: '>=8.6.13,<8.7.0a0'
+  url: https://repo.prefix.dev/conda-forge/linux-64/matplotlib-base-3.10.9-py313h683a580_0.conda
+  hash:
+    md5: 4265d85b1d706caba7ac1d73b5f43dee
+    sha256: ae0233aa03da84e0964a4c214faaa9d0735575714529a7f2ebe96bc712c276bf
+  category: main
+  optional: false
+- name: matplotlib-base
+  version: 3.10.9
+  manager: conda
+  platform: win-64
+  dependencies:
+    contourpy: '>=1.0.1'
+    cycler: '>=0.10'
+    fonttools: '>=4.22.0'
+    freetype: ''
+    kiwisolver: '>=1.3.1'
+    libfreetype: '>=2.14.3'
+    libfreetype6: '>=2.14.3'
+    numpy: '>=1.23,<3'
+    packaging: '>=20.0'
+    pillow: '>=8'
+    pyparsing: '>=2.3.1'
+    python: '>=3.13,<3.14.0a0'
+    python-dateutil: '>=2.7'
+    python_abi: 3.13.*
+    qhull: '>=2020.2,<2020.3.0a0'
+    ucrt: '>=10.0.20348.0'
+    vc: '>=14.3,<15'
+    vc14_runtime: '>=14.44.35208'
+  url: https://repo.prefix.dev/conda-forge/win-64/matplotlib-base-3.10.9-py313he1ded55_0.conda
+  hash:
+    md5: b0d7ed8c9999b16acde682672e712ded
+    sha256: a77e418fd30aa83e9abb75ad9fbfe08ef3847ef234f17747b8b779fc44a06d54
+  category: main
+  optional: false
 - name: mccabe
   version: 0.7.0
   manager: conda
@@ -2759,6 +3034,30 @@ package:
   hash:
     md5: 36ea6e1292e9d5e89374201da79646ef
     sha256: f997bfc9bc4d4e14261cdcd1ad195d64a72ee44dca3145d24c1349f8d1311aa5
+  category: main
+  optional: false
+- name: munkres
+  version: 1.1.4
+  manager: conda
+  platform: linux-64
+  dependencies:
+    python: '>=3.9'
+  url: https://repo.prefix.dev/conda-forge/noarch/munkres-1.1.4-pyhd8ed1ab_1.conda
+  hash:
+    md5: 37293a85a0f4f77bbd9cf7aaefc62609
+    sha256: d09c47c2cf456de5c09fa66d2c3c5035aa1fa228a1983a433c47b876aa16ce90
+  category: main
+  optional: false
+- name: munkres
+  version: 1.1.4
+  manager: conda
+  platform: win-64
+  dependencies:
+    python: '>=3.9'
+  url: https://repo.prefix.dev/conda-forge/noarch/munkres-1.1.4-pyhd8ed1ab_1.conda
+  hash:
+    md5: 37293a85a0f4f77bbd9cf7aaefc62609
+    sha256: d09c47c2cf456de5c09fa66d2c3c5035aa1fa228a1983a433c47b876aa16ce90
   category: main
   optional: false
 - name: ncurses
@@ -3087,6 +3386,37 @@ package:
     sha256: e14aafa63efa0528ca99ba568eaf506eb55a0371d12e6250aaaa61718d2eb62e
   category: dev
   optional: true
+- name: psutil
+  version: 7.2.2
+  manager: conda
+  platform: linux-64
+  dependencies:
+    __glibc: '>=2.17,<3.0.a0'
+    libgcc: '>=14'
+    python: ''
+    python_abi: 3.13.*
+  url: https://repo.prefix.dev/conda-forge/linux-64/psutil-7.2.2-py313h54dd161_0.conda
+  hash:
+    md5: 25fe6e02c2083497b3239e21b49d8093
+    sha256: f19fd682d874689dfde20bf46d7ec1a28084af34583e0405685981363af47c91
+  category: main
+  optional: false
+- name: psutil
+  version: 7.2.2
+  manager: conda
+  platform: win-64
+  dependencies:
+    python: ''
+    python_abi: 3.13.*
+    ucrt: '>=10.0.20348.0'
+    vc: '>=14.3,<15'
+    vc14_runtime: '>=14.44.35208'
+  url: https://repo.prefix.dev/conda-forge/win-64/psutil-7.2.2-py313h5fd188c_0.conda
+  hash:
+    md5: 761b299a6289c77459defea3563f8fc0
+    sha256: 3ec3373748f83069bef93b540de416e637ee30231b222d5df8f712e93f2f9195
+  category: main
+  optional: false
 - name: pthread-stubs
   version: '0.4'
   manager: conda
@@ -3245,6 +3575,30 @@ package:
     sha256: 5393b20b76361efe49971a0081cad0f4256f875a14fe71b1ed93ba9e0193369c
   category: dev
   optional: true
+- name: pyparsing
+  version: 3.3.2
+  manager: conda
+  platform: linux-64
+  dependencies:
+    python: ''
+  url: https://repo.prefix.dev/conda-forge/noarch/pyparsing-3.3.2-pyhcf101f3_0.conda
+  hash:
+    md5: 3687cc0b82a8b4c17e1f0eb7e47163d5
+    sha256: 417fba4783e528ee732afa82999300859b065dc59927344b4859c64aae7182de
+  category: main
+  optional: false
+- name: pyparsing
+  version: 3.3.2
+  manager: conda
+  platform: win-64
+  dependencies:
+    python: ''
+  url: https://repo.prefix.dev/conda-forge/noarch/pyparsing-3.3.2-pyhcf101f3_0.conda
+  hash:
+    md5: 3687cc0b82a8b4c17e1f0eb7e47163d5
+    sha256: 417fba4783e528ee732afa82999300859b065dc59927344b4859c64aae7182de
+  category: main
+  optional: false
 - name: pysocks
   version: 1.7.1
   manager: conda
@@ -3395,6 +3749,32 @@ package:
     sha256: 26442b2878df89f27cc9efd54c1322d111653683abf256b657dbefe089857b40
   category: main
   optional: false
+- name: python-dateutil
+  version: 2.9.0.post0
+  manager: conda
+  platform: linux-64
+  dependencies:
+    python: ''
+    six: '>=1.5'
+  url: https://repo.prefix.dev/conda-forge/noarch/python-dateutil-2.9.0.post0-pyhe01879c_2.conda
+  hash:
+    md5: 5b8d21249ff20967101ffa321cab24e8
+    sha256: d6a17ece93bbd5139e02d2bd7dbfa80bee1a4261dced63f65f679121686bf664
+  category: main
+  optional: false
+- name: python-dateutil
+  version: 2.9.0.post0
+  manager: conda
+  platform: win-64
+  dependencies:
+    python: ''
+    six: '>=1.5'
+  url: https://repo.prefix.dev/conda-forge/noarch/python-dateutil-2.9.0.post0-pyhe01879c_2.conda
+  hash:
+    md5: 5b8d21249ff20967101ffa321cab24e8
+    sha256: d6a17ece93bbd5139e02d2bd7dbfa80bee1a4261dced63f65f679121686bf664
+  category: main
+  optional: false
 - name: python_abi
   version: '3.13'
   manager: conda
@@ -3450,6 +3830,34 @@ package:
     sha256: dfaed50de8ee72a51096163b87631921688851001e38c78a841eba1ae8b35889
   category: dev
   optional: true
+- name: qhull
+  version: '2020.2'
+  manager: conda
+  platform: linux-64
+  dependencies:
+    __glibc: '>=2.17,<3.0.a0'
+    libgcc-ng: '>=12'
+    libstdcxx-ng: '>=12'
+  url: https://repo.prefix.dev/conda-forge/linux-64/qhull-2020.2-h434a139_5.conda
+  hash:
+    md5: 353823361b1d27eb3960efb076dfcaf6
+    sha256: 776363493bad83308ba30bcb88c2552632581b143e8ee25b1982c8c743e73abc
+  category: main
+  optional: false
+- name: qhull
+  version: '2020.2'
+  manager: conda
+  platform: win-64
+  dependencies:
+    ucrt: '>=10.0.20348.0'
+    vc: '>=14.2,<15'
+    vc14_runtime: '>=14.29.30139'
+  url: https://repo.prefix.dev/conda-forge/win-64/qhull-2020.2-hc790b64_5.conda
+  hash:
+    md5: 854fbdff64b572b5c0b470f334d34c11
+    sha256: 887d53486a37bd870da62b8fa2ebe3993f912ad04bd755e7ed7c47ced97cbaa8
+  category: main
+  optional: false
 - name: rav1e
   version: 0.8.1
   manager: conda
@@ -3675,6 +4083,30 @@ package:
   hash:
     md5: 0f727c3f9910796063e5ba4c2c7d9c89
     sha256: a12318ed880dacdc573b73a34532f0c08daa883cd2dc7294ac68b8bab9b94196
+  category: main
+  optional: false
+- name: six
+  version: 1.17.0
+  manager: conda
+  platform: linux-64
+  dependencies:
+    python: ''
+  url: https://repo.prefix.dev/conda-forge/noarch/six-1.17.0-pyhe01879c_1.conda
+  hash:
+    md5: 3339e3b65d58accf4ca4fb8748ab16b3
+    sha256: 458227f759d5e3fcec5d9b7acce54e10c9e1f4f4b7ec978f3bfd54ce4ee9853d
+  category: main
+  optional: false
+- name: six
+  version: 1.17.0
+  manager: conda
+  platform: win-64
+  dependencies:
+    python: ''
+  url: https://repo.prefix.dev/conda-forge/noarch/six-1.17.0-pyhe01879c_1.conda
+  hash:
+    md5: 3339e3b65d58accf4ca4fb8748ab16b3
+    sha256: 458227f759d5e3fcec5d9b7acce54e10c9e1f4f4b7ec978f3bfd54ce4ee9853d
   category: main
   optional: false
 - name: snappy
@@ -4556,6 +4988,21 @@ package:
     sha256: 210bd31c22bb88f5e2a167df24c95bb5f152b2ada7502f9b8c49d1f5366db423
   category: dev
   optional: true
+- name: zlib
+  version: 1.3.2
+  manager: conda
+  platform: win-64
+  dependencies:
+    libzlib: 1.3.2
+    ucrt: '>=10.0.20348.0'
+    vc: '>=14.3,<15'
+    vc14_runtime: '>=14.44.35208'
+  url: https://repo.prefix.dev/conda-forge/win-64/zlib-1.3.2-hfd05255_2.conda
+  hash:
+    md5: 5187ecf958be3c39110fe691cbd6873e
+    sha256: ef408f85f664a4b9c9dac3cb2e36154d9baa15a88984ea800e11060e0f2394a1
+  category: main
+  optional: false
 - name: zlib-ng
   version: 2.3.3
   manager: conda
@@ -4612,68 +5059,6 @@ package:
     sha256: 368d8628424966fd8f9c8018326a9c779e06913dd39e646cf331226acc90e5b2
   category: main
   optional: false
-- name: contourpy
-  version: 1.3.3
-  manager: pip
-  platform: linux-64
-  dependencies:
-    numpy: '>=1.25'
-  url: https://files.pythonhosted.org/packages/4b/32/e0f13a1c5b0f8572d0ec6ae2f6c677b7991fafd95da523159c19eff0696a/contourpy-1.3.3-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl
-  hash:
-    sha256: 4debd64f124ca62069f313a9cb86656ff087786016d76927ae2cf37846b006c9
-  category: main
-  optional: false
-- name: contourpy
-  version: 1.3.3
-  manager: pip
-  platform: win-64
-  dependencies:
-    numpy: '>=1.25'
-  url: https://files.pythonhosted.org/packages/18/0b/0098c214843213759692cc638fce7de5c289200a830e5035d1791d7a2338/contourpy-1.3.3-cp313-cp313-win_amd64.whl
-  hash:
-    sha256: 1cadd8b8969f060ba45ed7c1b714fe69185812ab43bd6b86a9123fe8f99c3263
-  category: main
-  optional: false
-- name: cycler
-  version: 0.12.1
-  manager: pip
-  platform: linux-64
-  dependencies: {}
-  url: https://files.pythonhosted.org/packages/e7/05/c19819d5e3d95294a6f5947fb9b9629efb316b96de511b418c53d245aae6/cycler-0.12.1-py3-none-any.whl
-  hash:
-    sha256: 85cef7cff222d8644161529808465972e51340599459b8ac3ccbac5a854e0d30
-  category: main
-  optional: false
-- name: cycler
-  version: 0.12.1
-  manager: pip
-  platform: win-64
-  dependencies: {}
-  url: https://files.pythonhosted.org/packages/e7/05/c19819d5e3d95294a6f5947fb9b9629efb316b96de511b418c53d245aae6/cycler-0.12.1-py3-none-any.whl
-  hash:
-    sha256: 85cef7cff222d8644161529808465972e51340599459b8ac3ccbac5a854e0d30
-  category: main
-  optional: false
-- name: fonttools
-  version: 4.63.0
-  manager: pip
-  platform: linux-64
-  dependencies: {}
-  url: https://files.pythonhosted.org/packages/ce/36/0b805d8c485f872f65a509cbe3b58a5d0d17bee855333b54a150c79d3061/fonttools-4.63.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl
-  hash:
-    sha256: 22135da48a348785c5e2d5d2d9d6bec5ed44adacbaeb9db12d9493bf6c6bfa68
-  category: main
-  optional: false
-- name: fonttools
-  version: 4.63.0
-  manager: pip
-  platform: win-64
-  dependencies: {}
-  url: https://files.pythonhosted.org/packages/92/46/5177b01f3b4abfdd4409f31cca4ab279c9343a26efbe9ec78c97fc612e02/fonttools-4.63.0-cp313-cp313-win_amd64.whl
-  hash:
-    sha256: ba04cb5891d4c0c21b6da95eda8d7b090021508a294fff33464fc7d241e0856b
-  category: main
-  optional: false
 - name: geoapps-utils
   version: 0.7.0b2.dev1+31e1f71
   manager: pip
@@ -4744,145 +5129,5 @@ package:
   source:
     type: url
     url: git+https://github.com/MiraGeoscience/geoh5py.git@37016b8cbe1db7d880c9c2ae724d48ab09962c28
-  category: main
-  optional: false
-- name: kiwisolver
-  version: 1.5.0
-  manager: pip
-  platform: linux-64
-  dependencies: {}
-  url: https://files.pythonhosted.org/packages/2b/0a/7b98e1e119878a27ba8618ca1e18b14f992ff1eda40f47bccccf4de44121/kiwisolver-1.5.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl
-  hash:
-    sha256: 332b4f0145c30b5f5ad9374881133e5aa64320428a57c2c2b61e9d891a51c2f3
-  category: main
-  optional: false
-- name: kiwisolver
-  version: 1.5.0
-  manager: pip
-  platform: win-64
-  dependencies: {}
-  url: https://files.pythonhosted.org/packages/be/8a/be60e3bbcf513cc5a50f4a3e88e1dcecebb79c1ad607a7222877becaa101/kiwisolver-1.5.0-cp313-cp313-win_amd64.whl
-  hash:
-    sha256: 0bf3acf1419fa93064a4c2189ac0b58e3be7872bf6ee6177b0d4c63dc4cea276
-  category: main
-  optional: false
-- name: matplotlib
-  version: 3.10.9
-  manager: pip
-  platform: linux-64
-  dependencies:
-    contourpy: '>=1.0.1'
-    cycler: '>=0.10'
-    fonttools: '>=4.22.0'
-    kiwisolver: '>=1.3.1'
-    numpy: '>=1.23'
-    packaging: '>=20.0'
-    pillow: '>=8'
-    pyparsing: '>=3'
-    python-dateutil: '>=2.7'
-  url: https://files.pythonhosted.org/packages/8a/17/4402d0d14ccf1dfc70932600b68097fbbf9c898a4871d2cbbe79c7801a32/matplotlib-3.10.9-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl
-  hash:
-    sha256: 8f3bcac1ca5ed000a6f4337d47ba67dfddf37ed6a46c15fd7f014997f7bf865f
-  category: main
-  optional: false
-- name: matplotlib
-  version: 3.10.9
-  manager: pip
-  platform: win-64
-  dependencies:
-    contourpy: '>=1.0.1'
-    cycler: '>=0.10'
-    fonttools: '>=4.22.0'
-    kiwisolver: '>=1.3.1'
-    numpy: '>=1.23'
-    packaging: '>=20.0'
-    pillow: '>=8'
-    pyparsing: '>=3'
-    python-dateutil: '>=2.7'
-  url: https://files.pythonhosted.org/packages/c5/e0/0840fd2f93da988ec660b8ad1984abe9f25d2aed22a5e394ff1c68c88307/matplotlib-3.10.9-cp313-cp313-win_amd64.whl
-  hash:
-    sha256: f4399f64b3e94cd500195490972ae1ee81170df1636fa15364d157d5bdd7b921
-  category: main
-  optional: false
-- name: psutil
-  version: 7.2.2
-  manager: pip
-  platform: linux-64
-  dependencies: {}
-  url: https://files.pythonhosted.org/packages/b5/70/5d8df3b09e25bce090399cf48e452d25c935ab72dad19406c77f4e828045/psutil-7.2.2-cp36-abi3-manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_28_x86_64.whl
-  hash:
-    sha256: 076a2d2f923fd4821644f5ba89f059523da90dc9014e85f8e45a5774ca5bc6f9
-  category: main
-  optional: false
-- name: psutil
-  version: 7.2.2
-  manager: pip
-  platform: win-64
-  dependencies: {}
-  url: https://files.pythonhosted.org/packages/b4/90/e2159492b5426be0c1fef7acba807a03511f97c5f86b3caeda6ad92351a7/psutil-7.2.2-cp37-abi3-win_amd64.whl
-  hash:
-    sha256: eb7e81434c8d223ec4a219b5fc1c47d0417b12be7ea866e24fb5ad6e84b3d988
-  category: main
-  optional: false
-- name: pyparsing
-  version: 3.3.2
-  manager: pip
-  platform: linux-64
-  dependencies: {}
-  url: https://files.pythonhosted.org/packages/10/bd/c038d7cc38edc1aa5bf91ab8068b63d4308c66c4c8bb3cbba7dfbc049f9c/pyparsing-3.3.2-py3-none-any.whl
-  hash:
-    sha256: 850ba148bd908d7e2411587e247a1e4f0327839c40e2e5e6d05a007ecc69911d
-  category: main
-  optional: false
-- name: pyparsing
-  version: 3.3.2
-  manager: pip
-  platform: win-64
-  dependencies: {}
-  url: https://files.pythonhosted.org/packages/10/bd/c038d7cc38edc1aa5bf91ab8068b63d4308c66c4c8bb3cbba7dfbc049f9c/pyparsing-3.3.2-py3-none-any.whl
-  hash:
-    sha256: 850ba148bd908d7e2411587e247a1e4f0327839c40e2e5e6d05a007ecc69911d
-  category: main
-  optional: false
-- name: python-dateutil
-  version: 2.9.0.post0
-  manager: pip
-  platform: linux-64
-  dependencies:
-    six: '>=1.5'
-  url: https://files.pythonhosted.org/packages/ec/57/56b9bcc3c9c6a792fcbaf139543cee77261f3651ca9da0c93f5c1221264b/python_dateutil-2.9.0.post0-py2.py3-none-any.whl
-  hash:
-    sha256: a8b2bc7bffae282281c8140a97d3aa9c14da0b136dfe83f850eea9a5f7470427
-  category: main
-  optional: false
-- name: python-dateutil
-  version: 2.9.0.post0
-  manager: pip
-  platform: win-64
-  dependencies:
-    six: '>=1.5'
-  url: https://files.pythonhosted.org/packages/ec/57/56b9bcc3c9c6a792fcbaf139543cee77261f3651ca9da0c93f5c1221264b/python_dateutil-2.9.0.post0-py2.py3-none-any.whl
-  hash:
-    sha256: a8b2bc7bffae282281c8140a97d3aa9c14da0b136dfe83f850eea9a5f7470427
-  category: main
-  optional: false
-- name: six
-  version: 1.17.0
-  manager: pip
-  platform: linux-64
-  dependencies: {}
-  url: https://files.pythonhosted.org/packages/b7/ce/149a00dd41f10bc29e5921b496af8b574d8413afcd5e30dfa0ed46c2cc5e/six-1.17.0-py2.py3-none-any.whl
-  hash:
-    sha256: 4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274
-  category: main
-  optional: false
-- name: six
-  version: 1.17.0
-  manager: pip
-  platform: win-64
-  dependencies: {}
-  url: https://files.pythonhosted.org/packages/b7/ce/149a00dd41f10bc29e5921b496af8b574d8413afcd5e30dfa0ed46c2cc5e/six-1.17.0-py2.py3-none-any.whl
-  hash:
-    sha256: 4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274
   category: main
   optional: false
