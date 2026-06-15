@@ -13,9 +13,9 @@ build-backend = "poetry_dynamic_versioning.backend"
 
 [project]
 name = "surface-apps"
-requires-python = '>=3.10,<4.0'
+requires-python = '>=3.12,<4.0'
 
-description = "Find Iso-surfaces in 3D data."
+description = "Applications to create and manipulate surface meshes for geoscientific data."
 license = "MIT"
 keywords = ["geology", "geophysics", "earth sciences"]
 readme = "package.rst"
@@ -31,7 +31,7 @@ repository = "https://github.com/MiraGeoscience/surface-apps"
 homepage = "https://www.mirageoscience.com/mining-industry-software/python-integration/"
 
 [tool.poetry]
-requires-poetry = '>=2.0,<3.0'
+requires-poetry = "2.*"
 
 classifiers = [
     "Development Status :: 2 - Pre-Alpha",
@@ -52,31 +52,25 @@ packages = [
      { include = "surface_apps-assets" },
 ]
 include = [
-    { path = "COPYING" },
-    { path = "COPYING.LESSER" },
-    { path = "LICENSE" },
-    { path = "README.rst" },
-    { path = "docs/**/THIRD_PARTY_SOFTWARE.rst" },
+    { path = "surface_apps/_version.py", format = ["sdist", "wheel"] },
 ]
-
 version = "0.0.0.dev0"
 
-[tool.poetry.dependencies]
-python = "^3.10"
 
-numpy = "~1.26.0"  # also in geoh5py
-pydantic = "^2.5.2"  # also in geoh5py
-scikit-image = "^0.25.2"
-scipy = "~1.14.0"  # also in geoapps-utils
+[tool.poetry.dependencies]
+numpy = "~2.4.2"
+pydantic = "~2.12.0"   # also in geoh5py
+scikit-image = "~0.26.0"
+scipy = "~1.17.0"  # also in geoapps-utils
 tqdm = "^4.66.1"
 
 ## Pip dependencies from Git repositories
 #----------------------------------------
 #geoh5py = {version = ">=0.12.0a, <0.13.dev", source = "pypi", allow-prereleases = true}
-geoh5py = {git = "https://github.com/MiraGeoscience/geoh5py.git", rev = "develop"}
+geoh5py = {git = "https://github.com/MiraGeoscience/geoh5py.git", rev = "release/GA_4.8"}
 
 #geoapps-utils = {version = ">=0.6.0a, <0.7.dev", source = "pypi", allow-prereleases = true}
-geoapps-utils = {git = "https://github.com/MiraGeoscience/geoapps-utils.git", rev = "develop"}
+geoapps-utils = {git = "https://github.com/MiraGeoscience/geoapps-utils.git", rev = "release/GA_4.8"}
 
 ## about pip dependencies
 # to be specified to work with conda-lock
@@ -90,8 +84,8 @@ geoapps-utils = {git = "https://github.com/MiraGeoscience/geoapps-utils.git", re
 [tool.conda-lock.dependencies]
 ## indirect dependencies, forcing them here for installation through Conda not pip
 #---------------------------------------------------------------------------------
-Pillow = ">=10.3.0, <10.4.dev"  # from geoh5py
-h5py = ">=3.2.1, <4.0.dev"  # from geoh5py
+pillow = ">=12.1.0, 12.*"  # from geoh5py
+h5py = ">=3.15.1, 3.*"  # from geoh5py
 
 [tool.poetry.group.dev.dependencies]
 Pygments = "*"
@@ -107,7 +101,7 @@ sphinx-rtd-theme = "*"
 tomli = "*"
 
 [tool.poetry.requires-plugins]
-poetry-dynamic-versioning = { version = ">=1.9.1,<2.0.0", extras = ["plugin"] }
+poetry-dynamic-versioning = { version = ">=1.9.1, 1.*", extras = ["plugin"] }
 
 [tool.poetry-dynamic-versioning]
 bump = true
@@ -141,7 +135,7 @@ platforms = ['win-64', 'linux-64']
 channels = ['conda-forge']
 
 [tool.ruff]
-target-version = "py310"
+target-version = "py312"
 
 [tool.ruff.lint]
 ignore = [

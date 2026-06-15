@@ -25,8 +25,12 @@ copyright = "Mira Geoscience Ltd"
 # The full version, including alpha/beta/rc tags.
 release = version("surface-apps")
 # The shorter X.Y.Z version.
-version = Version(release).base_version
+pep_version = Version(release)
+if pep_version.is_postrelease:
+    release = pep_version.base_version
 
+# The short X.Y.Z version.
+version = Version(release).base_version
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
