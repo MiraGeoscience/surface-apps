@@ -20,7 +20,7 @@ from geoh5py.objects import BlockModel, Points, Surface
 from geoh5py.objects.cell_object import CellObject
 from geoh5py.objects.grid_object import GridObject
 from geoh5py.ui_json.utils import str2list
-from pydantic import BaseModel, ConfigDict, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from surface_apps import assets_path
 
@@ -70,7 +70,7 @@ class IsoSurfaceDetectionParameters(BaseModel):
 
     interval_min: float | None = None
     interval_max: float | None = None
-    interval_spacing: float | None = None
+    interval_spacing: float | None = Field(gt=0)
     fixed_contours: list[float] | None = None
     max_distance: float = 500.0
     resolution: float = 50.0
@@ -104,19 +104,14 @@ class IsoSurfaceDetectionParameters(BaseModel):
         return fixed_contours
 
     @property
-    def has_intervals(self) -> bool:
-        """True if interval min, max and spacing are defined."""
-
-        has_min_max = None not in [self.interval_min, self.interval_max]
-        has_spacing = self.interval_spacing not in [0, None]
-
-        return has_min_max and has_spacing
-
-    @property
     def intervals(self) -> list[float]:
         """Returns arange of requested contour intervals."""
 
-        if self.has_intervals:
+        if (
+            self.interval_min is not None
+            and self.interval_max is not None
+            and self.interval_spacing is not None
+        ):
             intervals = np.arange(
                 self.interval_min,
                 self.interval_max + self.interval_spacing / 2,  # type: ignore
