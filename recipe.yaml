@@ -2,12 +2,14 @@ schema_version: 1
 
 context:
   name: "surface-apps"
-  version: "0.0.0.dev0"  # This will be replaced by the actual version in the build process
-  python_min: "3.10"
+  python_min: "3.12"
+  # Extract version from auto-generated _version.json
+  version: "${{ load_from_file('_version.json').version | trim }}"
+  module_name: ${{ name|lower|replace("-", "_") }}
 
 package:
   name: ${{ name|lower }}
-  version: ${{ version }}
+  version: "${{ version }}"
 
 source:
   path: ../${{ name }}
@@ -15,32 +17,38 @@ source:
 build:
   number: 0
   noarch: python
-  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  script:
+    env:
+      POETRY_DYNAMIC_VERSIONING_BYPASS: "${{ version }}"
+    content:
+      ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
-    - python 3.10.*
-    - poetry-core >=1.8.0
-    - poetry-dynamic-versioning >=1.9, <2.0.dev
-    - setuptools
+    - python ${{ python_min }}.*
     - pip
+    - poetry-core >=1.8.0
+    - poetry-dynamic-versioning >=1.9.1, 1.*
   run:
     - python >=${{ python_min }}
     # Mira packages
-    - geoapps-utils >=0.6.0a, <0.7.dev
-    - geoh5py >=0.12.0a, <0.13.dev
+    - geoapps-utils >=0.7.0b1, 0.7.*
+    - geoh5py >=0.13.0b1, 0.13.*
     # other direct dependencies
-    - numpy >=1.26.0, <1.27.dev
-    - pydantic >=2.5.2, <3.0.dev
-    - scikit-image >=0.25.2, <0.26.dev
-    - scipy >=1.14.0, <1.15.dev
-    - tqdm >=4.66.1, <5.0.dev
+    - numpy >=2.4.2, 2.4.*
+    - pydantic 2.12.*
+    - scikit-image 0.26.*
+    - scipy 1.17.*
+    - tqdm >=4.66.1, 4.*
 
 tests:
   - python:
+      python_version: ${{ python_min }}.*
       imports:
-        - surface_apps
-        - surface_apps._version
+        - ${{ module_name }}
+        - ${{ module_name }}._version
+      pip_check: true
+
   - script:
       - pytest --ignore=tests/version_test.py
     requirements:
@@ -49,11 +57,15 @@ tests:
     files:
       source:
         - tests/
-
+  - package_contents:
+      files:
+        - site-packages/${{ module_name }}/_version.py
 about:
-  summary: Surface detection within geoscientific data.
+  summary: Surface creation and manipulation within geoscientific data.
   license: MIT
-  license_file: LICENSE
+  license_file:
+    - LICENSE
+    - docs/source/THIRD_PARTY_SOFTWARE.rst
   homepage: https://www.mirageoscience.com/mining-industry-software/python-integration/
   repository: https://github.com/MiraGeoscience/surface-apps
 

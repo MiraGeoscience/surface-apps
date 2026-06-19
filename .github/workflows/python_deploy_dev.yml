@@ -15,10 +15,11 @@ jobs:
     uses: MiraGeoscience/CI-tools/.github/workflows/reusable-python-publish_rattler_package.yml@main
     with:
       package-name: 'surface-apps'
-      python-version: '3.10'
+      python-version: '3.12'
       source-repo-names: '["public-noremote-conda-dev"]'
       conda-channels: '["conda-forge"]'
       publish-repo-names: '["public-noremote-conda-dev"]'
+      build-experimental: true
     secrets:
       JFROG_ARTIFACTORY_URL: ${{ secrets.JFROG_ARTIFACTORY_URL }}
       JFROG_ARTIFACTORY_TOKEN: ${{ secrets.JFROG_ARTIFACTORY_TOKEN }}
@@ -29,7 +30,7 @@ jobs:
       package-manager: 'poetry'
       package-name: 'surface-apps'
       version-tag: ${{ github.ref_name }}
-      python-version: '3.10'
+      python-version: '3.12'
       virtual-repo-names: '["public-pypi-dev", "test-pypi"]'
     secrets:
       JFROG_ARTIFACTORY_URL: ${{ secrets.JFROG_ARTIFACTORY_URL }}

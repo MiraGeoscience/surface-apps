@@ -5,7 +5,7 @@ The **surface-apps** library offers tools for the creation and manipulation of s
 
 Installation
 ^^^^^^^^^^^^
-**Surface-apps** is currently written for Python 3.10 or higher.
+**Surface-apps** is currently written for Python 3.12 or higher.
 
 Install **surface-apps** from PyPI::
 
