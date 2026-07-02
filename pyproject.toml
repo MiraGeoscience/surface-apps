@@ -17,6 +17,10 @@ requires-python = '>=3.12,<4.0'
 
 description = "Applications to create and manipulate surface meshes for geoscientific data."
 license = "MIT"
+license-files = [
+    "LICENSE",
+    "docs/source/THIRD_PARTY_SOFTWARE.rst",
+]
 keywords = ["geology", "geophysics", "earth sciences"]
 readme = "package.rst"
 dynamic = ["version", "dependencies", "classifiers"]
@@ -28,6 +32,7 @@ maintainers = [
 
 [project.urls]
 repository = "https://github.com/MiraGeoscience/surface-apps"
+documentation  = "https://mirageoscience-surface-apps.readthedocs-hosted.com/"
 homepage = "https://www.mirageoscience.com/mining-industry-software/python-integration/"
 
 [tool.poetry]
@@ -52,8 +57,6 @@ packages = [
      { include = "surface_apps-assets" },
 ]
 include = [
-    { path = "LICENSE" },
-    { path = "docs/source/THIRD_PARTY_SOFTWARE.rst" },
     { path = "surface_apps/_version.py", format = ["sdist", "wheel"] },
 ]
 version = "0.0.0.dev0"

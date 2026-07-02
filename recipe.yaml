@@ -68,6 +68,7 @@ about:
     - docs/source/THIRD_PARTY_SOFTWARE.rst
   homepage: https://www.mirageoscience.com/mining-industry-software/python-integration/
   repository: https://github.com/MiraGeoscience/surface-apps
+  documentation: https://mirageoscience-surface-apps.readthedocs-hosted.com/
 
 extra:
   recipe-maintainers:
