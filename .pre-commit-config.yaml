@@ -12,7 +12,7 @@ ci:
 
 repos:
 -   repo: https://github.com/python-poetry/poetry
-    rev: 2.1.3
+    rev: 2.4.1
     hooks:
     -   id: poetry-check
 -   repo: https://github.com/hadialqattan/pycln
@@ -21,7 +21,7 @@ repos:
     -   id: pycln
         args: [--config=pyproject.toml]
 -   repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.12.7
+    rev: v0.15.20
     hooks:
     -   id: ruff
         args:
@@ -32,7 +32,7 @@ repos:
     -   id: ruff-format
         exclude: ^docs/
 -   repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.17.1
+    rev: v2.1.0
     hooks:
     -   id: mypy
         additional_dependencies: [
@@ -44,7 +44,7 @@ repos:
         ]
         exclude: ^(docs|surface_apps-assets)/
 -   repo: https://github.com/codingjoe/relint
-    rev: 3.3.1
+    rev: 3.5.0
     hooks:
     -   id: relint
         args: [-W]  # to fail on warnings
@@ -66,13 +66,13 @@ repos:
         types: [python]
         exclude: ^(docs|surface_apps-assets)/
 -   repo: https://github.com/codespell-project/codespell
-    rev: v2.4.1
+    rev: v2.4.2
     hooks:
     -   id: codespell
         exclude: (-lock\.ya?ml|\benvironments/.*\.ya?ml|\.ipynb|^THIRD_PARTY_SOFTWARE\.rst)$
         entry: codespell -I .codespellignore
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
     -   id: trailing-whitespace
         exclude: \.mdj$
