@@ -7,6 +7,25 @@ version: 2
 updates:
   - package-ecosystem: "github-actions"
     directory: "/"
-    schedule:
-      interval: "monthly"
     target-branch: "develop"
+    schedule:
+      interval: "weekly"
+    cooldown:
+      default-days: 4
+    ignore:
+      - dependency-name: "MiraGeoscience/CI-tools/.github/actions/*"
+        update-types:
+          - "version-update:semver-minor"
+          - "version-update:semver-patch"
+      - dependency-name: "MiraGeoscience/CI-tools/.github/workflows/*"
+        update-types:
+          - "version-update:semver-minor"
+          - "version-update:semver-patch"
+    groups:
+      github-actions:
+        patterns:
+          - actions/*
+      mirageo-ci-tools:
+        patterns:
+          - MiraGeoscience/CI-tools/.github/actions/*
+          - MiraGeoscience/CI-tools/.github/workflows/*
