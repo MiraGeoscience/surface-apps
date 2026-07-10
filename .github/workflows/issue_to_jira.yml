@@ -6,7 +6,12 @@ on:
 
 jobs:
   call-workflow-create-jira-issue:
-    uses: MiraGeoscience/CI-tools/.github/workflows/reusable-jira-issue_to_jira.yml@main
-    secrets: inherit
+    uses: MiraGeoscience/CI-tools/.github/workflows/reusable-jira-issue_to_jira.yml@v3
+    permissions:
+      issues: write
+    secrets:
+      JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+      JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL_WRITE }}
+      JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN_WRITE }}
     with:
-      project-key: 'GEOPY'
+      project_key: 'GEOPY'
