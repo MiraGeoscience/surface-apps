@@ -1,0 +1,78 @@
+schema_version: 1
+
+context:
+  name: "surface-apps"
+  python_min: "3.12"
+  # Extract version from auto-generated _version.json
+  version: "${{ load_from_file('_version.json').version | trim }}"
+  module_name: ${{ name|lower|replace("-", "_") }}
+
+package:
+  name: ${{ name|lower }}
+  version: "${{ version }}"
+
+source:
+  path: ../${{ name }}
+
+build:
+  number: 0
+  noarch: python
+  script:
+    env:
+      POETRY_DYNAMIC_VERSIONING_BYPASS: "${{ version }}"
+    content:
+      ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - pip
+    - poetry-core >=1.8.0
+    - poetry-dynamic-versioning >=1.9.1, 1.*
+  run:
+    - python >=${{ python_min }}
+    # Mira packages
+    - geoapps-utils >=0.7.0b1, 0.7.*
+    - geoh5py >=0.13.0b1, 0.13.*
+    # other direct dependencies
+    - numpy >=2.4.2, 2.4.*
+    - pydantic 2.12.*
+    - scikit-image 0.26.*
+    - scipy 1.17.*
+    - tqdm >=4.66.1, 4.*
+
+tests:
+  - python:
+      python_version: ${{ python_min }}.*
+      imports:
+        - ${{ module_name }}
+        - ${{ module_name }}._version
+      pip_check: true
+
+  - script:
+      - pytest --ignore=tests/version_test.py
+    requirements:
+      run:
+        - pytest
+    files:
+      source:
+        - tests/
+  - package_contents:
+      files:
+        - site-packages/${{ module_name }}/_version.py
+about:
+  summary: Surface creation and manipulation within geoscientific data.
+  license: MIT
+  license_file:
+    - LICENSE
+    - docs/source/THIRD_PARTY_SOFTWARE.rst
+  homepage: https://www.mirageoscience.com/mining-industry-software/python-integration/
+  repository: https://github.com/MiraGeoscience/surface-apps
+  documentation: https://mirageoscience-surface-apps.readthedocs-hosted.com/
+
+extra:
+  recipe-maintainers:
+    - andrewg-mira
+    - domfournier
+    - RomFloreani
+    - sebhmg

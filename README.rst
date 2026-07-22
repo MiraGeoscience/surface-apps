@@ -1,9 +1,9 @@
 |coverage| |maintainability| |precommit_ci| |docs| |style| |version| |status| |pyversions|
 
 
-.. |docs| image:: https://readthedocs.org/projects/surface-apps/badge/
+.. |docs| image:: https://readthedocs.com/projects/mirageoscience-surface-apps/badge/?version=latest
     :alt: Documentation Status
-    :target: https://surface-apps.readthedocs.io/en/latest/?badge=latest
+    :target: https://mirageoscience-surface-apps.readthedocs-hosted.com/en/latest/?badge=latest
 
 .. |coverage| image:: https://codecov.io/gh/MiraGeoscience/surface-apps/branch/develop/graph/badge.svg
     :alt: Code coverage
@@ -34,9 +34,10 @@
    :alt: Maintainability
 
 
-surface-apps: # TODO: SHORT DESCRIPTION
-=========================================================================
-The **surface-apps** library # TODO: PACKAGE DESCRIPTION
+surface-apps
+============
+
+The **surface-apps** library offers tools for the creation and manipulation of surface objects using various Python libraries and `geoh5py <https://mirageoscience-geoh5py.readthedocs-hosted.com/>`_.
 
 .. contents:: Table of Contents
    :local:
@@ -44,12 +45,12 @@ The **surface-apps** library # TODO: PACKAGE DESCRIPTION
 
 Documentation
 ^^^^^^^^^^^^^
-`Online documentation <https://surface-apps.readthedocs.io/en/latest/>`_
+`Online documentation <https://mirageoscience-surface-apps.readthedocs-hosted.com/en/latest/>`_
 
 
 Installation
 ^^^^^^^^^^^^
-**surface-apps** is currently written for Python 3.10 or higher.
+**surface-apps** is currently written for Python 3.12 or higher.
 
 Install Conda
 -------------
@@ -64,7 +65,7 @@ Within a conda environment
 --------------------------
 
 You can install (or update) a conda environment with all the requires packages to run **surface-apps**.
-To do so you can directly run the **Install_or_Update.bat** file by double left clicking on it.
+To do so you can directly run the **install.bat** file by double left clicking on it.
 
 Install with conda
 ------------------
@@ -134,18 +135,36 @@ To configure the development environment and tools, please see `README-dev.rst`_
 
 License
 ^^^^^^^
-# TODO: ADD LICENSE TERMS
+MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 Third Party Software
 ^^^^^^^^^^^^^^^^^^^^
-The surface-apps Software may provide links to third party libraries or code (collectively “Third Party Software”)
+The surface-apps Software may provide links to third party libraries or code (collectively "Third Party Software")
 to implement various functions. Third Party Software does not comprise part of the Software.
 The use of Third Party Software is governed by the terms of such software license(s).
 Third Party Software notices and/or additional terms and conditions are located in the
 `THIRD_PARTY_SOFTWARE.rst`_ file.
 
-.. _THIRD_PARTY_SOFTWARE.rst: THIRD_PARTY_SOFTWARE.rst
+.. _THIRD_PARTY_SOFTWARE.rst: ./docs/source/THIRD_PARTY_SOFTWARE.rst
 
 Copyright
 ^^^^^^^^^
-Copyright (c) 2024 Mira Geoscience Ltd.
+Copyright (c) 2024-2026 Mira Geoscience Ltd.

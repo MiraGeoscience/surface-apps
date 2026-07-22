@@ -1,4 +1,4 @@
-# Byte-compiled / optimized / DLL files
+﻿# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
@@ -125,9 +125,9 @@ venv.bak/
 
 #pycharm
 /.idea/*
+!/.idea/*.iml
 !/.idea/scopes/
 !/.idea/copyright/
-!/.idea/*.iml
 
 # mypy
 .mypy_cache/
@@ -145,3 +145,7 @@ dmypy.json
 
 # tempory generated files
 pyproject-sha.toml
+
+#version ignore
+surface_apps/_version.py
+/_version.json

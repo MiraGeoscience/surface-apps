@@ -1,0 +1,255 @@
+# ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+#  Copyright (c) 2024-2026 Mira Geoscience Ltd.                                '
+#                                                                              '
+#  This file is part of surface-apps package.                                  '
+#                                                                              '
+#  surface-apps is distributed under the terms and conditions of the MIT License
+#  (see LICENSE file at the root of this source code package).                 '
+# ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+from __future__ import annotations
+
+from pathlib import Path
+
+import numpy as np
+import pytest
+from geoapps_utils.utils.importing import GeoAppsError
+from geoh5py.objects import BlockModel, Points, Surface
+from geoh5py.workspace import Workspace
+
+from surface_apps.iso_surfaces.driver import Driver as IsoSurfacesDriver
+from surface_apps.iso_surfaces.params import IsoSurfaceParameters
+
+
+#  pylint: disable=too-many-locals
+
+
+def test_centroids(tmp_path: Path):
+    """
+    Test iso_surface with a block model. Data values are the distance from a point.
+    """
+    ws = Workspace(tmp_path / "iso_test.geoh5")
+    np.random.seed(0)
+    n = 70
+    length = 10
+
+    # Axes for block model
+    x = np.linspace(0, length, n)
+    y = np.linspace(0, length, n)
+    z = np.linspace(0, length, n)
+
+    origin = np.random.uniform(-100, 100, 3)
+
+    # Create test block model
+    block_model = BlockModel.create(
+        ws,
+        origin=origin,
+        u_cell_delimiters=x,
+        v_cell_delimiters=y,
+        z_cell_delimiters=z,
+        name="test_block_model",
+        allow_move=False,
+    )
+
+    # Sphere test data for the block model
+    sphere_radius = np.random.uniform(length * 0.15, length * 0.3)
+    offset = np.random.uniform(0, (length / 2) - sphere_radius, 3)
+    sphere_center = ((length - 2) / 2, (length - 2) / 2, (length - 2) / 2) + offset
+
+    # The value at each point is its distance from the center of the sphere
+    x_coords, y_coords, z_coords = np.meshgrid(
+        np.linspace(0, length, n - 1),
+        np.linspace(0, length, n - 1),
+        np.linspace(0, length, n - 1),
+    )
+    verts = np.stack(
+        (x_coords.flatten(), y_coords.flatten(), z_coords.flatten()), axis=1
+    )
+
+    values = np.linalg.norm(
+        np.subtract(verts, np.asarray(sphere_center)),
+        axis=1,
+    )
+    data = block_model.add_data({"my data": {"values": values}})
+
+    # Generate surface
+    func_surface = IsoSurfacesDriver.iso_surface(
+        block_model, data, [sphere_radius], max_distance=np.inf
+    )
+
+    # Compare surface center with sphere center
+    surf_center = np.mean(func_surface[0][0], axis=0)
+    center_error = np.abs(
+        ((sphere_center + origin) - surf_center) / (sphere_center + origin)
+    )
+
+    assert np.all(center_error < 0.02)
+
+    # Radius of sphere
+    surf_distance = np.linalg.norm(np.subtract(func_surface[0][0], surf_center), axis=1)
+    surf_radius = np.mean(surf_distance, axis=0)
+    radius_error = np.abs((surf_radius - sphere_radius) / sphere_radius)
+
+    assert radius_error < 0.02
+
+    # For user validation only
+    Surface.create(
+        ws, name="surface", vertices=func_surface[0][0], cells=func_surface[0][1]
+    )
+    block_model.add_data(
+        {
+            "DataValues": {
+                "values": values,
+            }
+        }
+    )
+    ws.close()
+
+
+def test_vertices(tmp_path: Path):
+    """
+    Test iso_surface with a points object. Data values are the distance from a point.
+    """
+    ws = Workspace(tmp_path / "iso_test.geoh5")
+    np.random.seed(0)
+    length = 10
+    origin = np.random.uniform(-100, 100, 3)
+    verts = np.random.randn(5000, 3) * length + origin
+    sphere_radius = np.random.uniform(length * 0.2, length * 0.5, 1)[0]
+    offset = np.random.uniform(0, (length / 2), 3)
+    sphere_center = origin + offset
+
+    values = np.linalg.norm(verts - sphere_center, axis=1)
+
+    points = Points.create(
+        ws,
+        name="test_points",
+        vertices=verts,
+    )
+    data = points.add_data({"my data": {"values": values}})
+    func_surface = IsoSurfacesDriver.iso_surface(
+        points,
+        data,
+        [sphere_radius],
+        resolution=sphere_radius / 8.0,
+        max_distance=np.inf,
+    )
+
+    # For user validation only
+    Surface.create(
+        ws, name="surface", vertices=func_surface[0][0], cells=func_surface[0][1]
+    )
+    points.add_data(
+        {
+            "DataValues": {
+                "values": values,
+            }
+        }
+    )
+    ws.close()
+
+    # Compare surface center with sphere center
+    surf_center = np.mean(func_surface[0][0], axis=0)
+    center_error = np.abs((sphere_center - surf_center) / (sphere_center))
+
+    assert np.all(center_error < 0.25)
+
+    # Radius of sphere
+    surf_distance = np.linalg.norm(np.subtract(func_surface[0][0], surf_center), axis=1)
+    surf_radius = np.mean(surf_distance, axis=0)
+    radius_error = np.abs((surf_radius - sphere_radius) / sphere_radius)
+
+    assert radius_error < 0.06
+
+
+def test_clipping_horizon(tmp_path: Path):
+    """
+    Test iso_surface with a points object. Data values are the distance from a point.
+    """
+    ws = Workspace(tmp_path / "iso_test.geoh5")
+    np.random.seed(0)
+    length = 10
+    origin = np.random.uniform(-100, 100, 3)
+    verts = np.random.randn(5000, 3) * length + origin
+    sphere_radius = np.random.uniform(length * 0.2, length * 0.5, 1)[0]
+    offset = np.random.uniform(0, (length / 2), 3)
+    sphere_center = origin + offset
+
+    values = np.linalg.norm(verts - sphere_center, axis=1)
+
+    points = Points.create(
+        ws,
+        name="test_points",
+        vertices=verts,
+    )
+    data = points.add_data({"my data": {"values": values}})
+
+    vertices = np.array(
+        [
+            [-500, -500, 30],
+            [500, -500, 30],
+            [500, 500, 30],
+            [-500, 500, 30],
+            [-500, -500, 30],
+        ]
+    )
+    cells = np.array([[0, 1, 3], [1, 2, 3]])
+    horizon = Surface.create(
+        workspace=ws, name="horizon", vertices=vertices, cells=cells
+    )
+    func_surface = IsoSurfacesDriver.iso_surface(
+        points,
+        data,
+        [20],
+        resolution=sphere_radius / 8.0,
+        max_distance=np.inf,
+        horizon=horizon,
+    )  # For user validation only
+
+    surface = Surface.create(
+        ws, name="surface", vertices=func_surface[0][0], cells=func_surface[0][1]
+    )
+    points.add_data(
+        {
+            "DataValues": {
+                "values": values,
+            }
+        }
+    )
+
+    assert np.all(surface.vertices[:, -1] <= 30)
+
+
+def test_single_layer_grid(tmp_path):
+    with Workspace(tmp_path / "iso_test.geoh5") as ws:
+        grid = BlockModel.create(
+            ws,
+            name="single_layer_grid",
+            u_cell_delimiters=np.linspace(0, 10, 11),
+            v_cell_delimiters=np.linspace(0, 10, 11),
+            z_cell_delimiters=np.array([0.0, 1.0]),
+            origin=[0, 0, 0],
+        )
+        data = grid.add_data(
+            {
+                "elevation": {
+                    "values": np.random.rand(grid.n_cells) * 100,
+                    "data_type": "Float",
+                    "association": "Cell",
+                }
+            }
+        )
+
+        with pytest.raises(GeoAppsError, match="cannot be a single layer"):
+            IsoSurfaceParameters.build(
+                {
+                    "geoh5": ws,
+                    "objects": grid,
+                    "data": data,
+                    "interval_min": 0.0,
+                    "interval_max": 100.0,
+                    "interval_spacing": 20.0,
+                    "max_distance": 50.0,
+                    "resolution": 5.0,
+                }
+            )
