@@ -25,6 +25,7 @@ Content
    usage
    iso_surfaces
    api_reference
+   release_notes
    THIRD_PARTY_SOFTWARE
 
 
