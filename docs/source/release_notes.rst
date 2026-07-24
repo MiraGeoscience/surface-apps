@@ -11,13 +11,12 @@ Release 0.1.0 (2026-07-01)
 - Clip surfaces by ndv of data values
 - Crash on values shape
 - Investigate conda_environment saved on geoapps run of curve_apps
-- Clip surfaces by ndv of data values
 - Streamline geoapps-utils
 - Streamline geoapps-utils
 - Update package with python-poetry-template
 - Fixup README by using regular double quotes
 - Formalize out_group as empty string or UIJsonGroup selector
-- Update input variables in github shared workflows
+- Update input variables in GitHub shared workflows
 - Point development to geoh5py release/0.10.0
 - Release branches to prepare distrib for Analyst 4.5
 - Bump develop version to 0.2.0-alpha.1
