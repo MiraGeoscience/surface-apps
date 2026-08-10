@@ -69,10 +69,10 @@ tqdm = "^4.66.1"
 ## Pip dependencies from Git repositories
 #----------------------------------------
 #geoh5py = {version = ">=0.12.0a, <0.13.dev", source = "pypi", allow-prereleases = true}
-geoh5py = {git = "https://github.com/MiraGeoscience/geoh5py.git", rev = "release/GA_4.8"}
+geoh5py = {git = "https://github.com/MiraGeoscience/geoh5py.git", rev = "feature/uijson"}
 
 #geoapps-utils = {version = ">=0.6.0a, <0.7.dev", source = "pypi", allow-prereleases = true}
-geoapps-utils = {git = "https://github.com/MiraGeoscience/geoapps-utils.git", rev = "release/GA_4.8"}
+geoapps-utils = {git = "https://github.com/MiraGeoscience/geoapps-utils.git", rev = "feature/uijson"}
 
 [tool.conda-lock.dependencies]
 ## indirect dependencies, forcing them here for installation through Conda not pip
