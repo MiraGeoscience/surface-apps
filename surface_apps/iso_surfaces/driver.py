@@ -14,13 +14,12 @@ import sys
 from pathlib import Path
 
 import numpy as np
+from geoapps_utils.base import Driver as BaseDriver
 from geoapps_utils.utils.formatters import string_name
 from geoh5py.data.data import Data
 from geoh5py.objects import ObjectBase, Surface
 from geoh5py.shared.utils import fetch_active_workspace
-from geoh5py.ui_json import InputFile
 
-from surface_apps.driver import BaseSurfaceDriver
 from surface_apps.iso_surfaces.params import IsoSurfaceParameters
 from surface_apps.iso_surfaces.utils import entity_to_grid, extract_iso_surfaces
 
@@ -28,7 +27,7 @@ from surface_apps.iso_surfaces.utils import entity_to_grid, extract_iso_surfaces
 logger = logging.getLogger(__name__)
 
 
-class Driver(BaseSurfaceDriver):
+class Driver(BaseDriver):
     """
     Driver for the detection of iso-surfaces within geoh5py objects.
 
@@ -37,10 +36,7 @@ class Driver(BaseSurfaceDriver):
 
     _params_class = IsoSurfaceParameters
 
-    def __init__(self, parameters: IsoSurfaceParameters | InputFile):
-        super().__init__(parameters)
-
-    def make_surfaces(self):
+    def run(self):
         """Make surface objects from iso-surfaces detected in source data."""
 
         with fetch_active_workspace(self.params.geoh5, mode="r+"):
@@ -71,6 +67,7 @@ class Driver(BaseSurfaceDriver):
                                 parent=self.out_group,
                             )
                         ]
+        return surfaces
 
     @staticmethod
     def iso_surface(
