@@ -20,7 +20,7 @@ from geoh5py.data.data import Data
 from geoh5py.objects import ObjectBase, Surface
 from geoh5py.shared.utils import fetch_active_workspace
 
-from surface_apps.iso_surfaces.params import IsoSurfaceParameters
+from surface_apps.iso_surfaces.options import IsoSurfaceParameters
 from surface_apps.iso_surfaces.utils import entity_to_grid, extract_iso_surfaces
 
 
