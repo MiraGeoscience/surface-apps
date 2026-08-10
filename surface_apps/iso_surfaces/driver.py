@@ -67,7 +67,7 @@ class Driver(BaseDriver):
                                 parent=self.out_group,
                             )
                         ]
-        return surfaces
+        return results if any(results) else None
 
     @staticmethod
     def iso_surface(
