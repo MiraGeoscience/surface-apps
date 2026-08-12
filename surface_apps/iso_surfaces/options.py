@@ -68,9 +68,9 @@ class IsoSurfaceDetectionParameters(BaseModel):
     :param resolution: Resolution of underlying grid.
     """
 
-    interval_min: float = 0.0
-    interval_max: float = 0.0
-    interval_spacing: float = Field(1.0, gt=0)
+    interval_min: float | None = None
+    interval_max: float | None = None
+    interval_spacing: float | None = Field(1.0, gt=0)
     fixed_contours: list[float] | None = None
     max_distance: float = 500.0
     resolution: float = 50.0
