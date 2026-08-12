@@ -37,6 +37,14 @@ class Driver(BaseDriver):
 
     _params_class = IsoSurfaceParameters
 
+    def __init__(
+        self,
+        params: IsoSurfaceParameters,
+    ):
+        super().__init__(params)
+
+        self._out_group = self.validate_out_group(self.params.out_group)
+
     def run(self):
         """Make surface objects from iso-surfaces detected in source data."""
 
@@ -105,22 +113,6 @@ class Driver(BaseDriver):
         surfaces = extract_iso_surfaces(entity, grid, levels, values)
 
         return surfaces
-
-    @property
-    def out_group(self) -> UIJsonGroup:
-        """
-        Overloaded property to force the creation of an out_group.
-        """
-        if self._out_group is None:
-            if self.params.out_group is not None:
-                self._out_group = self.params.out_group
-
-            else:
-                with fetch_active_workspace(self.params.geoh5, mode="r+"):
-                    self._out_group = self.params.ui_json.to_ui_json_group(
-                        workspace=self.params.geoh5
-                    )
-        return self._out_group
 
 
 if __name__ == "__main__":
