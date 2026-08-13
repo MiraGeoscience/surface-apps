@@ -51,6 +51,7 @@ class Driver(BaseDriver):
             logger.info("Generating iso-surfaces ...")
             levels = self.params.detection.contours
 
+            results = []
             if len(levels) >= 1:
                 surfaces = self.iso_surface(
                     self.params.source.objects,
@@ -60,8 +61,6 @@ class Driver(BaseDriver):
                     max_distance=self.params.detection.max_distance,
                     horizon=self.params.source.horizon,
                 )
-
-                results = []
                 for surface, level in zip(surfaces, levels, strict=False):
                     if len(surface[0]) > 0 and len(surface[1]) > 0:
                         results += [
