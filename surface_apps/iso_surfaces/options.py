@@ -20,7 +20,7 @@ from geoh5py.objects import BlockModel, Points, Surface
 from geoh5py.objects.cell_object import CellObject
 from geoh5py.objects.grid_object import GridObject
 from geoh5py.ui_json.utils import str2list
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_serializer, field_validator
 
 from surface_apps import assets_path
 
@@ -70,7 +70,7 @@ class IsoSurfaceDetectionParameters(BaseModel):
 
     interval_min: float | None = None
     interval_max: float | None = None
-    interval_spacing: float | None = Field(gt=0)
+    interval_spacing: float | None = Field(1.0, gt=0)
     fixed_contours: list[float] | None = None
     max_distance: float = 500.0
     resolution: float = 50.0
@@ -102,6 +102,16 @@ class IsoSurfaceDetectionParameters(BaseModel):
             )
 
         return fixed_contours
+
+    @field_serializer("fixed_contours")
+    def list_to_string(self, value):
+        """
+        Convert list of integers to comma-separated string.
+        """
+        if isinstance(value, list):
+            return ", ".join(str(v) for v in value)
+
+        return value
 
     @property
     def intervals(self) -> list[float]:

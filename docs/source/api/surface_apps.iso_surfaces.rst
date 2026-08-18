@@ -12,10 +12,10 @@ surface\_apps.iso\_surfaces.driver module
    :undoc-members:
    :show-inheritance:
 
-surface\_apps.iso\_surfaces.params module
------------------------------------------
+surface\_apps.iso\_surfaces.options module
+------------------------------------------
 
-.. automodule:: surface_apps.iso_surfaces.params
+.. automodule:: surface_apps.iso_surfaces.options
    :members:
    :undoc-members:
    :show-inheritance:

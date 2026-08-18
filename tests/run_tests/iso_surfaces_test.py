@@ -18,7 +18,7 @@ from geoh5py.objects import BlockModel, Points, Surface
 from geoh5py.workspace import Workspace
 
 from surface_apps.iso_surfaces.driver import Driver as IsoSurfacesDriver
-from surface_apps.iso_surfaces.params import IsoSurfaceParameters
+from surface_apps.iso_surfaces.options import IsoSurfaceParameters
 
 
 #  pylint: disable=too-many-locals
@@ -110,56 +110,55 @@ def test_vertices(tmp_path: Path):
     """
     Test iso_surface with a points object. Data values are the distance from a point.
     """
-    ws = Workspace(tmp_path / "iso_test.geoh5")
-    np.random.seed(0)
-    length = 10
-    origin = np.random.uniform(-100, 100, 3)
-    verts = np.random.randn(5000, 3) * length + origin
-    sphere_radius = np.random.uniform(length * 0.2, length * 0.5, 1)[0]
-    offset = np.random.uniform(0, (length / 2), 3)
-    sphere_center = origin + offset
+    with Workspace.create(tmp_path / f"{__name__}.geoh5") as ws:
+        np.random.seed(0)
+        length = 10
+        origin = np.random.uniform(-100, 100, 3)
+        verts = np.random.randn(5000, 3) * length + origin
+        sphere_radius = np.random.uniform(length * 0.2, length * 0.5, 1)[0]
+        offset = np.random.uniform(0, (length / 2), 3)
+        sphere_center = origin + offset
 
-    values = np.linalg.norm(verts - sphere_center, axis=1)
+        values = np.linalg.norm(verts - sphere_center, axis=1)
 
-    points = Points.create(
-        ws,
-        name="test_points",
-        vertices=verts,
-    )
-    data = points.add_data({"my data": {"values": values}})
-    func_surface = IsoSurfacesDriver.iso_surface(
-        points,
-        data,
-        [sphere_radius],
-        resolution=sphere_radius / 8.0,
-        max_distance=np.inf,
-    )
-
-    # For user validation only
-    Surface.create(
-        ws, name="surface", vertices=func_surface[0][0], cells=func_surface[0][1]
-    )
-    points.add_data(
-        {
-            "DataValues": {
-                "values": values,
+        points = Points.create(
+            ws,
+            name="test_points",
+            vertices=verts,
+        )
+        data = points.add_data({"my data": {"values": values}})
+        options = IsoSurfaceParameters.build(
+            {
+                "geoh5": ws,
+                "objects": points,
+                "data": data,
+                "fixed_contours": [sphere_radius],
+                "resolution": sphere_radius / 8.0,
+                "max_distance": 1000.0,
             }
-        }
-    )
-    ws.close()
+        )
+        uijson = options.ui_json.write(tmp_path / f"{__name__}.uijson")
 
-    # Compare surface center with sphere center
-    surf_center = np.mean(func_surface[0][0], axis=0)
-    center_error = np.abs((sphere_center - surf_center) / (sphere_center))
+    driver = IsoSurfacesDriver.start(uijson)
 
-    assert np.all(center_error < 0.25)
+    with Workspace(tmp_path / f"{__name__}.geoh5") as ws:
+        surface = next(
+            child for child in driver.out_group.children if isinstance(child, Surface)
+        )
+        # Compare surface center with sphere center
+        surf_center = np.mean(surface.vertices, axis=0)
+        center_error = np.abs((sphere_center - surf_center) / (sphere_center))
 
-    # Radius of sphere
-    surf_distance = np.linalg.norm(np.subtract(func_surface[0][0], surf_center), axis=1)
-    surf_radius = np.mean(surf_distance, axis=0)
-    radius_error = np.abs((surf_radius - sphere_radius) / sphere_radius)
+        assert np.all(center_error < 0.25)
 
-    assert radius_error < 0.06
+        # Radius of sphere
+        surf_distance = np.linalg.norm(
+            np.subtract(surface.vertices, surf_center), axis=1
+        )
+        surf_radius = np.mean(surf_distance, axis=0)
+        radius_error = np.abs((surf_radius - sphere_radius) / sphere_radius)
+
+        assert radius_error < 0.06
 
 
 def test_clipping_horizon(tmp_path: Path):

@@ -14,21 +14,20 @@ import sys
 from pathlib import Path
 
 import numpy as np
+from geoapps_utils.base import Driver as BaseDriver
 from geoapps_utils.utils.formatters import string_name
 from geoh5py.data.data import Data
 from geoh5py.objects import ObjectBase, Surface
 from geoh5py.shared.utils import fetch_active_workspace
-from geoh5py.ui_json import InputFile
 
-from surface_apps.driver import BaseSurfaceDriver
-from surface_apps.iso_surfaces.params import IsoSurfaceParameters
+from surface_apps.iso_surfaces.options import IsoSurfaceParameters
 from surface_apps.iso_surfaces.utils import entity_to_grid, extract_iso_surfaces
 
 
 logger = logging.getLogger(__name__)
 
 
-class Driver(BaseSurfaceDriver):
+class Driver(BaseDriver):
     """
     Driver for the detection of iso-surfaces within geoh5py objects.
 
@@ -37,16 +36,22 @@ class Driver(BaseSurfaceDriver):
 
     _params_class = IsoSurfaceParameters
 
-    def __init__(self, parameters: IsoSurfaceParameters | InputFile):
-        super().__init__(parameters)
+    def __init__(
+        self,
+        params: IsoSurfaceParameters,
+    ):
+        super().__init__(params)
 
-    def make_surfaces(self):
+        self._out_group = self.validate_out_group(self.params.out_group)
+
+    def run(self):
         """Make surface objects from iso-surfaces detected in source data."""
 
         with fetch_active_workspace(self.params.geoh5, mode="r+"):
             logger.info("Generating iso-surfaces ...")
             levels = self.params.detection.contours
 
+            results = []
             if len(levels) >= 1:
                 surfaces = self.iso_surface(
                     self.params.source.objects,
@@ -56,8 +61,6 @@ class Driver(BaseSurfaceDriver):
                     max_distance=self.params.detection.max_distance,
                     horizon=self.params.source.horizon,
                 )
-
-                results = []
                 for surface, level in zip(surfaces, levels, strict=False):
                     if len(surface[0]) > 0 and len(surface[1]) > 0:
                         results += [
@@ -71,6 +74,7 @@ class Driver(BaseSurfaceDriver):
                                 parent=self.out_group,
                             )
                         ]
+        return results if any(results) else None
 
     @staticmethod
     def iso_surface(

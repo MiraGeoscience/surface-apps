@@ -10,14 +10,14 @@
 from pathlib import Path
 from typing import ClassVar
 
-from geoapps_utils.driver.data import BaseData
+from geoapps_utils.base import Options
 from geoh5py.objects import Surface
 from pydantic import ConfigDict
 
 from surface_apps import assets_path
 
 
-class SurfaceNormalsOptions(BaseData):
+class SurfaceNormalsOptions(Options):
     """
     Options for surface normals.
 
@@ -29,8 +29,8 @@ class SurfaceNormalsOptions(BaseData):
 
     name: ClassVar[str] = "surface_normals"
     default_ui_json: ClassVar[Path] = assets_path() / "uijson/surface_normals.ui.json"
-    title: ClassVar[str] = "Surface Normals"
-    run_command: ClassVar[str] = "surface_apps.surface_normals.driver"
+    title: str = "Surface Normals"
+    run_command: str = "surface_apps.surface_normals.driver"
 
     conda_environment: str = "surface_apps"
     surfaces: list[Surface]

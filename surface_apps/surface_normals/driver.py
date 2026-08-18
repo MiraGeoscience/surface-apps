@@ -11,11 +11,12 @@ import logging
 import sys
 from pathlib import Path
 
-from geoapps_utils.driver.driver import BaseDriver
+from geoapps_utils.base import Driver as BaseDriver
 from geoapps_utils.utils.transformations import (
     compute_normals,
 )
 from geoh5py.groups.property_group_type import GroupTypeEnum
+from geoh5py.objects import Points
 from geoh5py.shared.conversion.base import CellObjectConversion
 from geoh5py.shared.merging.points import PointsMerger
 from geoh5py.shared.utils import fetch_active_workspace
@@ -35,7 +36,7 @@ class Driver(BaseDriver):
 
     _params_class = SurfaceNormalsOptions
 
-    def run(self):
+    def run(self) -> list[Points]:
         with fetch_active_workspace(self.params.geoh5, mode="r+") as geoh5:
             points = []
             for surface in self.params.surfaces:
@@ -69,7 +70,8 @@ class Driver(BaseDriver):
                     name="Normals",
                     property_group_type=GroupTypeEnum.VECTOR,
                 )
-                self.update_monitoring_directory(pts)
+
+        return points
 
 
 if __name__ == "__main__":
