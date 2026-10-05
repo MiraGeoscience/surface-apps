@@ -157,7 +157,7 @@ def extract_iso_surfaces(
                 interp = interp1d(
                     np.arange(grid[i].shape[0]), grid[i], fill_value="extrapolate"
                 )
-                vertices[:, i] += interp(verts[:, i])
+                vertices[:, i] = interp(verts[:, i])
 
             if isinstance(entity, BlockModel):
                 vertices = rotate_xyz(vertices, [0, 0, 0], entity.rotation)

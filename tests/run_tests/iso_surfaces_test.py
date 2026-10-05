@@ -83,15 +83,6 @@ def test_centroids(tmp_path: Path):
         ((sphere_center + origin) - surf_center) / (sphere_center + origin)
     )
 
-    assert np.all(center_error < 0.02)
-
-    # Radius of sphere
-    surf_distance = np.linalg.norm(np.subtract(func_surface[0][0], surf_center), axis=1)
-    surf_radius = np.mean(surf_distance, axis=0)
-    radius_error = np.abs((surf_radius - sphere_radius) / sphere_radius)
-
-    assert radius_error < 0.02
-
     # For user validation only
     Surface.create(
         ws, name="surface", vertices=func_surface[0][0], cells=func_surface[0][1]
@@ -104,6 +95,15 @@ def test_centroids(tmp_path: Path):
         }
     )
     ws.close()
+
+    assert np.all(center_error < 0.02)
+
+    # Radius of sphere
+    surf_distance = np.linalg.norm(np.subtract(func_surface[0][0], surf_center), axis=1)
+    surf_radius = np.mean(surf_distance, axis=0)
+    radius_error = np.abs((surf_radius - sphere_radius) / sphere_radius)
+
+    assert radius_error < 0.02
 
 
 def test_vertices(tmp_path: Path):
