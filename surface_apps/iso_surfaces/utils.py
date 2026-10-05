@@ -152,21 +152,18 @@ def extract_iso_surfaces(
             verts, faces, _normals, _values = marching_cubes(values, level=level)
             verts, faces = remove_nan(verts, faces)
 
-            vertices = []
+            vertices = np.empty((len(verts), 3), dtype=float)
             for i in np.arange(3):
                 interp = interp1d(
                     np.arange(grid[i].shape[0]), grid[i], fill_value="extrapolate"
                 )
-                vertices += [interp(verts[:, i])]
+                vertices[:, i] += interp(verts[:, i])
 
             if isinstance(entity, BlockModel):
-                vertices = rotate_xyz(np.vstack(vertices).T, [0, 0, 0], entity.rotation)
-                vertices[:, 0] += entity.origin["x"]  # type: ignore
-                vertices[:, 1] += entity.origin["y"]  # type: ignore
-                vertices[:, 2] += entity.origin["z"]  # type: ignore
-
-            else:
-                vertices = np.vstack(vertices).T  # type: ignore
+                vertices = rotate_xyz(vertices, [0, 0, 0], entity.rotation)
+                vertices[:, 0] += entity.origin[0]
+                vertices[:, 1] += entity.origin[1]
+                vertices[:, 2] += entity.origin[2]
 
         except RuntimeError as _:
             logging.exception("Caught a RuntimeError in marching cubes algorithm.")
