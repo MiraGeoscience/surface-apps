@@ -4,10 +4,13 @@ on:
   issues:
     types: [opened]
 
+permissions: {}
+
 jobs:
   call-workflow-create-jira-issue:
     uses: MiraGeoscience/CI-tools/.github/workflows/reusable-jira-issue_to_jira.yml@40e4f41b8195844608f93eb613ce4ce8a0a1b76e # v4.0.0
     permissions:
+      contents: read
       issues: write
     secrets:
       JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
