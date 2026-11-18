@@ -45,6 +45,10 @@ The isolated Python 3.14 docs environment does not install application dependenc
     pixi install --locked --environment docs
     pixi run --frozen --environment docs build-docs
 
+Install external `uv <https://docs.astral.sh/uv/getting-started/installation/>`_
+alongside Pixi and keep it on ``PATH``; uv is not installed in the docs environment.
+Read the Docs pins uv 0.13.8 via asdf.
+
 The task installs the source package without dependencies before running Sphinx.
 HTML is written to ``docs/_build/html``. Optional arguments select the builder and
 output root, for example ``build-docs html docs/_build/preview``.

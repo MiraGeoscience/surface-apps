@@ -87,7 +87,6 @@ docs = [
     "sphinx",
     "sphinx-issues",
     "sphinxcontrib-googleanalytics",
-    "uv",
 ]
 test = ["pytest", "pytest-cov", "pyyaml", "packaging"]
 lint = ["pylint"]
