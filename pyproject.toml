@@ -80,9 +80,14 @@ dev = [
     { include-group = "test" },
     { include-group = "lint" },
     "Pygments",
+]
+docs = [
+    "alabaster==1.*",
+    "packaging",
     "sphinx",
-    "sphinx-autodoc-typehints",
-    "sphinx-rtd-theme",
+    "sphinx-issues",
+    "sphinxcontrib-googleanalytics",
+    "uv",
 ]
 test = ["pytest", "pytest-cov", "pyyaml", "packaging"]
 lint = ["pylint"]

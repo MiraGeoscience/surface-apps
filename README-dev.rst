@@ -37,6 +37,20 @@ Analyst; pass ``-e`` for an editable installation.
 
 
 
+Build the documentation
+^^^^^^^^^^^^^^^^^^^^^^^
+
+The isolated Python 3.14 docs environment does not install application dependencies::
+
+    pixi install --locked --environment docs
+    pixi run --frozen --environment docs build-docs
+
+The task installs the source package without dependencies before running Sphinx.
+HTML is written to ``docs/_build/html``. Optional arguments select the builder and
+output root, for example ``build-docs html docs/_build/preview``.
+Read the Docs uses the same environment and also creates an HTML ZIP download.
+Set ``GOOGLE_ANALYTICS_ID`` to enable analytics.
+
 Updating dependencies
 ^^^^^^^^^^^^^^^^^^^^^
 

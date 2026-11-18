@@ -6,16 +6,12 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-import sys
-from pathlib import Path
-
+import os
 from datetime import datetime
 from importlib.metadata import version
 
 from packaging.version import Version
 
-
-sys.path.insert(0, Path("../..").resolve())
 
 project = "surface-apps"
 author = "Mira Geoscience Ltd."
@@ -44,7 +40,24 @@ autodoc_mock_imports = [
     "pydantic",
     "tqdm",
 ]
-extensions = ["sphinx.ext.autodoc"]
+extensions = [
+    "sphinx.ext.autodoc",
+    "sphinx.ext.autosummary",
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.todo",
+    "sphinx.ext.viewcode",
+    "sphinx_issues",
+    "sphinxcontrib.googleanalytics",
+]
+
+intersphinx_mapping = {
+    "numpy": ("https://numpy.org/doc/stable/", None),
+    "python": ("https://docs.python.org/3.14/", None),
+}
+todo_include_todos = True
+googleanalytics_id = os.environ.get("GOOGLE_ANALYTICS_ID", "")
+googleanalytics_enabled = bool(googleanalytics_id)
+issues_github_path = "MiraGeoscience/surface-apps"
 
 templates_path = ["_templates"]
 exclude_patterns = []
