@@ -12,6 +12,7 @@ from __future__ import annotations
 import importlib
 import json
 import re
+import runpy
 from pathlib import Path
 
 import pytest
@@ -75,3 +76,23 @@ def test_version_json_is_consistent():
     project_version = Version(surface_apps.__version__)
     json_version = Version(_get_json_version())
     assert project_version == json_version
+
+
+@pytest.mark.parametrize(
+    "installed_version,expected_release,expected_version",
+    [
+        ("0.1.1.dev110+6469524", "0.1.1.dev110", "0.1.1"),
+        ("0.3.0a1+abc123", "0.3.0a1", "0.3.0"),
+        ("0.3.0a1.post2+abc123", "0.3.0a1", "0.3.0"),
+    ],
+)
+def test_documentation_version_uses_public_release(
+    monkeypatch, installed_version, expected_release, expected_version
+):
+    monkeypatch.setattr("importlib.metadata.version", lambda _: installed_version)
+    config_path = Path(__file__).resolve().parents[1] / "docs" / "source" / "conf.py"
+    config = runpy.run_path(str(config_path))
+
+    assert config["release"] == expected_release
+    assert config["version"] == expected_version
+    assert config["html_theme_options"]["description"] == f"version {expected_release}"
