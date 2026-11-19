@@ -41,7 +41,8 @@ Analyst; pass ``-e`` for an editable installation.
 Build the documentation
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-The isolated Python 3.14 docs environment does not install application dependencies::
+The Python 3.14 docs environment includes application dependencies so Sphinx
+can inspect and link the public API::
 
     pixi install --locked --environment docs
     pixi run --frozen --environment docs build-docs
