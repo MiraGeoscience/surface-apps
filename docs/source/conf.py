@@ -6,31 +6,26 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-import sys
-from pathlib import Path
-
+import os
 from datetime import datetime
-from importlib.metadata import version
+from importlib.metadata import version as get_version
 
 from packaging.version import Version
 
-
-sys.path.insert(0, Path("../..").resolve())
 
 project = "surface-apps"
 author = "Mira Geoscience Ltd."
 project_copyright = "%Y, Mira Geoscience Ltd"
 copyright = "Mira Geoscience Ltd"
 
-# The full version, including alpha/beta/rc tags.
-release = version("surface-apps")
-# The shorter X.Y.Z version.
-pep_version = Version(release)
-if pep_version.is_postrelease:
-    release = pep_version.base_version
+# The public version, including alpha/beta/rc tags.
+full_version = Version(get_version("surface-apps"))
+release = full_version.public
+if full_version.is_postrelease:
+    release = release.rsplit(".post", 1)[0]
 
 # The short X.Y.Z version.
-version = Version(release).base_version
+version = full_version.base_version
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -44,7 +39,24 @@ autodoc_mock_imports = [
     "pydantic",
     "tqdm",
 ]
-extensions = ["sphinx.ext.autodoc"]
+extensions = [
+    "sphinx.ext.autodoc",
+    "sphinx.ext.autosummary",
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.todo",
+    "sphinx.ext.viewcode",
+    "sphinx_issues",
+    "sphinxcontrib.googleanalytics",
+]
+
+intersphinx_mapping = {
+    "numpy": ("https://numpy.org/doc/stable/", None),
+    "python": ("https://docs.python.org/3.14/", None),
+}
+todo_include_todos = True
+googleanalytics_id = os.environ.get("GOOGLE_ANALYTICS_ID", "")
+googleanalytics_enabled = bool(googleanalytics_id)
+issues_github_path = "MiraGeoscience/surface-apps"
 
 templates_path = ["_templates"]
 exclude_patterns = []

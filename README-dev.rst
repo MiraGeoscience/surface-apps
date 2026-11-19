@@ -7,162 +7,85 @@ Setup for development
    :depth: 2
 
 After you have cloned the Git repository, you will need to:
-    #. create the Conda environment lock files for the dependencies
-    #. create a virtual Conda environment for development, where to install the dependencies
-       of  the project
-    #. execute the tests
-    #. setup Git LFS if needed
-    #. configure the pre-commit hooks for static code analysis and auto-formatting
-    #. configure the Python IDE (PyCharm)
+#. install the Pixi environments for the project
+#. execute the tests
+#. setup Git LFS if needed
+#. configure the prek hooks for static code analysis and auto-formatting
+#. configure the Python IDE (PyCharm)
 
 
-Create the Conda environment lock files
----------------------------------------
-First, create the Conda environment lock files (``*.conda.lock.yml``) for the dependencies defined
-in `pyproject.toml`_. From the root of the project, run the command::
-
-    $ deps-lock
-
-It will create or replace the ``*.conda.lock.yml`` files in the ``environments`` folder:
-one for runtime dependencies, and one for development dependencies (with the ``-dev`` suffix),
-for each combinations of Python versions and platforms
-(platforms are specified in ``conda-lock`` section of the ``pyproject.toml``).
-
-These files will be used by installation script and to create the development environment.
+.. _Pixi: https://pixi.sh/
+.. _prek: https://prek.j178.dev/
 
 
-Install the Conda environment
------------------------------
+Install the Pixi environment
+----------------------------
 
-For development, you need a **Conda** environment. From the root of the project, run the command::
+Install `Pixi`_ version 0.84.2 or newer and external `uv <https://docs.astral.sh/uv/>`_.
+Keep both commands on ``PATH``; uv is not installed by Pixi. From the project root,
+install the default development environment with::
 
-    $ create-dev-env
+    pixi install
 
-This command install a local environment at the base of your repository: ``.conda-env``.
-This environment should automatically be recognized by the Conda installation.
+The default environment includes the test and lint tools. Run the tests with::
 
-To activate this environment, run the following command from the root of the project::
+    pixi run test
 
-    $ conda activate ./.conda-env
+The project also provides ``py312``, ``py313`` and ``py314`` test environments,
+plus ``runtime`` environments for application use.
+On Windows, run ``install_in_analyst.bat`` to install the locked runtime in Geoscience
+Analyst; pass ``-e`` for an editable installation.
 
+
+
+Build the documentation
+^^^^^^^^^^^^^^^^^^^^^^^
+
+The isolated Python 3.14 docs environment does not install application dependencies::
+
+    pixi install --locked --environment docs
+    pixi run --frozen --environment docs build-docs
+
+Install external `uv <https://docs.astral.sh/uv/getting-started/installation/>`_
+alongside Pixi and keep it on ``PATH``; uv is not installed in the docs environment.
+Read the Docs pins uv 0.13.8 via asdf.
+
+The task installs the source package without dependencies before running Sphinx.
+HTML is written to ``docs/_build/html``. Optional arguments select the builder and
+output root, for example ``build-docs html docs/_build/preview``.
+Read the Docs uses the same environment and also creates an HTML ZIP download.
+Set ``GOOGLE_ANALYTICS_ID`` to enable analytics.
 
 Updating dependencies
 ^^^^^^^^^^^^^^^^^^^^^
 
-Dependencies are listed in `pyproject.toml`_ with version constraints.
-Versions are then locked using ``conda-lock`` as previously described.
+    Runtime dependency constraints are maintained in ``pyproject.toml`` and ``pixi.toml``.
+    After changing either file, refresh the resolved environment with::
 
-Anytime dependencies are added to or removed from the ``pyproject.toml`` file,
-regenerate the Conda environment lock files, using ``devtools\run_conda_lock.bat``,
-or directly from command line::
-
-    (base) $ python devtools/run_conda_lock.py
-
-Regenerate the Conda environment lock files as well when you want to fetch newly
-available versions of the dependencies (typically patches, still in accordance with
-the specifications expressed in ``pyproject.toml``).
+        pixi update
 
 
 Adding a dependency
 -------------------
-
-First install the dependency using ``conda``:
-
-    (path/to/.conda-env) $ conda install my_new_dep
-
-Then update the list of dependencies in `pyproject.toml`_ with a suited version constraint
-(if for development only, place it under section ``[tool.poetry.group.dev.dependencies]``).
-
-For example, if ``conda`` installed version 1.5.2 of ``my_new_dep``,
-then add ``my_new_dep="^1.5.2"``.
-
-Do not forget to regenerate the Conda environment lock files.
+    Add runtime requirements to both the PEP 621 dependency list in ``pyproject.toml``
+    and the matching Pixi package requirements in ``pixi.toml``. Put development-only
+    tools in the appropriate Pixi feature. Run ``pixi update`` after changing them.
 
 
-How to use **Poetry** to update the dependency list (optional)
---------------------------------------------------------------
+Configure prek hooks
+^^^^^^^^^^^^^^^^^^^^
 
-`Poetry <https://python-poetry.org/>`_ provides a command line interface to easily add or remove dependencies:
+`prek`_ runs the checks configured in ``.pre-commit-config.yaml``. Install it with::
 
-    (path/to/.conda-env) $ poetry add another_package --lock
+    uv tool install prek
 
-Note the ``--lock`` option, that simple creates or updates the lock file, without Poetry installing anything.
-``poetry`` would install the package through ``pip`` while we want dependencies to be installed through ``conda``
-so that they match the version pinned by ``conda-lock``.
+From the project directory, install the Git hook and run all checks with::
 
-One limitation though: Poetry will look for packages in PyPI only and not in the Conda channels.
-The version selected by Poetry might thus not be aviaible for Conda.
+    prek install --prepare-hooks
+    prek run --all-files
 
-To install ``Poetry`` on your computer, refer to the `Poetry documentation`_.
-
-.. _Poetry documentation: https://pre-commit.com/
-
-
-Configure the pre-commit hooks
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-`pre-commit`_ is used to automatically run static code analysis upon commit.
-The list of tools to execute upon commit is configured in the file `.pre-commit-config.yaml`_.
-
-pre-commit can be installed using a Python installation on the system, or one from a Conda environment.
-
-- To install pre-commit using Python (and pip) in your system path:
-
-..  code-block:: bash
-
-    pip install --user pre-commit
-
-- Or to install from an activated Conda environment:
-
-..  code-block:: bash
-
-    conda install -c conda-forge pre-commit
-
-Then, in either way, install the pre-commit hooks as follow (**current directory is the project folder**):
-
-..  code-block:: bash
-
-    pre-commit install
-
-To prepare and check the commit messages, you can also use the following commands:
-
-.. code-block:: bash
-
-    pre-commit install -t prepare-commit-msg -t commit-msg
-
-It configures ``pre-commit`` to prepares and checks the commit ensuring it has a JIRA issue ID:
-if no ID was provided, it extracts it from the branch name;
-if one was provided, it checks it is the same one as in the branch name.
-
-To run pre-commit manually, use the following command:
-
-..  code-block:: bash
-
-    pre-commit run --all-files
-
-To run only on changes staged for commit:
-
-.. code-block:: bash
-
-    pre-commit run
-
-If a tool fails running, it might be caused by an obsolete versions of the tools that pre-commit is
-trying to execute. Try the following command to update them:
-
-..  code-block:: bash
-
-    pre-commit autoupdate
-
-Upon every commit, all the pre-commit checks run automatically for you, and reformat files when required. Enjoy...
-
-If you prefer to run pre-commit upon push, and not upon every commit, use the following commands:
-
-..  code-block:: bash
-
-    pre-commit uninstall -t pre-commit
-    pre-commit install -t pre-push
-
-.. _pre-commit: https://pre-commit.com/
+Run ``prek run`` to check only the files selected for the current commit. Update
+hook revisions with ``prek auto-update``.
 
 
 Running the tests
@@ -177,25 +100,22 @@ Install pytest
 
 .. _pytest: https://docs.pytest.org/
 
-If you installed  your environment through ``setup-dev.bat``, pytest is already installed.
-You can run it from the Conda command (**in your project folder**):
+After installing the default Pixi environment, run pytest from the project folder:
 
 .. code-block:: bash
 
-    pytest tests
+    pixi run pytest tests
 
 
 Code coverage with Pytest
 -------------------------
 .. _pytest-cov: https://pypi.org/project/pytest-cov/
 
-If you installed  your environment through ``setup-dev.bat``, `pytest-cov`_ is already installed.
-It allows you to visualize the code coverage of your tests.
-You can run the tests from the console with coverage:
+`pytest-cov`_ is installed in the default environment. Run the tests with HTML coverage:
 
 .. code-block:: bash
 
-    pytest --cov --cov-report html
+    pixi run pytest --cov-report html tests
 
 The html report is generated in the folder ``htmlcov`` at the root of the project.
 You can then explore the report by opening ``index.html`` in a browser.
@@ -239,13 +159,14 @@ IDE : PyCharm
 Configure the Python interpreter in PyCharm
 --------------------------------------------
 
-First, excluded the ``.conda-env`` folder from PyCharm.
-Do so, in PyCharm, right-click on the ``.conda-env`` folder, and ``Mark Directory as > Excluded``.
+First, exclude the ``.pixi`` folder from PyCharm by right-clicking it and selecting
+``Mark Directory as > Excluded``.
 
-Then, you can add the Conda environment as a Python interpreter in PyCharm.
+Add the Pixi environment's Python interpreter (``.pixi/envs/default/Scripts/python.exe``
+on Windows or ``.pixi/envs/default/bin/python`` on Linux).
 
     ..  image:: devtools/images/pycharm-exclude_conda_env.png
-        :alt: PyCharm: Exclude Conda environment
+        :alt: PyCharm: Exclude Pixi environment
         :align: center
         :width: 40%
 
@@ -258,11 +179,11 @@ and add click add interpreter (at the top left):
         :align: center
         :width: 80%
 
-Select ``Conda Environment``, ``Use existing environment``,
-and select the desired environment from the list (the one in the ``.conda-env`` folder):
+Select the option for an existing or system interpreter and choose the Python executable
+inside ``.pixi/envs/default``:
 
     ..  image:: devtools/images/pycharm-set_conda_env_as_interpreter.png
-        :alt: PyCharm: Set Conda environment as interpreter
+        :alt: PyCharm: Set Pixi environment as interpreter
         :align: center
         :width: 80%
 
@@ -271,7 +192,7 @@ Then you can check the list of installed packages in the ``Packages`` table. You
 option to see also the packages installed through pip:
 
     ..  image:: devtools/images/pycharm-list_all_conda_packages.png
-        :alt: PyCharm: Conda environment packages
+        :alt: PyCharm: Pixi environment packages
         :align: center
         :width: 80%
 
