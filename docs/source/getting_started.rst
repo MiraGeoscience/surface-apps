@@ -3,7 +3,9 @@
 Getting Started
 ===============
 
-Install `Pixi <https://pixi.sh/>`_ 0.84.2 or newer, then download or clone
+Install `Pixi <https://pixi.sh/>`_ 0.84.2 or newer and external
+`uv <https://docs.astral.sh/uv/>`_, with both commands available on ``PATH``.
+Then download or clone
 `surface-apps <https://github.com/MiraGeoscience/surface-apps>`_.
 From the extracted repository root, install the locked application environment::
 
