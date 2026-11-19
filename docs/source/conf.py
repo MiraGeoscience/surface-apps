@@ -43,7 +43,6 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
     "sphinx.ext.intersphinx",
-    "sphinx.ext.todo",
     "sphinx.ext.viewcode",
     "sphinx_issues",
     "sphinxcontrib.googleanalytics",
@@ -53,7 +52,6 @@ intersphinx_mapping = {
     "numpy": ("https://numpy.org/doc/stable/", None),
     "python": ("https://docs.python.org/3.14/", None),
 }
-todo_include_todos = True
 googleanalytics_id = os.environ.get("GOOGLE_ANALYTICS_ID", "")
 googleanalytics_enabled = bool(googleanalytics_id)
 issues_github_path = "MiraGeoscience/surface-apps"
