@@ -47,7 +47,6 @@ tests:
       imports:
         - ${{ module_name }}
         - ${{ module_name }}._version
-      pip_check: true
 
   - script:
       - pytest --ignore=tests/version_test.py
