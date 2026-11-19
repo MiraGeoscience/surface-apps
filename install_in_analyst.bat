@@ -35,7 +35,7 @@ if /I "%~1" == "-e" (
   shift
 )
 
-"%MIRA_CMD_RUNNER_DIR%\MambaEnvRunner.exe" --name surface-apps --install "%MY_CONDA_ENV_FILE%" --with-pip-deps ^
+"%MIRA_CMD_RUNNER_DIR%\MambaEnvRunner.exe" --name surface_apps --install "%MY_CONDA_ENV_FILE%" --with-pip-deps ^
    --run "pip install --no-deps -U --force-reinstall !EXTRA_PIP_INSTALL_OPTIONS! ." %1 %2 %3 %4 %5 %6 %7 %8 %9
 
 set "INSTALL_EXIT_CODE=!errorlevel!"
