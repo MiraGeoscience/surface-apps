@@ -10,7 +10,6 @@ import os
 from datetime import datetime
 from importlib.metadata import version as get_version
 
-from docutils import nodes
 from packaging.version import Version
 
 
@@ -73,6 +72,8 @@ rst_epilog = f"""
 
 
 def resolve_external_type(app, env, node, contnode):
+    from docutils import nodes
+
     if node.get("refdomain") != "py":
         return None
 
