@@ -41,6 +41,10 @@ requirements:
     - scipy 1.17.*
     - tqdm >=4.66.1, 4.*
 
+  run_constraints:
+    # Conditional security floors for transitive dependencies.
+    - pillow >=13.0.0  # GHSA-wqgw-9xfh-qf2g
+
 tests:
   - python:
       python_version: ${{ python_min }}.*
