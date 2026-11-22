@@ -42,7 +42,7 @@ requirements:
     - tqdm >=4.66.1, 4.*
 
   run_constraints:
-    # Conditional security floors for transitive dependencies.
+    # Security floors for transitive dependencies:
     - pillow >=13.0.0  # GHSA-wqgw-9xfh-qf2g
 
 tests:
