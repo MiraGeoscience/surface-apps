@@ -47,79 +47,30 @@ Documentation
 ^^^^^^^^^^^^^
 `Online documentation <https://mirageoscience-surface-apps.readthedocs-hosted.com/en/latest/>`_
 
-
 Installation
 ^^^^^^^^^^^^
-**surface-apps** is currently written for Python 3.12 or higher.
+**surface-apps** is a private package and is not published to public PyPI or conda-forge.
+It is published to the private PyPI index and the Mira Artifactory Conda channel.
 
-Install with Pixi
------------------
+It can be installed in the usual way with ``pip``, ``uv``, or ``conda`` by specifying the
+private PyPI index or the Mira Artifactory Conda channel.
 
-Install `Pixi <https://pixi.sh/>`_ 0.84.2 or newer and external
-`uv <https://docs.astral.sh/uv/>`_, with both commands available on ``PATH``.
-From a checkout of this repository, install the locked runtime and the local package::
+It can also be installed with ``pip`` or ``uv`` by pointing either to a local source directory
+or to a Git reference (branch or tag). See the pip or uv documentation for details.
 
-    pixi install --locked --environment runtime
-    pixi run --frozen --environment runtime install
+To install a dedicated environment under Geoscience Analyst on Windows, make sure ``pixi`` is
+installed and available on your ``PATH``, then run one of the following commands:
 
-On Windows, use ``install_in_analyst.bat`` for Geoscience Analyst integration.
+    install_in_analyst.bat
+    install_in_analyst.bat -e --name surface-apps-dev
 
-Install with PyPI
------------------
+The ``-e`` option installs the package in editable mode, allowing you to make changes to the
+source code and have them reflected immediately in the environment. The optional ``--name``
+argument lets you specify a custom environment name; if omitted, the default name is
+``surface-apps``.
 
-You should not install the package from PyPI, as the app requires conda packages to run.
-Still, you can install it in a prepared conda environment, telling ``pip`` not to install dependencies
-thanks to the ``--no-deps`` option.
-
-From PyPI
-~~~~~~~~~
-
-To install the **surface-apps** package published on PyPI:
-
-.. code-block:: bash
-
-    pip install -U --no-deps surface-apps
-
-From a Git tag or branch
-~~~~~~~~~~~~~~~~~~~~~~~~
-If the revision of the package is not on PyPI yet, you can install it from a Git tag:
-
-.. code-block:: bash
-
-    pip install -U --no-deps --force-reinstall https://github.com/MiraGeoscience/surface-apps/archive/refs/tags/TAG.zip
-
-Or to install the latest changes available on a given Git branch:
-
-.. code-block:: bash
-
-    pip install -U --no-deps --force-reinstall https://github.com/MiraGeoscience/surface-apps/archive/refs/heads/BRANCH.zip
-
-.. note::
-    The ``--force-reinstall`` option is used to make sure the updated version
-    of the sources is installed, and not the cached version, even if the version number
-    did not change. The ``-U`` or ``--upgrade`` option is used to make sure to get the latest version,
-    on not merely reinstall the same version. As the package is aimed to be in a **Conda environment**, the option ``--no-deps`` is used to avoid installing the dependencies with pip, as they will be installed with conda.
-
-From a local copy of the sources
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-If you have a git clone of the package sources locally,
-you can install **surface-apps** from the local copy of the sources with:
-
-.. code-block:: bash
-
-    pip install -U --force-reinstall path/to/project_folder_with_pyproject_toml
-
-Or in **editable mode**, so that you can edit the sources and see the effect immediately at runtime:
-
-.. code-block:: bash
-
-    pip install -e -U --force-reinstall path/to/project_folder_with_pyproject_toml
-
-Setup for development
-^^^^^^^^^^^^^^^^^^^^^
-To configure the development environment and tools, please see `README-dev.rst`_.
-
-.. _README-dev.rst: README-dev.rst
+For more options and instructions on setting up your development environment, see
+`README-dev.rst <README-dev.rst>`_.
 
 License
 ^^^^^^^

@@ -27,14 +27,6 @@ Prerequisites
 
   Never add credentials to ``pixi.toml`` or ``pixi.lock``.
 
-.. note:: External contributors using Pixi
-
-   If you do not have Mira Artifactory credentials, comment out ``index-url``
-   under ``[feature.mira-pypi.pypi-options]`` in ``pixi.toml``, then run
-   ``pixi lock``. Packages configured with version references will resolve from
-   public PyPI; packages configured with Git references will resolve from Git.
-   Keep these local ``pixi.toml`` and ``pixi.lock`` changes uncommitted.
-
 Install and test
 ^^^^^^^^^^^^^^^^
 
@@ -52,7 +44,9 @@ The ``runtime`` environment omits test and lint tools.
 On Windows, install the locked runtime into Geoscience Analyst with::
 
     install_in_analyst.bat
-    install_in_analyst.bat -e --name simpeg-drivers-dev
+    install_in_analyst.bat -e --name mirageo-dev
+
+Possibly, replace ``mirageo-dev`` with a dedicated environment name of your choice.
 
 The script exports the locked ``win-64`` runtime, installs its dependencies
 through Analyst, and installs this checkout without resolving dependencies
@@ -92,7 +86,6 @@ build HTML with::
 The task installs the local package without dependencies, uses the checked-in
 configuration ``docs/source/conf.py``, and builds the documentation from
 ``docs/source`` into ``docs/_build/html``. Read the Docs uses the same task.
-
 
 Updating dependencies
 ^^^^^^^^^^^^^^^^^^^^^
