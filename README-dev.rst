@@ -83,7 +83,7 @@ Building documentation
 ^^^^^^^^^^^^^^^^^^^^^^
 
 The separate ``docs`` environment uses Python 3.14 and Sphinx. Read the Docs
-installs uv 0.13.8 separately. Fetch the Git LFS documentation images, then
+installs uv separately. Fetch the Git LFS documentation images, then
 build HTML with::
 
     git lfs pull
@@ -131,17 +131,6 @@ Test layout
 
 Tests live under ``tests`` and use the ``_test.py`` filename suffix.
 
-
-Repository-specific notes
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-This repository's Analyst script installs the ``runtime`` environment. To use
-a distinct environment name, for example, run
-``install_in_analyst.bat -e --name surface-apps-dev``. Unlike curve-apps, this
-repository does not define the optional ``webview`` feature.
-
-Read the Docs also publishes ``surface-apps-docs.zip``. Set
-``GOOGLE_ANALYTICS_ID`` to enable documentation analytics.
 
 ---------
 
