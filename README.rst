@@ -39,38 +39,28 @@ surface-apps
 
 The **surface-apps** library offers tools for the creation and manipulation of surface objects using various Python libraries and `geoh5py <https://mirageoscience-geoh5py.readthedocs-hosted.com/>`_.
 
-.. contents:: Table of Contents
-   :local:
-   :depth: 3
-
 Documentation
 ^^^^^^^^^^^^^
 `Online documentation <https://mirageoscience-surface-apps.readthedocs-hosted.com/en/latest/>`_
 
 Installation
 ^^^^^^^^^^^^
-**surface-apps** is a private package and is not published to public PyPI or conda-forge.
-It is published to the private PyPI index and the Mira Artifactory Conda channel.
+**surface-apps** is a Python package published on PyPI and conda-forge.
 
-It can be installed in the usual way with ``pip``, ``uv``, or ``conda`` by specifying the
-private PyPI index or the Mira Artifactory Conda channel.
+It can be installed in the usual way with ``pip``, ``uv``, or ``conda``::
+
+    pip install surface-apps
+    uv pip install surface-apps
+    conda install -c conda-forge surface-apps
 
 It can also be installed with ``pip`` or ``uv`` by pointing either to a local source directory
 or to a Git reference (branch or tag). See the pip or uv documentation for details.
 
-To install a dedicated environment under Geoscience Analyst on Windows, make sure ``pixi`` is
-installed and available on your ``PATH``, then run one of the following commands:
+Setup for development
+^^^^^^^^^^^^^^^^^^^^^
+To configure the development environment and tools, please see `README-dev.rst`_.
 
-    install_in_analyst.bat
-    install_in_analyst.bat -e --name surface-apps-dev
-
-The ``-e`` option installs the package in editable mode, allowing you to make changes to the
-source code and have them reflected immediately in the environment. The optional ``--name``
-argument lets you specify a custom environment name; if omitted, the default name is
-``surface-apps``.
-
-For more options and instructions on setting up your development environment, see
-`README-dev.rst <README-dev.rst>`_.
+.. _README-dev.rst: README-dev.rst
 
 License
 ^^^^^^^
@@ -105,3 +95,7 @@ Third Party Software notices and/or additional terms and conditions are located 
 `THIRD_PARTY_SOFTWARE.rst`_ file.
 
 .. _THIRD_PARTY_SOFTWARE.rst: ./docs/source/THIRD_PARTY_SOFTWARE.rst
+
+Trademarks
+^^^^^^^^^^
+"Python" and the Python logos are trademarks or registered trademarks of the Python Software Foundation.
