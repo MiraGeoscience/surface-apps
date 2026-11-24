@@ -32,14 +32,18 @@ requirements:
   run:
     - python >=${{ python_min }}
     # Mira packages
-    - geoapps-utils >=0.8.0b1, <0.9.0
-    - geoh5py >=0.14.0b1, <0.15.0
+    - geoapps-utils >=0.8.0b1, 0.8.*
+    - geoh5py >=0.14.0b1, 0.14.*
     # other direct dependencies
     - numpy >=2.4.2, 2.4.*
     - pydantic 2.12.*
     - scikit-image 0.26.*
     - scipy 1.17.*
     - tqdm >=4.66.1, 4.*
+
+  run_constraints:
+    # Security floors for transitive dependencies:
+    - pillow >=13.0.0  # GHSA-wqgw-9xfh-qf2g
 
 tests:
   - python:
@@ -49,7 +53,7 @@ tests:
         - ${{ module_name }}._version
 
   - script:
-      - pytest --ignore=tests/version_test.py
+      - pytest --ignore=tests/version_test.py --ignore=tests/pixi_lock_test.py
     requirements:
       run:
         - pytest

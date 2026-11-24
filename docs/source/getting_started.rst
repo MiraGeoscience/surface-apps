@@ -3,16 +3,15 @@
 Getting Started
 ===============
 
-Install `Pixi <https://pixi.sh/>`_ 0.84.2 or newer and external
-`uv <https://docs.astral.sh/uv/>`_, with both commands available on ``PATH``.
-Then download or clone
-`surface-apps <https://github.com/MiraGeoscience/surface-apps>`_.
-From the extracted repository root, install the locked application environment::
+**surface-apps** is a Python package published on PyPI and conda-forge.
 
-    pixi install --locked --environment runtime
-    pixi run --frozen --environment runtime install
+It can be installed in the usual way with ``pip``, ``uv``, or ``conda``::
 
-On Windows, use ``install_in_analyst.bat`` to install in Geoscience Analyst.
-Pass ``-e`` for an editable installation.
+    pip install surface-apps
+    uv pip install surface-apps
+    conda install -c conda-forge surface-apps
+
+It can also be installed with ``pip`` or ``uv`` by pointing either to a local source directory
+or to a Git reference (branch or tag). See the pip or uv documentation for details.
 
 See the :ref:`Basic usage <usage>` section for running the applications.
